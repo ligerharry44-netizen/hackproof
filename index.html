@@ -61,7 +61,7 @@ header h1 {
     .container {
       max-width: 1200px;
       margin: auto;
-      padding: 70px 40px;
+      padding: 50px 30px;
     }
 
     .section-title {
@@ -148,24 +148,110 @@ header h1 {
   transform: scale(1.03);
   box-shadow: 0 0 30px rgba(239,68,68,0.9);
 }
+/* ===============================
+   MOBILE OPTIMIZATION
+   =============================== */
+
+@media (max-width: 768px) {
+
+  header {
+    padding: 35px 20px;
+  }
+
+  header h1 {
+    font-size: 2.1rem;
+  }
+
+  header p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+
+  nav {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  nav strong {
+    font-size: 0.95rem;
+  }
+
+  nav a {
+    margin-left: 0;
+    margin-right: 15px;
+    font-size: 0.9rem;
+  }
+
+  .container {
+    padding: 35px 20px;
+  }
+
+  .section-title {
+    font-size: 1.8rem;
+    margin-bottom: 35px;
+  }
+
+  .category {
+    margin-bottom: 45px;
+  }
+
+  .category h3 {
+    font-size: 1.1rem;
+  }
+
+  .topic-list a {
+    font-size: 0.95rem;
+  }
+
+  /* PRACTICE LAB CENTERED & CLEAN */
+  .practice-lab-section {
+    padding: 35px 20px;
+    margin-top: 70px;
+  }
+
+  .practice-lab-section h2 {
+    font-size: 2rem;
+  }
+
+  .practice-lab-section p {
+    font-size: 0.95rem;
+  }
+
+  .practice-lab-link {
+    font-size: 1rem;
+    padding: 15px;
+  }
+
+  footer {
+    font-size: 0.85rem;
+    padding: 25px 15px;
+  }
+}
+nav strong a {
+  font-weight: 700;
+  text-shadow: 0 0 10px rgba(34,197,94,0.7);
+}
   </style>
 </head>
 
 <body>
-
 <header>
   <h1>HackProof Notes</h1>
 <p style="color:#22c55e; text-shadow:0 0 10px rgba(34,197,94,0.5);">
   A personal cyber security knowledge base covering networking fundamentals,
-  operating systems, SOC concepts, SIEM, and blue team learning.
+  operating systems Blue and Red team learning.
   Notes are added gradually, topic by topic, with clear explanations
   and real-world defensive security perspective.
 </p>
-
   </p>
 </header>
 <nav>
-  <strong>👨‍💻 HackProof Vault</strong>
+  <strong>
+    <a href="roadmap.html" style="color:#09b3c9; text-decoration:none;">
+    🧭Learning Roadmap 
+    </a>
+  </strong>
   <div>
     <a href="index.html">Home</a>
     <a href="networking.html">Networking</a>
@@ -176,15 +262,31 @@ header h1 {
 </nav>
 <h2 class="section-title"
     style="
-      font-size: 2.0rem;
-      font-weight: 600;
+      font-size: 3.0rem;
+      font-weight: 660;
       color: #48c51a;
       text-shadow: 0 0 15px rgba(31, 126, 66, 0.8);
       letter-spacing: 1px;
     ">
   🏆 HackProof Learning Hub
 </h2>
-
+<div style="text-align:center; margin:30px 0;">
+  <input
+    type="text"
+    id="searchInput"
+    placeholder="Search topics, labs, concepts..."
+    style="
+      width: 60%;
+      max-width: 500px;
+      padding: 12px;
+      border-radius: 8px;
+      border: 1px solid #1e293b;
+      background: #020617;
+      color: #e5e7eb;
+      font-family: inherit;
+    "
+  >
+</div>
 </h2>
   <!-- NETWORKING CATEGORY -->
   <div class="category">
@@ -263,7 +365,9 @@ header h1 {
     Liger44
   </span>
   <br>
-  Cyber Security Learner | Blue Team Enthusiast
+<p style="font-size:0.75rem; opacity:0.7;">
+  Built for ethical cyber security learning only.
+</p>
   <hr style="margin:25px auto; width:70%; border:1px solid #1e293b;">
 <p style="
   font-size: 0.95rem;
@@ -278,6 +382,24 @@ header h1 {
   </a>
 </p>
 </footer>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const searchInput = document.getElementById("searchInput");
+
+  if (!searchInput) return;
+
+  searchInput.addEventListener("keyup", function () {
+    const filter = searchInput.value.toLowerCase();
+    const cards = document.querySelectorAll(".category, .lab-card");
+
+    cards.forEach(card => {
+      card.style.display =
+        card.innerText.toLowerCase().includes(filter) ? "" : "none";
+    });
+  });
+});
+</script>
 </p>
 </body>
 </html>
+
