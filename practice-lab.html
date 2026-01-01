@@ -75,6 +75,48 @@
       border-bottom: 1px dashed #22c55e;
       font-weight: 600;
     }
+.lab-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+}
+
+.lab-card {
+  background: linear-gradient(180deg, #020617, #010409);
+  border: 1px solid #1e293b;
+  border-radius: 12px;
+  padding: 25px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.lab-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 0 20px rgba(239,68,68,0.25);
+}
+
+.lab-card h3 {
+  color: #ef4444;
+  margin-bottom: 12px;
+}
+
+.lab-meta {
+  font-size: 0.8rem;
+  color: #94a3b8;
+  margin-bottom: 12px;
+}
+
+.lab-card p {
+  font-size: 0.95rem;
+  color: #cbd5f5;
+}
+
+.lab-card a {
+  display: inline-block;
+  margin-top: 18px;
+  color: #22c55e;
+  font-weight: 600;
+  text-decoration: none;
+}
 
     footer {
       text-align: center;
@@ -82,6 +124,86 @@
       border-top: 1px solid #1e293b;
       color: #64748b;
     }
+    /* ===============================
+   MOBILE OPTIMIZATION
+   =============================== */
+
+@media (max-width: 768px) {
+
+  header {
+    padding: 35px 20px;
+  }
+
+  header h1 {
+    font-size: 2.1rem;
+  }
+
+  header p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+
+  nav {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  nav strong {
+    font-size: 0.95rem;
+  }
+
+  nav a {
+    margin-left: 0;
+    margin-right: 15px;
+    font-size: 0.9rem;
+  }
+
+  .container {
+    padding: 35px 20px;
+  }
+
+  .section-title {
+    font-size: 1.8rem;
+    margin-bottom: 35px;
+  }
+
+  .category {
+    margin-bottom: 45px;
+  }
+
+  .category h3 {
+    font-size: 1.1rem;
+  }
+
+  .topic-list a {
+    font-size: 0.95rem;
+  }
+
+  /* PRACTICE LAB CENTERED & CLEAN */
+  .practice-lab-section {
+    padding: 35px 20px;
+    margin-top: 70px;
+  }
+
+  .practice-lab-section h2 {
+    font-size: 2rem;
+  }
+
+  .practice-lab-section p {
+    font-size: 0.95rem;
+  }
+
+  .practice-lab-link {
+    font-size: 1rem;
+    padding: 15px;
+  }
+
+  footer {
+    font-size: 0.85rem;
+    padding: 25px 15px;
+  }
+}
   </style>
 </head>
 
@@ -99,37 +221,71 @@
   <a href="password-cracking.html">Password Cracking</a>
 
 </nav>
-
+<div style="text-align:center; margin:30px 0;">
+  <input
+    type="text"
+    id="searchInput"
+    placeholder="Search topics, labs, concepts..."
+    style="
+      width: 60%;
+      max-width: 500px;
+      padding: 12px;
+      border-radius: 8px;
+      border: 1px solid #1e293b;
+      background: #020617;
+      color: #e5e7eb;
+      font-family: inherit;
+    "
+  >
+</div>
 <div class="container">
 
   <!-- PASSWORD CRACKING -->
 <section>
-  <h2 class="section-title">🔐 Password Cracking</h2>
-  <h3>Concept</h3>
-  <p>
-    Hands-on lab to understand dictionary attacks, brute-force attacks,
-    and defensive detection.
+  <h2 class="section-title">🧪 Practice Labs</h2>
+
+  <p style="text-align:center; max-width:800px; margin:0 auto 50px; color:#94a3b8;">
+    Hands-on labs designed to understand real-world attacks and defenses.
+    Practice only in legal, authorized environments.
   </p>
-  <a href="password-cracking.html"
-     style="color:#22d3ee; text-decoration:none; border-bottom:1px dashed #22d3ee;">
-    Open Password Cracking Lab →
-  </a>
+
+  <div class="lab-grid">
+
+    <!-- Password Cracking -->
+    <div class="lab-card">
+      <h3>🔐 Password Cracking</h3>
+      <div class="lab-meta">Category: Offensive • Level: Beginner</div>
+      <p>
+        Learn how weak passwords are recovered using dictionary and brute-force
+        techniques, and how defenders detect and prevent them.
+      </p>
+      <a href="password-cracking.html">Open Lab →</a>
+    </div>
+
+    <!-- SQL Injection -->
+    <div class="lab-card">
+      <h3>🛢️ SQL Injection</h3>
+      <div class="lab-meta">Category: Web • Level: Beginner</div>
+      <p>
+        Understand how SQL injection works, its impact on databases,
+        and how secure coding prevents it.
+      </p>
+      <a href="#">Coming Soon</a>
+    </div>
+
+    <!-- Future Lab -->
+    <div class="lab-card">
+      <h3>🧬 Authentication Attacks</h3>
+      <div class="lab-meta">Category: Web • Level: Intermediate</div>
+      <p>
+        Explore login attacks such as brute-force, credential stuffing,
+        and session misuse.
+      </p>
+      <a href="#">Coming Soon</a>
+    </div>
+
+  </div>
 </section>
-  <!-- SQL INJECTION -->
-  <section>
-    <h2 class="section-title">🛢️ SQL Injection</h2>
-
-    <h3>Concept</h3>
-    <p>
-      SQL Injection occurs when user input is improperly handled,
-      allowing attackers to manipulate database queries.
-    </p>
-
-    <a class="lab-link" href="#">
-      SQL Injection Lab (Coming Soon)
-    </a>
-  </section>
-
 </div>
 <footer>
   © 2026 HackProof Notes  
@@ -154,5 +310,24 @@
   </a>
 </p>
 </footer>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const searchInput = document.getElementById("searchInput");
+
+  if (!searchInput) return;
+
+  searchInput.addEventListener("keyup", function () {
+    const filter = searchInput.value.toLowerCase();
+    const cards = document.querySelectorAll(".category, .lab-card");
+
+    cards.forEach(card => {
+      card.style.display =
+        card.innerText.toLowerCase().includes(filter) ? "" : "none";
+    });
+  });
+});
+</script>
 </body>
 </html>
+
+
