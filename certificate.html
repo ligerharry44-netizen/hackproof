@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>HackProof | Certificate of Completion</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Font -->
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      margin: 0;
+      background: #020617;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .certificate {
+      width: 900px;
+      padding: 60px;
+      background: linear-gradient(135deg, #020617, #000);
+      border: 4px solid #22c55e;
+      box-shadow: 0 0 40px rgba(34,197,94,0.4);
+      color: #e5e7eb;
+      text-align: center;
+      position: relative;
+    }
+
+    .certificate::before {
+      content: "";
+      position: absolute;
+      inset: 10px;
+      border: 1px dashed #22c55e;
+    }
+
+    h1 {
+      color: #22c55e;
+      font-size: 2.6rem;
+      margin-bottom: 10px;
+      text-shadow: 0 0 10px rgba(34,197,94,0.8);
+    }
+
+    .sub-title {
+      color: #ee2a0c;
+      font-size: 1rem;
+      margin-bottom: 40px;
+    }
+
+    .presented {
+      font-size: 1rem;
+      margin-bottom: 10px;
+    }
+
+    .name {
+      font-size: 2.2rem;
+      color: #38bdf8;
+      font-weight: 600;
+      margin: 15px 0;
+      text-shadow: 0 0 10px rgba(56,189,248,0.8);
+    }
+
+    .course {
+      font-size: 1.1rem;
+      margin-top: 25px;
+      margin-bottom: 35px;
+      color: #cbd5f5;
+    }
+
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 50px;
+      font-size: 0.9rem;
+      color: #94a3b8;
+    }
+
+    .signature {
+      text-align: left;
+    }
+
+    .signature span {
+      display: block;
+      margin-top: 10px;
+      color: #22d3ee;
+      font-weight: 600;
+    }
+
+    .seal {
+      position: absolute;
+      bottom: 40px;
+      right: 60px;
+      border: 2px solid #ef4444;
+      border-radius: 50%;
+      padding: 20px 26px;
+      color: #ef4444;
+      font-weight: 700;
+      box-shadow: 0 0 15px rgba(239,68,68,0.8);
+    }
+
+    @media (max-width: 768px) {
+      .certificate {
+        width: 95%;
+        padding: 30px;
+      }
+
+      .footer {
+        flex-direction: column;
+        gap: 25px;
+        text-align: center;
+      }
+
+      .signature {
+        text-align: center;
+      }
+
+      .seal {
+        position: static;
+        margin: 30px auto 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+    <script>
+  const completed = localStorage.getItem("practiceLabCompleted");
+
+  if (completed !== "true") {
+    document.body.innerHTML = `
+      <div style="
+        height:100vh;
+        display:flex;
+        flex-direction:column;
+        justify-content:center;
+        align-items:center;
+        background:#020617;
+        color:#e5e7eb;
+        font-family:JetBrains Mono;
+        text-align:center;
+      ">
+        <h1 style="color:#ef4444;">🚫 Access Denied</h1>
+        <p style="max-width:500px; color:#94a3b8;">
+          You must complete the Practice Lab before accessing the certificate.
+        </p>
+        <a href="practice-lab.html" style="
+          margin-top:20px;
+          color:#22c55e;
+          font-weight:600;
+          text-decoration:none;
+        ">
+          → Go to Practice Lab
+        </a>
+      </div>
+    `;
+  }
+</script>
+  <div class="certificate">
+
+    <h1>Certificate of Completion</h1>
+    <div class="sub-title">
+      HackProof Cyber Security Learning Platform
+    </div>
+
+    <div class="presented">
+      This certificate is proudly presented to
+    </div>
+
+    <div class="name">
+      YOUR NAME HERE
+    </div>
+
+    <div class="course">
+      for successfully completing the<br>
+      <strong>
+        Cyber Security Foundations Program
+      </strong><br><br>
+    </div>
+    <div class="footer">
+      <div class="signature">
+        Date: <strong>__________</strong>
+        <span>Liger44</span>
+        Founder, HackProof Notes
+      </div>
+
+      <div>
+        Certificate ID:<br>
+        HP-SEC-2026-XXXX
+      </div>
+    </div>
+  <div class="seal">VERIFIED</div>
+    </div>
+
+  </div>
+
+</body>
+</html>
+
+
