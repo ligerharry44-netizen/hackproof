@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <title>HackProof Notes | Cyber Security Learning Hub</title>
-  <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <!-- Font -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
@@ -26,26 +26,6 @@
       background: var(--bg);
       color: var(--text);
       line-height: 1.7;
-    }
-    /* ================= HEADER ================= */
-    header {
-      padding: 28px 24px;
-      border-bottom: 1px solid var(--border);
-      text-align: center;
-    }
-    header h1 {
-      font-size: 1.8rem;
-      font-weight: 700;
-      margin: 0;
-      color: var(--accent);
-    }
-    header p {
-      margin-top: 8px;
-      font-size: 0.95rem;
-      color: var(--muted);
-      max-width: 720px;
-      margin-left: auto;
-      margin-right: auto;
     }
     /* ================= NAV ================= */
     nav {
@@ -171,24 +151,69 @@
         font-size: 1.4rem;
       }
     }
-  </style>
+    /* =====  minimal navbar ===== */
+.top-nav {
+  display: flex;
+  align-items: center;
+  padding: 12px 24px;
+  background: #020617;
+  border-bottom: 1px solid #1e293b;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.nav-left {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+  color: #22c55e;
+  text-decoration: none;
+  font-size: 0.95rem;
+  margin-right: 10px;
+}
+
+.brand img {
+  width: 22px;
+  height: 22px;
+}
+
+.top-nav a {
+  color: #94a3b8;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.top-nav a:hover {
+  color: #22c55e;
+}
+</style>
 </head>
 <body>
-<header>
-  <h1>HackProof Notes</h1>
-</header>
-<nav>
-  <strong>
-    🧭 <a href="roadmap.html">Learning Roadmap</a>
-  </strong>
-  <div>
-    <a href="index.html">Home</a>
-    <a href="cybersecurity-101.html">Cybersecurity 101</a>
-    <a href="networking.html">Networking</a>
-    <a href="operating-systems.html">OS</a>
-    <a href="WebFundamentals.html">Web</a>
+<nav class="top-nav">
+  <div class="nav-left">
+    <a href="index.html" class="brand">
+      <img src="favicon.svg" alt="HackProof Icon">
+      <span>HackProof Notes</span>
+    </a>
+
+    <a href="index.html">Notes</a>
+    <a href="roadmap.html">Roadmap</a>
     <a href="practice-lab.html">Labs</a>
   </div>
+  <div class="nav-right">
+    <div class="profile">
+      <span class="email"></span>
+      <span class="avatar">👤</span>
+    </div>
+</nav>
 </nav>
 <div class="container">
   <div class="page-title">Core Learning Areas</div>
@@ -253,4 +278,3 @@
 </footer>
 </body>
 </html>
-
