@@ -85,26 +85,30 @@
     }
   </style>
 </head>
-
 <body>
-
 <header>
   <h1>Cyber Security 101</h1>
 </header>
-
-<nav>
-  <strong>🧠 HackProof Notes</strong>
-  <div>
-    <a href="index.html">Home</a>
-    <a href="networking.html">Networking</a>
-    <a href="operating-systems.html">Operating Systems</a>
-    <a href="WebFundamentals.html">Web Fundamentals</a>
-    <a href="cybersecurity-101.html">Cybersecurity 101</a>
+<nav class="top-nav">
+  <div class="nav-left">
+    <a href="index.html" class="brand">
+      <span>HackProof Notes</span>
+    </a>
+    <a href="index.html">Notes</a>
+    <a href="roadmap.html">Roadmap</a>
+    <a href="practice-lab.html">Labs</a>
   </div>
+<div class="nav-right">
+<div class="nav-user" id="nav-user">
+  <a href="login.html" id="login-link" class="avatar">👤 Login</a>
+  <div class="user-dropdown" id="user-dropdown" style="display:none;">
+    <span class="user-email" id="user-email"></span>
+    <button onclick="logoutUser()">Sign out</button>
+  </div>
+</div>
+</div>
 </nav>
-
 <div class="container">
-
 <!-- WHAT IS CYBERSECURITY -->
 <div class="section">
 <h2>What Is Cybersecurity :</h2>
@@ -481,5 +485,32 @@ A Zero-Day attack exploits a software vulnerability that is unknown to the softw
   Questions or feedback?
   <a href="mailto:ligerharry44@gmail.com">ligerharry44@gmail.com</a>
 </footer>
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+  import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyASUWJWXQXCYE9LpQJUKqz8z-371Y3yNUQ",
+    authDomain: "hackproof-7d14d.firebaseapp.com",
+    projectId: "hackproof-7d14d",
+    appId: "1:256480294548:web:66c82a236fc21f602f2681"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+
+  // ✅ THIS WAS MISSING
+  const content = document.getElementById("protected-content");
+
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      // 🔓 Logged in → show content
+      content.style.display = "block";
+    } else {
+      // 🔒 Not logged in → redirect
+      window.location.href = "login.html";
+    }
+  });
+</script>
 </body>
 </html>
