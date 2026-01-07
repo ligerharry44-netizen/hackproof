@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -142,17 +143,29 @@
 </head>
 
 <body>
-
 <header>
   <h1>HackProof Notes</h1>
   <p>Cyber Security • Networking • SOC • Blue Team Knowledge Base</p>
 </header>
-
-<nav>
-  <strong>📘 Knowledge Base</strong>
-  <input type="text" placeholder="🔍 Search (coming soon)">
+<nav class="top-nav">
+  <div class="nav-left">
+    <a href="index.html" class="brand">
+      <span>HackProof Notes</span>
+    </a>
+    <a href="index.html">Notes</a>
+    <a href="roadmap.html">Roadmap</a>
+    <a href="practice-lab.html">Labs</a>
+  </div>
+<div class="nav-right">
+<div class="nav-user" id="nav-user">
+  <a href="login.html" id="login-link" class="avatar">👤 Login</a>
+  <div class="user-dropdown" id="user-dropdown" style="display:none;">
+    <span class="user-email" id="user-email"></span>
+    <button onclick="logoutUser()">Sign out</button>
+  </div>
+</div>
+</div>
 </nav>
-
 <div class="container">
 
 <section id="networking">
@@ -510,7 +523,6 @@
 
   <hr>
   </div>
-
   <hr class="divider">
 
   <!-- IDS / IPS -->
@@ -716,7 +728,32 @@
   </a>
 </p>
 </footer>
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+  import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyASUWJWXQXCYE9LpQJUKqz8z-371Y3yNUQ",
+    authDomain: "hackproof-7d14d.firebaseapp.com",
+    projectId: "hackproof-7d14d",
+    appId: "1:256480294548:web:66c82a236fc21f602f2681"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+
+  // ✅ THIS WAS MISSING
+  const content = document.getElementById("protected-content");
+
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      // 🔓 Logged in → show content
+      content.style.display = "block";
+    } else {
+      // 🔒 Not logged in → redirect
+      window.location.href = "login.html";
+    }
+  });
+</script>
 </body>
 </html>
-
-
