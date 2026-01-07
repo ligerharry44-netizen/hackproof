@@ -162,13 +162,11 @@
   top: 0;
   z-index: 100;
 }
-
 .nav-left {
   display: flex;
   align-items: center;
   gap: 18px;
 }
-
 .brand {
   display: flex;
   align-items: center;
@@ -179,20 +177,62 @@
   font-size: 0.95rem;
   margin-right: 10px;
 }
-
 .brand img {
   width: 22px;
   height: 22px;
 }
-
 .top-nav a {
   color: #94a3b8;
   text-decoration: none;
   font-size: 0.9rem;
 }
-
 .top-nav a:hover {
   color: #22c55e;
+}
+.nav-user {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.avatar {
+  color: #94a3b8;
+  text-decoration: none;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+.avatar:hover {
+  color: #22c55e;
+}
+.user-dropdown {
+  position: absolute;
+  top: 36px;
+  right: 0;
+  background: #020617;
+  border: 1px solid #1e293b;
+  border-radius: 8px;
+  min-width: 220px;
+  padding: 12px;
+  z-index: 999;
+}
+.user-email {
+  display: block;
+  font-size: 0.85rem;
+  color: #e5e7eb;
+  margin-bottom: 10px;
+  word-break: break-all;
+}
+.user-dropdown button {
+  width: 100%;
+  padding: 8px;
+  background: #ef4444;
+  border: none;
+  border-radius: 6px;
+  color: #020617;
+  font-weight: 600;
+  cursor: pointer;
+}
+.user-dropdown button:hover {
+  background: #dc2626;
 }
 </style>
 </head>
@@ -208,8 +248,13 @@
     <a href="practice-lab.html">Labs</a>
   </div>
 <div class="nav-right">
-<a href="login.html" class="avatar" title="Login to HackProof">👤 Login</a>
-<span id="user-email">guest</span>
+<div class="nav-user" id="nav-user">
+  <a href="login.html" id="login-link" class="avatar">👤 Login</a>
+  <div class="user-dropdown" id="user-dropdown" style="display:none;">
+    <span class="user-email" id="user-email"></span>
+    <button onclick="logoutUser()">Sign out</button>
+  </div>
+</div>
 </div>
 </nav>
 </nav>
@@ -276,22 +321,40 @@
 </footer>
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-  import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+  import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
   const firebaseConfig = {
     apiKey: "AIzaSyASUWJWXQXCYE9LpQJUKqz8z-371Y3yNUQ",
     authDomain: "hackproof-7d14d.firebaseapp.com",
     projectId: "hackproof-7d14d",
-    storageBucket: "hackproof-7d14d.firebasestorage.app",
-    messagingSenderId: "256480294548",
     appId: "1:256480294548:web:66c82a236fc21f602f2681"
   };
   const app = initializeApp(firebaseConfig);
   const auth = getAuth(app);
+  const loginLink = document.getElementById("login-link");
+  const dropdown = document.getElementById("user-dropdown");
+  const userEmail = document.getElementById("user-email");
+  // Auth state
   onAuthStateChanged(auth, (user) => {
     if (user) {
-      document.getElementById("user-email").textContent = user.email;
+      loginLink.textContent = "👤 Account";
+      loginLink.removeAttribute("href");
+      userEmail.textContent = user.email;
+      dropdown.style.display = "none";
     }
   });
+  // Toggle dropdown
+  loginLink.addEventListener("click", () => {
+    if (userEmail.textContent) {
+      dropdown.style.display =
+        dropdown.style.display === "none" ? "block" : "none";
+    }
+  });
+  // Logout
+  window.logoutUser = function () {
+    signOut(auth).then(() => {
+      window.location.href = "index.html";
+    });
+  };
 </script>
 </body>
 </html>
