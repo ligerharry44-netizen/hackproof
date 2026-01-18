@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>HackProof Notes | SIEM</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'JetBrains Mono', monospace;
+      background: #020617;
+      color: #e5e7eb;
+      line-height: 1.9;
+    }
+
+    header {
+      padding: 40px;
+      text-align: center;
+      background: radial-gradient(circle at top, #020617, #000);
+      border-bottom: 1px solid #164e63;
+    }
+
+    header h1 {
+      color: #22d3ee;
+      font-size: 2.6rem;
+      text-shadow: 0 0 15px #22d3ee;
+    }
+
+    header p {
+      color: #94a3b8;
+    }
+
+    nav {
+      padding: 15px 30px;
+      border-bottom: 1px solid #1e293b;
+    }
+
+    nav a {
+      color: #22d3ee;
+      text-decoration: none;
+      margin-right: 20px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 40px;
+    }
+
+    section {
+      margin-bottom: 60px;
+      padding: 40px;
+      border: 1px solid #1e293b;
+      border-radius: 10px;
+      background: linear-gradient(180deg, #020617, #000);
+    }
+
+    h2.section-title {
+      text-align: center;
+      font-size: 2.2rem;
+      color: #38bdf8;
+      margin-bottom: 40px;
+    }
+
+    h3 {
+      color: #a5f3fc;
+      margin-top: 30px;
+    }
+
+    ul {
+      margin-left: 25px;
+    }
+
+    img.diagram {
+      display: block;
+      max-width: 10%;
+      margin: 4px auto;
+      border-radius: 4px;
+      border: 1px solid #1e293b;
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px;
+      border-top: 1px solid #1e293b;
+      color: #64748b;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>HackProof Notes</h1>
+  <p>SIEM | Blue Team | SimTools</p>
+</header>
+
+<nav>
+  <a href="#">Notes</a>
+  <a href="#">Roadmap</a>
+  <a href="#">Labs</a>
+</nav>
+
+<div class="container">
+
+<!-- ================= SECTION 1 ================= -->
+<section>
+  <h2 class="section-title">Introduction to SIEM</h2>
+
+  <p>
+    Security Information and Event Management system (SIEM) is the core security
+    solution that a SOC analyst uses in the security operations center. we will learn how
+    different devices in a network generate logs and why it's essential to have a
+    centralized solution to collect, normalize, and correlate these logs.
+  </p>
+</section>
+
+<!-- ================= SECTION 2 ================= -->
+<section>
+  <h2 class="section-title">Logs Everywhere</h2>
+
+  <p>
+    In any network, multiple devices constantly communicate with each other and, most
+    of the time, with the Internet through a router. These devices include workstations,
+    servers, and network infrastructure components.
+  </p>
+
+  <p>
+    Log sources can be broadly divided into two main categories, discussed below.
+  </p>
+  <img src="siem-page-1.png" alt="SIEM Diagram Page 1">
+</section>
+
+<!-- ================= SECTION 3 ================= -->
+<section>
+  <h2 class="section-title">Host-Centric Log Sources</h2>
+
+  <p>
+    Host-centric log sources capture events that occur on or directly related to an
+    individual system. These logs provide visibility into what is happening inside
+    endpoints and servers.
+  </p>
+
+  <p>Devices that generate host-centric logs include:</p>
+  <ul>
+    <li>Windows systems</li>
+    <li>Linux systems</li>
+    <li>Application and database servers</li>
+  </ul>
+
+  <p>Examples of Host-Centric Logs :</p>
+  <ul>
+    <li>A user accessing or modifying a file</li>
+    <li>A user attempting to authenticate</li>
+    <li>Process creation or execution events</li>
+    <li>Registry key or value creation, modification, or deletion</li>
+    <li>PowerShell execution activity</li>
+  </ul>
+
+  <p>
+    These logs are critical for understanding user behaviour and process activity on a
+    specific machine.
+  </p>
+
+</section>
+
+<!-- ================= SECTION 4 ================= -->
+<section>
+  <h2 class="section-title">Network-Centric Log Sources</h2>
+
+  <p>
+    Network-centric log sources capture events generated when systems
+    communicate with each other or access external resources over the network.
+  </p>
+
+  <p>Devices that generate network-centric logs include:</p>
+  <ul>
+    <li>Firewalls</li>
+    <li>IDS/IPS</li>
+    <li>Routers</li>
+    <li>VPN gateways</li>
+  </ul>
+
+  <p>Examples of Network-Centric Logs :</p>
+  <ul>
+    <li>SSH connections</li>
+    <li>File transfers over FTP</li>
+    <li>Web traffic (HTTP/HTTPS)</li>
+    <li>Remote access through VPN</li>
+    <li>Network file-sharing activity</li>
+  </ul>
+
+  <p>
+    These logs provide visibility into traffic flow, connections, and data movement
+    across the network.
+  </p>
+</section>
+
+<!-- ================= SECTION 5 ================= -->
+<section>
+  <h2 class="section-title">Challenges of Analyzing Logs Manually</h2>
+
+  <h3>Numerous Log Sources :</h3>
+  <p>
+    Modern networks contain a large number of log sources, each generating hundreds
+    or even thousands of events per second.
+  </p>
+
+  <h3>No Centralisation :</h3>
+  <p>
+    Because logs reside on the systems that generate them, analysts often need to
+    manually connect to each device using tools such as
+  </p>
+
+  <h3>Limited Context :</h3>
+  <p>
+    A single log entry rarely tells the whole story. Many activities look harmless when
+    viewed in isolation.
+  </p>
+</section>
+
+<!-- ================= SECTION 6 ================= -->
+<section>
+  <h2 class="section-title">Why SIEM?</h2>
+
+  <p>
+    In the previous task, we explored how different log sources generate massive
+    volume of logs in many formats—and how difficult it is to analyze them effectively.
+  </p>
+
+  <p>
+    This is where Security Information and Event Management (SIEM) comes into
+    play.
+  </p>
+
+  <p>
+    A SIEM solution collects logs from a wide range of log sources, standardizes
+    them into a common format, correlates related events, and detects malicious
+    activity using predefined and custom detection rules.
+  </p>
+</section>
+
+<!-- ================= SECTION 7 ================= -->
+<section>
+  <h2 class="section-title">Core Features of a SIEM Solution</h2>
+
+  <h3>Centralized Log Collection :</h3>
+  <p>SIEM solutions collect logs from all types of log sources, including:</p>
+  <ul>
+    <li>Endpoints</li>
+    <li>Servers</li>
+    <li>Firewalls</li>
+    <li>IDS/IPS</li>
+    <li>Cloud platforms</li>
+  </ul>
+
+  <p>
+    Logs are typically ingested using lightweight agents, APIs, or log forwarding
+    mechanisms and stored in a central location.
+  </p>
+
+  <h3>Normalization of Logs :</h3>
+  <p>Raw logs differ greatly in structure and format:</p>
+  <ul>
+    <li>Windows Event Logs look different from Linux logs</li>
+    <li>Firewall logs differ from application logs</li>
+  </ul>
+
+  <p>Because SIEM centralizes logs, it also:</p>
+  <ul>
+    <li>Parses logs by breaking them into structured fields (e.g., user, IP, action)</li>
+    <li>Normalizes logs by converting them into a consistent format</li>
+  </ul>
+
+  <h3>Correlation of Logs :</h3>
+  <p>
+    On their own, individual log entries often provide limited value. SIEM shines by
+    correlating events across multiple sources to uncover suspicious patterns.
+  </p>
+
+  <p>Example Correlation Scenario :</p>
+  <ul>
+    <li>Haris logs in via VPN from a previously unseen IP address</li>
+    <li>Haris accesses documents on a shared drive</li>
+    <li>Haris executes a PowerShell script</li>
+    <li>The system makes an outbound network connection</li>
+  </ul>
+</section>
+
+<!-- ================= SECTION 8 ================= -->
+<section>
+  <h2 class="section-title">Real-Time Alerting and Dashboards</h2>
+
+  <p>
+    SIEM platforms detect malicious activity using detection rules.
+  </p>
+
+  <ul>
+    <li>Many rules are provided out of the box</li>
+    <li>Analysts can create custom rules to improve detection over time</li>
+    <li>When rule conditions are met, alerts are generated in real time</li>
+  </ul>
+
+  <p>
+    Analysts are immediately notified and can investigate alerts directly within the SIEM
+    interface.
+  </p>
+
+  <p>
+    Dashboards are one of the most powerful components of any SIEM. They present
+    complex data in a clear, visual, and actionable format.
+  </p>
+
+  <p>After logs are ingested and normalized, SIEM dashboards provide insights such as:</p>
+  <ul>
+    <li>Alert highlights</li>
+    <li>System notifications</li>
+    <li>Health alerts</li>
+    <li>Failed login attempts</li>
+    <li>Event ingestion counts</li>
+    <li>Rules triggered</li>
+    <li>Top domains visited</li>
+  </ul>
+
+  <img src="images/siem-dashboard.png" alt="SIEM Dashboard" class="diagram">
+</section>
+
+<!-- ================= SECTION 9 ================= -->
+<section>
+  <h2 class="section-title">Log Sources and Ingestion</h2>
+
+  <h3>Windows Machine :</h3>
+  <p>
+    Windows systems record nearly every activity in the form of Windows Event Logs.
+    Each event type is assigned a unique Event ID, which helps analysts quickly identify
+    and track specific actions.
+  </p>
+
+  <h3>Linux Machine :</h3>
+  <p>
+    Linux systems store logs as text files, typically under the /var/log directory. These
+    logs capture system events, errors, warnings, and application activity and are
+    continuously ingested into the SIEM.
+  </p>
+
+  <p>Common Linux Log Locations :</p>
+  <ul>
+    <li>/var/log/httpd – HTTP request, response, and error logs</li>
+    <li>/var/log/cron – Cron job execution events</li>
+    <li>/var/log/auth.log or /var/log/secure – Authentication-related logs</li>
+    <li>/var/log/kern.log – Kernel-related events</li>
+  </ul>
+
+  <p>Web Server Logs</p>
+  <p>
+    Web servers are critical log sources because they record all inbound and outbound
+    web traffic, making them essential for detecting web-based attacks.
+  </p>
+
+  <p>On Linux-based systems, Apache logs are commonly stored in:</p>
+  <ul>
+    <li>/var/log/apache</li>
+    <li>/var/log/httpd</li>
+  </ul>
+</section>
+
+<!-- ================= SECTION 10 ================= -->
+<section>
+  <h2 class="section-title">Alerting Process and Analysis</h2>
+
+  <p>
+    We’ve learned that a SIEM detects threats by correlating logs from multiple log
+    sources and triggering alerts.
+  </p>
+
+  <p>The answer lies in detection rules.</p>
+
+  <h3>What Are Detection Rules :</h3>
+  <p>
+    Detection rules are essentially logical expressions that define what to look for and
+    when to raise an alert.
+  </p>
+
+  <p>
+    They continuously evaluate incoming logs and trigger when specific conditions are
+    met.
+  </p>
+
+  <p>Simple Examples of Detection Rules :</p>
+  <ul>
+    <li>If a user has 5 failed login attempts within 10 seconds, trigger an alert for Multiple Failed Login Attempts</li>
+    <li>If a successful login occurs after multiple failures, trigger an alert for Brute Force Success</li>
+    <li>Trigger an alert whenever a USB device is inserted (useful if USB usage is restricted)</li>
+    <li>If outbound data transfer exceeds 25 MB, raise an alert for Potential Data Exfiltration</li>
+  </ul>
+</section>
+
+</div>
+<footer>
+  © 2026 HackProof Notes  
+  <br>
+   Created and maintained by
+  <span style="color:#22d3ee; font-weight:600;">
+    Liger44
+  </span>
+  <br>
+<p style="font-size:0.75rem; opacity:0.7;">
+  Built for ethical cyber security learning only.
+</p>
+  <br><br>
+  Questions or feedback?
+  <a href="mailto:ligerharry44@gmail.com">ligerharry44@gmail.com</a>
+</footer>
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+  import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+  const firebaseConfig = {
+    apiKey: "AIzaSyASUWJWXQXCYE9LpQJUKqz8z-371Y3yNUQ",
+    authDomain: "hackproof-7d14d.firebaseapp.com",
+    projectId: "hackproof-7d14d",
+    appId: "1:256480294548:web:66c82a236fc21f602f2681"
+  };
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const loginLink = document.getElementById("login-link");
+  const dropdown = document.getElementById("user-dropdown");
+  const userEmail = document.getElementById("user-email");
+  // Auth state
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      loginLink.textContent = "👤 Account";
+      loginLink.removeAttribute("href");
+      userEmail.textContent = user.email;
+      dropdown.style.display = "none";
+    }
+  });
+  // Toggle dropdown
+  loginLink.addEventListener("click", () => {
+    if (userEmail.textContent) {
+      dropdown.style.display =
+        dropdown.style.display === "none" ? "block" : "none";
+    }
+  });
+  // Logout
+  window.logoutUser = function () {
+    signOut(auth).then(() => {
+      window.location.href = "index.html";
+    });
+  };
+</script>
+</body>
+</html>
