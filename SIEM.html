@@ -33,12 +33,17 @@
       color: #94a3b8;
     }
 
+    /* NAV FIXED (PROFILE RIGHT) */
     nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       padding: 15px 30px;
       border-bottom: 1px solid #1e293b;
     }
 
-    nav a {
+    .nav-left a,
+    .nav-right a {
       color: #22d3ee;
       text-decoration: none;
       margin-right: 20px;
@@ -76,10 +81,22 @@
 
     img.diagram {
       display: block;
-      max-width: 10%;
-      margin: 4px auto;
-      border-radius: 4px;
+      max-width: 70%;
+      margin: 25px auto;
+      border-radius: 8px;
       border: 1px solid #1e293b;
+    }
+
+    /* Reference / Highlight Section */
+    .reference-section {
+      border-left: 6px solid #f59e0b;
+      background: linear-gradient(180deg, #1a1205, #020617);
+    }
+
+    .reference-section a {
+      color: #fbbf24;
+      font-weight: 600;
+      text-decoration: none;
     }
 
     footer {
@@ -99,13 +116,17 @@
 </header>
 
 <nav>
-  <a href="#">Notes</a>
-  <a href="#">Roadmap</a>
-  <a href="#">Labs</a>
+  <div class="nav-left">
+    <a href="index.html">Notes</a>
+    <a href="roadmap.html">Roadmap</a>
+    <a href="practice-lab.html">Labs</a>
+  </div>
+  <div class="nav-right">
+    <a href="login.html" id="login-link">👤 Login</a>
+  </div>
 </nav>
 
-<div class="container">
-
+<div class="container" id="protected-content">
 <!-- ================= SECTION 1 ================= -->
 <section>
   <h2 class="section-title">Introduction to SIEM</h2>
@@ -397,7 +418,11 @@
     <li>If outbound data transfer exceeds 25 MB, raise an alert for Potential Data Exfiltration</li>
   </ul>
 </section>
-
+<section class="reference-section">
+  <h2 class="section-title">References & Learning Material</h2>
+  <p>📄 Reference Document:</p>
+  <a href="SIEM.pdf" target="_blank">SIEM.pdf</a>
+</section>
 </div>
 <footer>
   © 2026 HackProof Notes  
