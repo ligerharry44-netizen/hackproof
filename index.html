@@ -1,362 +1,278 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>HackProof Notes | Cyber Security Learning Hub</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" type="image/svg+xml" href="favicon.svg">
-  <!-- Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --bg: #020617;
-      --panel: #020617;
-      --border: #1e293b;
-      --text: #e5e7eb;
-      --muted: #94a3b8;
-      --accent: #22c55e;
-      --danger: #ef4444;
-    }
-    * {
-      box-sizing: border-box;
-    }
-    body {
-      margin: 0;
-      font-family: 'Inter', sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.7;
-    }
-    /* ================= NAV ================= */
-    nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 12px 24px;
-      border-bottom: 1px solid var(--border);
-      background: var(--bg);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
-    nav strong a {
-      color: var(--accent);
-      font-weight: 600;
-      text-decoration: none;
-      font-size: 0.95rem;
-    }
-    nav a {
-      color: var(--muted);
-      text-decoration: none;
-      margin-left: 18px;
-      font-size: 0.9rem;
-    }
-    nav a:hover {
-      color: var(--accent);
-    }
-    /* ================= CONTAINER ================= */
-    .container {
-      max-width: 1100px;
-      margin: auto;
-      padding: 40px 24px;
-    }
-    .page-title {
-      font-size: 1.6rem;
-      font-weight: 600;
-      margin-bottom: 32px;
-      text-align: center;
-    }
-    /* ================= CARDS ================= */
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 24px;
-    }
-    .card {
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 22px;
-      background: var(--panel);
-    }
-    .card h3 {
-      margin: 0 0 10px;
-      font-size: 1.05rem;
-      font-weight: 600;
-    }
-    .card p {
-      font-size: 0.9rem;
-      color: var(--muted);
-      margin-bottom: 16px;
-    }
-    .card a {
-      font-size: 0.9rem;
-      color: var(--accent);
-      text-decoration: none;
-      font-weight: 500;
-    }
-    .card a:hover {
-      text-decoration: underline;
-    }
-    /* ================= PRACTICE LAB ================= */
-    .labs {
-      margin-top: 70px;
-      padding: 36px;
-      border: 2px solid var(--danger);
-      border-radius: 12px;
-      text-align: center;
-    }
-    .labs h2 {
-      font-size: 1.5rem;
-      color: var(--danger);
-      margin-bottom: 12px;
-    }
-    .labs p {
-      color: #fecaca;
-      max-width: 700px;
-      margin: auto;
-      font-size: 0.95rem;
-    }
-    .labs a {
-      display: inline-block;
-      margin-top: 24px;
-      padding: 14px 24px;
-      background: var(--danger);
-      color: #020617;
-      font-weight: 600;
-      border-radius: 8px;
-      text-decoration: none;
-    }
-    /* ================= FOOTER ================= */
-    footer {
-      margin-top: 70px;
-      padding: 28px 24px;
-      text-align: center;
-      border-top: 1px solid var(--border);
-      font-size: 0.85rem;
-      color: var(--muted);
-    }
-    footer a {
-      color: var(--accent);
-      text-decoration: none;
-      font-weight: 500;
-    }
-    /* ================= MOBILE ================= */
-    @media (max-width: 768px) {
-      nav {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 8px;
-      }
-      .page-title {
-        font-size: 1.4rem;
-      }
-    }
-    /* =====  minimal navbar ===== */
+<meta charset="UTF-8">
+<title>HackProof Notes | Cyber Security Learning Hub</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --bg: #020617;
+  --panel: #020617;
+  --border: #1e293b;
+  --text: #e5e7eb;
+  --muted: #94a3b8;
+  --accent: #22c55e;
+  --danger: #ef4444;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+/* NAV */
 .top-nav {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   padding: 12px 24px;
-  background: #020617;
-  border-bottom: 1px solid #1e293b;
+  border-bottom: 1px solid var(--border);
   position: sticky;
   top: 0;
-  z-index: 100;
+  background: rgba(2,6,23,0.8);
+  backdrop-filter: blur(10px);
 }
+
 .nav-left {
   display: flex;
   align-items: center;
   gap: 18px;
 }
+
 .brand {
   display: flex;
   align-items: center;
   gap: 8px;
   font-weight: 700;
-  color: #22c55e;
+  color: var(--accent);
   text-decoration: none;
-  font-size: 0.95rem;
-  margin-right: 10px;
 }
-.brand img {
-  width: 22px;
-  height: 22px;
-}
+
+.brand img { width: 22px; }
+
 .top-nav a {
-  color: #94a3b8;
+  color: var(--muted);
   text-decoration: none;
   font-size: 0.9rem;
 }
-.top-nav a:hover {
-  color: #22c55e;
+
+.top-nav a:hover { color: var(--accent); }
+
+/* HERO */
+.hero {
+  text-align: center;
+  padding: 90px 20px;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeUp 1s ease forwards;
 }
-.nav-user {
-  position: relative;
-  display: flex;
-  align-items: center;
+
+.hero h1 { font-size: 2.6rem; }
+.hero span { color: var(--accent); }
+
+.hero p {
+  color: var(--muted);
+  max-width: 600px;
+  margin: 20px auto;
 }
-.avatar {
-  color: #94a3b8;
-  text-decoration: none;
-  font-size: 0.9rem;
-  cursor: pointer;
-}
-.avatar:hover {
-  color: #22c55e;
-}
-.user-dropdown {
-  position: absolute;
-  top: 36px;
-  right: 0;
-  background: #020617;
-  border: 1px solid #1e293b;
-  border-radius: 8px;
-  min-width: 220px;
-  padding: 12px;
-  z-index: 999;
-}
-.user-email {
-  display: block;
-  font-size: 0.85rem;
-  color: #e5e7eb;
-  margin-bottom: 10px;
-  word-break: break-all;
-}
-.user-dropdown button {
-  width: 100%;
-  padding: 8px;
-  background: #ef4444;
+
+.hero button {
+  margin-top: 25px;
+  padding: 14px 26px;
+  background: var(--accent);
   border: none;
-  border-radius: 6px;
-  color: #020617;
+  border-radius: 8px;
   font-weight: 600;
   cursor: pointer;
+  transition: 0.3s;
 }
-.user-dropdown button:hover {
-  background: #dc2626;
+
+.hero button:hover { transform: scale(1.05); }
+
+/* CONTAINER */
+.container {
+  max-width: 1100px;
+  margin: auto;
+  padding: 40px 24px;
+}
+
+.page-title {
+  text-align: center;
+  font-size: 1.6rem;
+  margin-bottom: 30px;
+}
+
+/* GRID */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px,1fr));
+  gap: 24px;
+}
+
+/* CARD (CLICKABLE) */
+.card {
+  display: block;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 22px;
+  background: var(--panel);
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.3s ease;
+
+  opacity: 0;
+  transform: translateY(25px);
+  animation: fadeUp 0.8s ease forwards;
+}
+
+.card:nth-child(1){ animation-delay:0.2s; }
+.card:nth-child(2){ animation-delay:0.3s; }
+.card:nth-child(3){ animation-delay:0.4s; }
+.card:nth-child(4){ animation-delay:0.5s; }
+.card:nth-child(5){ animation-delay:0.6s; }
+.card:nth-child(6){ animation-delay:0.7s; }
+
+.card:hover {
+  transform: translateY(-6px) scale(1.02);
+  border-color: var(--accent);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+}
+
+.card p { color: var(--muted); }
+
+/* LABS */
+.labs {
+  margin-top: 70px;
+  padding: 36px;
+  border: 2px solid var(--danger);
+  border-radius: 14px;
+  text-align: center;
+  transition: 0.3s;
+}
+
+.labs:hover { transform: scale(1.02); }
+
+.labs h2 { color: var(--danger); }
+
+.labs p {
+  color: #fecaca;
+  max-width: 700px;
+  margin: auto;
+}
+
+.labs a {
+  display: inline-block;
+  margin-top: 24px;
+  padding: 14px 24px;
+  background: var(--danger);
+  color: #020617;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+/* FOOTER */
+footer {
+  margin-top: 70px;
+  padding: 28px 24px;
+  text-align: center;
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+}
+
+/* ANIMATION */
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 </style>
 </head>
+
 <body>
+
 <nav class="top-nav">
   <div class="nav-left">
     <a href="index.html" class="brand">
-      <img src="favicon.svg" alt="HackProof Icon">
+      <img src="favicon.svg">
       <span>HackProof Notes</span>
     </a>
     <a href="index.html">Notes</a>
     <a href="roadmap.html">Roadmap</a>
     <a href="practice-lab.html">Labs</a>
   </div>
-<div class="nav-right">
-<div class="nav-user" id="nav-user">
-  <a href="login.html" id="login-link" class="avatar">👤 Login</a>
-  <div class="user-dropdown" id="user-dropdown" style="display:none;">
-    <span class="user-email" id="user-email"></span>
-    <button onclick="logoutUser()">Sign out</button>
-  </div>
-</div>
-</div>
 </nav>
-</nav>
+
 <div class="container">
-  <div class="page-title">Core Learning Areas</div>
-  <div class="grid">
-    <div class="card">
-      <h3>🔐 Cyber Security 101</h3>
+
+<section class="hero">
+  <h1>Learn <span>Cyber Security</span> the Smart Way</h1>
+  <p>Structured notes, real-world labs, and practical cybersecurity learning.</p>
+  <button onclick="location.href='cybersecurity-101.html'">Start Learning →</button>
+</section>
+
+<div class="page-title">Core Learning Areas</div>
+
+<div class="grid">
+
+  <a href="cybersecurity-101.html" class="card">
+    <h3>🔐 Cyber Security 101</h3>
     <p>CIA Triad, IAAA, Access Control, Risk Management.</p>
-      <a href="cybersecurity-101.html">Open →</a>
-    </div>
-    <div class="card">
-      <h3>🌐 Networking Fundamentals</h3>
-      <p>OSI, TCP/IP, ports, VPNs, firewalls, traffic flow.</p>
-      <a href="networking.html">Open →</a>
-    </div>
-    <div class="card">
-      <h3>🖥️ Operating Systems</h3>
-      <p>Windows & Linux internals, logs, registry, permissions.</p>
-      <a href="operating-systems.html">Open →</a>
-    </div>
-    <div class="card">
-      <h3>🧩 Web Fundamentals</h3>
-      <p>HTML, DNS, HTTP/HTTPS, authentication & sessions.</p>
-      <a href="WebFundamentals.html">Open →</a>
-    </div>
-    <div class="card">
-      <h3>🛡️ Blue Team </h3>
-      <p>SOC concepts, SIEM, detection & incident response.</p>
-      <a href="blue_team.html">Open →</a>
-    </div>
-    <div class="card">
-      <h3>☠️ Red Team (Coming Soon)</h3>
-      <p>Recon, exploitation, privilege escalation techniques.</p>
-    </div>
+  </a>
+
+  <a href="networking.html" class="card">
+    <h3>🌐 Networking Fundamentals</h3>
+    <p>OSI, TCP/IP, ports, VPNs, firewalls, traffic flow.</p>
+  </a>
+
+  <a href="operating-systems.html" class="card">
+    <h3>🖥️ Operating Systems</h3>
+    <p>Windows & Linux internals, logs, registry, permissions.</p>
+  </a>
+
+  <a href="WebFundamentals.html" class="card">
+    <h3>🧩 Web Fundamentals</h3>
+    <p>HTML, DNS, HTTP/HTTPS, authentication & sessions.</p>
+  </a>
+
+  <a href="blue_team.html" class="card">
+    <h3>🛡️ Blue Team</h3>
+    <p>SOC concepts, SIEM, detection & incident response.</p>
+  </a>
+
+  <div class="card">
+    <h3>☠️ Red Team (Coming Soon)</h3>
+    <p>Recon, exploitation, privilege escalation techniques.</p>
   </div>
-  <!-- PRACTICE LAB -->
-  <div class="labs">
-    <h2>🧪 Practice Labs</h2>
-    <p>
-    This section is dedicated to hands-on cyber security practice.
-    All labs focus on understanding real-world attacks from a
-    defensive and ethical perspective.
-    </p>
-    <a href="practice-lab.html">Enter Practice Labs →</a>
-      <p style="margin-top:25px; font-size:0.9rem; color:#fecaca;">
-    ⚠️ Practice only in environments you own or are authorized to test.
-  </p>
-  </div>
+
 </div>
+
+<div class="labs">
+  <h2>🧪 Practice Labs</h2>
+  <p>
+  This section is dedicated to hands-on cyber security practice.
+  All labs focus on understanding real-world attacks.
+  </p>
+  <a href="practice-lab.html">Enter Practice Labs →</a>
+</div>
+
+</div>
+
 <footer>
-  © 2026 HackProof Notes  
-  <br>
-   Created and maintained by
-  <span style="color:#22d3ee; font-weight:600;">
-    Liger44
-  </span>
-  <br>
-<p style="font-size:0.75rem; opacity:0.7;">
-  Built for ethical cyber security learning only.
-</p>
-  <br><br>
-  Questions or feedback?
-  <a href="mailto:ligerharry44@gmail.com">ligerharry44@gmail.com</a>
+  © 2026 HackProof Notes<br>
+  Created by <span style="color:#22d3ee;">Liger44</span>
 </footer>
-<script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-  import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-  const firebaseConfig = {
-    apiKey: "AIzaSyASUWJWXQXCYE9LpQJUKqz8z-371Y3yNUQ",
-    authDomain: "hackproof-7d14d.firebaseapp.com",
-    projectId: "hackproof-7d14d",
-    appId: "1:256480294548:web:66c82a236fc21f602f2681"
-  };
-  const app = initializeApp(firebaseConfig);
-  const auth = getAuth(app);
-  const loginLink = document.getElementById("login-link");
-  const dropdown = document.getElementById("user-dropdown");
-  const userEmail = document.getElementById("user-email");
-  // Auth state
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      loginLink.textContent = "👤 Account";
-      loginLink.removeAttribute("href");
-      userEmail.textContent = user.email;
-      dropdown.style.display = "none";
-    }
-  });
-  // Toggle dropdown
-  loginLink.addEventListener("click", () => {
-    if (userEmail.textContent) {
-      dropdown.style.display =
-        dropdown.style.display === "none" ? "block" : "none";
-    }
-  });
-  // Logout
-  window.logoutUser = function () {
-    signOut(auth).then(() => {
-      window.location.href = "index.html";
-    });
-  };
-</script>
+
 </body>
+</html>
 </html>
 
