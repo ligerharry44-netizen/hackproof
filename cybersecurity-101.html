@@ -1,130 +1,277 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>HackProof Notes | Cyber Security 101</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<title>HackProof Notes | Cyber Security 101</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;600&display=swap" rel="stylesheet">
 
-  <style>
-    body {
-      margin: 0;
-      font-family: 'JetBrains Mono', monospace;
-      background: #020617;
-      color: #e5e7eb;
-      line-height: 1.8;
-    }
+<style>
 
-    header {
-      padding: 50px 30px;
-      text-align: center;
-      border-bottom: 1px solid #1e293b;
-      background: radial-gradient(circle at top, #020617, #000);
-    }
+/* ===== BASE ===== */
+body {
+  margin: 0;
+  font-family: 'JetBrains Mono', monospace;
+  background: linear-gradient(135deg, #f8fafc, #eef2f7);
+  color: #0f172a;
+}
 
-    header h1 {
-      color: #22c55e;
-      text-shadow: 0 0 14px rgba(34,197,94,0.7);
-    }
+/* ===== PROGRESS BAR ===== */
+#progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 4px;
+  width: 0%;
+  background: #22c55e;
+  z-index: 9999;
+}
 
-    nav {
-      display: flex;
-      justify-content: space-between;
-      padding: 15px 30px;
-      border-bottom: 1px solid #1e293b;
-      background: #020617;
-    }
+/* ===== NAV ===== */
+nav {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px 30px;
+  background: rgba(255,255,255,0.8);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid #e5e7eb;
+}
 
-    nav a {
-      color: #22d3ee;
-      text-decoration: none;
-      margin-left: 18px;
-      font-size: 0.9rem;
-    }
+nav a {
+  color: #334155;
+  text-decoration: none;
+  margin-right: 18px;
+}
 
-    nav a:hover {
-      text-decoration: underline;
-    }
+nav a:hover {
+  color: #22c55e;
+}
 
-    .container {
-      max-width: 1200px;
-      margin: auto;
-      padding: 40px 30px;
-    }
+/* ===== SIDEBAR ===== */
+#sidebar {
+  position: fixed;
+  left: 0;
+  top: 80px;
+  width: 240px;
+  height: 80vh;
+  overflow-y: auto;
+  padding: 10px 15px;
 
-    .section {
-      margin-bottom: 60px;
-      padding: 35px;
-      border: 1px solid #1e293b;
-      border-radius: 12px;
-      background: linear-gradient(180deg, #020617, #000);
-    }
+  background: rgba(255,255,255,0.7);
+  backdrop-filter: blur(10px);
+  border-right: 1px solid #e5e7eb;
+}
 
-    h2 { color: #38bdf8; }
-    h3 { color: #a5f3fc; }
-    h4 { color: #7dd3fc; }
+#sidebar a {
+  display: block;
+  color: #64748b;
+  text-decoration: none;
+  margin: 10px 0;
+  padding: 6px 8px;
+  border-radius: 6px;
+}
 
-    ul, ol {
-      margin-left: 25px;
-    }
+#sidebar a:hover {
+  background: #f1f5f9;
+  color: #22c55e;
+}
 
-    img {
-      max-width: 100%;
-      border-radius: 10px;
-      margin: 20px 0;
-      border: 1px solid #1e293b;
-    }
+/* ===== CONTAINER ===== */
+.container {
+  max-width: 900px;
+  margin-left: 260px;
+  padding: 40px 20px;
+}
 
-    footer {
-      text-align: center;
-      padding: 30px;
-      border-top: 1px solid #1e293b;
-      color: #64748b;
-      font-size: 0.85rem;
-    }
-  </style>
+/* ===== SECTION ===== */
+.section {
+  margin-bottom: 60px;
+  padding: 35px;
+  border-radius: 16px;
+
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.05);
+
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.6s ease;
+}
+
+.section.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ===== HEADINGS ===== */
+h2 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 15px;
+  color: #0f172a;
+  border-left: 5px solid #22c55e;
+  padding-left: 12px;
+}
+
+h2::after {
+  content: "";
+  display: block;
+  width: 60px;
+  height: 3px;
+  background: #22c55e;
+  margin-top: 8px;
+  border-radius: 5px;
+}
+
+h3 {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-top: 20px;
+  color: #1e293b;
+}
+
+h4 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #475569;
+}
+
+/* ===== TEXT ===== */
+p, li {
+  font-size: 0.95rem;
+  color: #334155;
+}
+
+/* ===== TABLE ===== */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  border: 1px solid #e5e7eb;
+  padding: 10px;
+}
+
+th {
+  background: #f1f5f9;
+}
+
+/* ===== IMAGES ===== */
+img {
+  display: block;
+  max-width: 600px;
+  width: 100%;
+  margin: 25px auto;
+  border-radius: 12px;
+  background: #f8fafc;
+  padding: 10px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+}
+
+/* ===== REFERENCE BOX ===== */
+.reference {
+  margin-top: 50px;
+  padding: 25px;
+
+  background: linear-gradient(135deg, #ecfdf5, #f0fdf4);
+  border: 1px solid #bbf7d0;
+  border-left: 6px solid #22c55e;
+
+  border-radius: 14px;
+}
+
+.reference h3 {
+  margin-bottom: 15px;
+  color: #166534;
+}
+
+.ref-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+
+  padding: 15px;
+  border-radius: 10px;
+
+  background: white;
+  border: 1px solid #e5e7eb;
+
+  transition: 0.3s;
+}
+
+.ref-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+}
+
+.pdf-icon {
+  font-size: 2rem;
+}
+
+.ref-content p {
+  margin: 0;
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.ref-content a {
+  display: inline-block;
+  margin-top: 5px;
+  padding: 6px 12px;
+
+  background: #22c55e;
+  color: white;
+  border-radius: 6px;
+
+  text-decoration: none;
+  font-size: 0.85rem;
+}
+
+.ref-content a:hover {
+  background: #16a34a;
+}
+
+/* ===== FOOTER ===== */
+footer {
+  text-align: center;
+  padding: 30px;
+  border-top: 1px solid #e5e7eb;
+  color: #64748b;
+}
+
+</style>
 </head>
+
 <body>
-<header>
-  <h1>Cyber Security 101</h1>
-</header>
-<nav class="top-nav">
-  <div class="nav-left">
-    <a href="index.html" class="brand">
-      <span>HackProof Notes</span>
-    </a>
+
+<div id="progress-bar"></div>
+<div id="sidebar"></div>
+
+<nav>
+  <div>
     <a href="index.html">Notes</a>
     <a href="roadmap.html">Roadmap</a>
     <a href="practice-lab.html">Labs</a>
   </div>
-<div class="nav-right">
-<div class="nav-user" id="nav-user">
-  <a href="login.html" id="login-link" class="avatar">👤 Login</a>
-  <div class="user-dropdown" id="user-dropdown" style="display:none;">
-    <span class="user-email" id="user-email"></span>
-    <button onclick="logoutUser()">Sign out</button>
-  </div>
-</div>
-</div>
 </nav>
 <div class="container">
 <!-- WHAT IS CYBERSECURITY -->
 <div class="section">
-<h2>What Is Cybersecurity :</h2>
+<h2>What Is Cybersecurity</h2>
 <p>
-Cybersecurity is the practice of protecting computers, networks, servers, mobile devices, and data from attacks, damage, or unauthorized access.
-</p>
+Cybersecurity is the practice of protecting systems,networks,and data from unauthorized access,attacks,ordamage.</p>
+<p>It’s essential because today’s world is digitally connected — from banking systems to defense infrastructure — and every connection is a potential target.</p>
 </div>
 
 <!-- CIA TRIAD -->
 <div class="section">
-<h2>Core Pillars of Cybersecurity :</h2>
+<h2>Core Pillars of Cybersecurity</h2>
 <img src="images/cia-triad.png" alt="CIA Triad Diagram">
 
 <h3>Confidentiality</h3>
-<p>Confidentiality means protecting information from unauthorized access. Only authorized users should be able to see or use the data.</p>
-
+<p>Ensures data is accessed only by authorized </p>
 <h4>Why Confidentiality is Important :</h4>
 <ul>
   <li>Prevents data leaks</li>
@@ -164,7 +311,7 @@ Cybersecurity is the practice of protecting computers, networks, servers, mobile
 </ul>
 
 <h3>Availability</h3>
-<p>Availability ensures that data and systems are accessible to authorized users whenever they are needed.</p>
+<p>Ensures resources are accessible when needed.</p>
 
 <h4>Real-Life Examples :</h4>
 <ul>
@@ -179,6 +326,37 @@ Cybersecurity is the practice of protecting computers, networks, servers, mobile
   <li>DDoS protection</li>
   <li>Load balancing</li>
 </ul>
+</div>
+
+<!-- Differentiate between a Threat, Vulnerability, and Risk -->
+<div class="section">
+<h2> Differentiate between Threat,Vulnerability,and Risk</h2>
+<table border="1" cellpadding="10" cellspacing="0">
+  <thead>
+    <tr>
+      <th>Term</th>
+      <th>Definition</th>
+      <th>Example</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Threat</td>
+      <td>A threat is anything that has the potential to cause harm to systems, data, or individuals.</td>
+      <td>Malware, insider attack</td>
+    </tr>
+    <tr>
+      <td>Vulnerability</td>
+      <td>A weakness that can be exploited by a threat</td>
+      <td>Unpatched operating system</td>
+    </tr>
+    <tr>
+      <td>Risk</td>
+      <td>The probability of loss when a threat exploits a vulnerability</td>
+      <td>Ransomware attack on outdated systems</td>
+    </tr>
+  </tbody>
+</table>
 </div>
 
 <!-- INFORMATION ASSURANCE -->
@@ -464,11 +642,19 @@ A Zero-Day attack exploits a software vulnerability that is unknown to the softw
 </ul>
 </div>
 </section>
-  <div class="reference">
-    📎 Reference Documents:<br>
-    <a href="Cyber security 101.pdf" target="_blank">Cyber Security 101.pdf</a><br>
+<!-- REFERENCE SECTION -->
+<div class="reference">
+  <h3>Reference Documents</h3>
+
+  <div class="ref-item">
+    <span class="pdf-icon">📄</span>
+
+    <div class="ref-content">
+      <p>Cyber Security 101.pdf</p>
+      <a href="Cyber security 101.pdf" target="_blank">Download</a>
+    </div>
   </div>
-</section>
+</div>
 </div>
 <footer>
   © 2026 HackProof Notes  
@@ -485,32 +671,54 @@ A Zero-Day attack exploits a software vulnerability that is unknown to the softw
   Questions or feedback?
   <a href="mailto:ligerharry44@gmail.com">ligerharry44@gmail.com</a>
 </footer>
-<script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-  import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+</body>
+</html>
+<!-- JS -->
+<script>
 
-  const firebaseConfig = {
-    apiKey: "AIzaSyASUWJWXQXCYE9LpQJUKqz8z-371Y3yNUQ",
-    authDomain: "hackproof-7d14d.firebaseapp.com",
-    projectId: "hackproof-7d14d",
-    appId: "1:256480294548:web:66c82a236fc21f602f2681"
-  };
+/* PROGRESS BAR */
+window.onscroll = function () {
+  let winScroll = document.documentElement.scrollTop;
+  let height =
+    document.documentElement.scrollHeight -
+    document.documentElement.clientHeight;
 
-  const app = initializeApp(firebaseConfig);
-  const auth = getAuth(app);
+  document.getElementById("progress-bar").style.width =
+    (winScroll / height) * 100 + "%";
+};
 
-  // ✅ THIS WAS MISSING
-  const content = document.getElementById("protected-content");
+/* SIDEBAR AUTO LINKS */
+const sidebar = document.getElementById("sidebar");
+const headings = document.querySelectorAll("h2");
 
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      // 🔓 Logged in → show content
-      content.style.display = "block";
-    } else {
-      // 🔒 Not logged in → redirect
-      window.location.href = "login.html";
-    }
-  });
+headings.forEach((h, i) => {
+  const id = "section-" + i;
+  h.id = id;
+
+  const link = document.createElement("a");
+  link.href = "#" + id;
+  link.textContent = h.textContent;
+
+  sidebar.appendChild(link);
+});
+
+/* SCROLL ANIMATION */
+const sections = document.querySelectorAll(".section");
+
+const observer = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("show");
+      }
+    });
+  },
+  { threshold: 0.1 }
+);
+
+sections.forEach((sec) => observer.observe(sec));
+
 </script>
+
 </body>
 </html>
