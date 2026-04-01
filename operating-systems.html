@@ -1,166 +1,355 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>HackProof Notes | Operating Systems</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<title>HackProof Notes | Operating System</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;600&display=swap" rel="stylesheet">
 
-  <style>
-    body {
-      margin: 0;
-      font-family: 'JetBrains Mono', monospace;
-      background: #020617;
-      color: #e5e7eb;
-      line-height: 1.8;
-    }
+<style>
 
-    header {
-      padding: 40px;
-      text-align: center;
-      background: radial-gradient(circle at top, #020617, #000);
-      border-bottom: 1px solid #164e63;
-    }
-
-    header h1 {
-      color: #22d3ee;
-      font-size: 2.6rem;
-      text-shadow: 0 0 15px #22d3ee;
-    }
-
-    header p {
-      color: #94a3b8;
-    }
-
-    nav {
-      display: flex;
-      justify-content: space-between;
-      padding: 15px 30px;
-      border-bottom: 1px solid #1e293b;
-    }
-
-    nav a {
-      color: #22d3ee;
-      text-decoration: none;
-      margin-left: 15px;
-    }
-
-    .container {
-      max-width: 1200px;
-      margin: auto;
-      padding: 40px;
-    }
-
-    section {
-      border: 1px solid #1e293b;
-      border-radius: 10px;
-      padding: 40px;
-      background: linear-gradient(180deg, #020617, #000);
-    }
-
-    .main-title {
-      text-align: center;
-      font-size: 2.4rem;
-      color: #22d3ee;
-      margin-bottom: 70px;
-      text-shadow: 0 0 12px rgba(34,211,238,0.8);
-    }
-
-    .os-title {
-      text-align: center;
-      font-size: 2rem;
-      color: #38bdf8;
-      margin: 60px 0 35px;
-      text-shadow: 0 0 10px rgba(56,189,248,0.6);
-    }
-
-    .os-title::after {
-      content: "";
-      display: block;
-      width: 120px;
-      height: 3px;
-      margin: 16px auto 0;
-      background: linear-gradient(to right, transparent, #38bdf8, transparent);
-    }
-
-    .topic-block {
-      padding: 30px;
-      border-left: 5px solid #38bdf8;
-      border-radius: 10px;
-      background: linear-gradient(180deg, #020617, #000);
-    }
-
-    .sub-topic {
-      font-size: 1.3rem;
-      color: #a5f3fc;
-      margin-bottom: 10px;
-      padding-left: 12px;
-      border-left: 4px solid #22d3ee;
-      text-shadow: 0 0 6px rgba(34,211,238,0.5);
-    }
-
-    ul {
-      margin-left: 20px;
-    }
-
-    .divider {
-      margin: 40px 0;
-      border: none;
-      height: 1px;
-      background: linear-gradient(to right, transparent, #22d3ee, transparent);
-    }
-
-    footer {
-      text-align: center;
-      padding: 30px;
-      border-top: 1px solid #1e293b;
-      color: #64748b;
-      margin-top: 40px;
-    }
-    .diagram-img {
-  max-width: 60%;
-  height: auto;
-  display: block;
-  margin: 25px auto;
-  border-radius: 8px;
-  border: 1px solid #1e293b;
+/* ===== BASE ===== */
+body {
+  margin: 0;
+  font-family: 'JetBrains Mono', monospace;
+  background: #f4f7fb;
+  color: #0f172a;
+  line-height: 1.6;
 }
-  </style>
+
+/* ===== NAV ===== */
+nav {
+  padding: 15px 30px;
+  background: white;
+  border-bottom: 1px solid #e5e7eb;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+nav a {
+  margin-right: 20px;
+  text-decoration: none;
+  color: #334155;
+  font-weight: 500;
+}
+
+nav a:hover {
+  color: #22c55e;
+}
+
+/* ===== SIDEBAR ===== */
+#sidebar {
+  position: fixed;
+  left: 0;
+  top: 70px;
+  width: 250px;
+  height: 85vh;
+  overflow-y: auto;
+  padding: 20px;
+  background: #0f172a;
+  border-right: 1px solid #1f2933;
+}
+
+#sidebar a {
+  display: block;
+  margin: 8px 0;
+  padding: 10px 12px;
+  text-decoration: none;
+  color: #22c55e;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  background: rgba(34, 197, 94, 0.08);
+}
+
+#sidebar a:hover {
+  background: #22c55e;
+  color: white;
+}
+
+#sidebar a.active {
+  background: #22c55e;
+  color: white;
+}
+
+/* ===== CONTAINER ===== */
+.container {
+  margin-left: 270px;
+  padding: 40px;
+  display: flex;
+  justify-content: center;
+}
+
+.container section {
+  width: 100%;
+  max-width: 900px;
+}
+
+/* ===== SECTION CARDS ===== */
+.section {
+  margin-bottom: 30px;
+  padding: 25px;
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.04);
+}
+
+/* ===== MAIN TITLE ===== */
+.main-title {
+  font-size: 2.2rem;
+  font-weight: 700;
+  padding: 15px 20px;
+  border-radius: 10px;
+  background: linear-gradient(90deg, #22c55e, #06b6d4);
+  color: white;
+  margin-bottom: 25px;
+}
+
+/* ===== TEXT ===== */
+p, li {
+  color: #475569;
+}
+
+/* ===== TABLE ===== */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  border: 1px solid #1e293b;
+  padding: 10px;
+}
+
+th {
+  background: #020617;
+  color: #22d3ee;
+}
+
+/* ===== FOOTER ===== */
+footer {
+  text-align: center;
+  padding: 40px;
+  border-top: 1px solid #e5e7eb;
+  background: white;
+  margin-top: 40px;
+}
+
+/* ===== DARK MODE ===== */
+.dark {
+  background: #0f172a;
+  color: #e2e8f0;
+}
+
+.dark nav,
+.dark #sidebar,
+.dark .section,
+.dark footer {
+  background: #111827;
+  border-color: #1f2933;
+}
+
+/* ===== MOBILE ===== */
+@media (max-width: 900px) {
+  #sidebar {
+    position: relative;
+    width: 100%;
+    height: auto;
+    border-right: none;
+    border-bottom: 1px solid #e5e7eb;
+  }
+
+.container {
+  margin-left: 270px;
+  padding: 40px;
+  display: block;
+  max-width: calc(100% - 270px);
+}
+
+  .container section {
+    max-width: 100%;
+  }
+}
+.topic-block {
+  overflow-x: auto;
+}
+
+</style>
 </head>
+
 <body>
-<header>
-  <h1>HackProof Notes</h1>
-  <p>Operating Systems | Blue Team Knowledge Base</p>
-</header>
-<nav class="top-nav">
-  <div class="nav-left">
-    <a href="index.html" class="brand">
-      <span>HackProof Notes</span>
-    </a>
-    <a href="index.html">Notes</a>
-    <a href="roadmap.html">Roadmap</a>
-    <a href="practice-lab.html">Labs</a>
-  </div>
-<div class="nav-right">
-<div class="nav-user" id="nav-user">
-  <a href="login.html" id="login-link" class="avatar">👤 Login</a>
-  <div class="user-dropdown" id="user-dropdown" style="display:none;">
-    <span class="user-email" id="user-email"></span>
-    <button onclick="logoutUser()">Sign out</button>
-  </div>
-</div>
-</div>
+
+<div id="sidebar"></div>
+
+<nav>
+  <a href="index.html">Notes</a>
+  <a href="roadmap.html">Roadmap</a>
+  <a href="practice-lab.html">Labs</a>
+
+  <button onclick="toggleDarkMode()" style="
+  padding:6px 12px;
+  border:none;
+  background:#22c55e;
+  color:white;
+  border-radius:6px;
+  cursor:pointer;">
+  Dark
+  </button>
 </nav>
-<div class="container" id="protected-content" style="display:none;">
+
+<div class="container">
 <section>
-  <h2 class="main-title">Operating Systems</h2>
-  <h2 class="os-title">Windows</h2>
-  <div class="topic-block">
-    <h3 class="sub-topic">Event Viewer :</h3>
+
+<h1 class="main-title">Operating System</h1>
+
+<!-- 🔥 NEW CONTENT START -->
+<div class="section">
+<h2>Program, Process, Thread</h2>
+
+<p><strong>Program</strong><br>
+A program is a file that contains instructions written in a programming language. 
+It is stored on disk and is not running yet.
+Examples include Chrome, Notepad, or Python.
+A program becomes useful only when it is executed by the operating system.</p>
+
+<p><strong>Process</strong><br>
+When a program starts running, it becomes a process. A process uses system resources
+like CPU, memory, files, and network. Each process has a unique Process ID (PID).
+Multiple processes can run at the same time in an operating system.</p>
+
+<p><strong>Thread</strong><br>
+A thread is the smallest unit of execution inside a process. A process can have multiple
+threads running simultaneously. Threads share the same memory of the process but execute
+different tasks. Multithreading improves performance and responsiveness.</p>
+
+<p><strong>📌 Simple line:</strong><br>
+Program is static, process is running, and thread is a part of a process.</p>
+</div>
+
+<div class="section">
+<h2>Process States</h2>
+
+<p>
+When a process runs in an operating system, it does not run continuously.
+It moves through different states depending on CPU availability and input/output operations.
+These states help the OS manage multiple processes efficiently.
+</p>
+<ul>
+<li><strong>Ready:</strong> Process is ready and waiting for CPU.</li>
+<li><strong>Running:</strong> Process is currently executing.</li>
+<li><strong>Waiting:</strong> Process waiting for I/O like disk or keyboard.</li>
+<li><strong>Terminated:</strong> Process finished execution.</li>
+</ul>
+</div>
+
+<div class="section">
+<h2>Context Switching</h2>
+<p>
+Context switching happens when the CPU switches from one process to another process.
+Since only one process can use the CPU at a time, the operating system quickly switches
+between processes to create the illusion of multitasking.
+</p>
+<p>
+During context switching, the OS saves the current process state and loads the next process state.
+Too many context switches can slow down the system because switching takes time.
+</p>
+</div>
+
+<div class="section">
+<h2>Memory Management</h2>
+<p>
+Memory management is the process of managing RAM and allocating memory to processes.
+The operating system decides how much memory each process gets and ensures processes
+do not access each other's memory.
+</p>
+<p><strong>Stack:</strong> Used for function calls and local variables.</p>
+<p><strong>Heap:</strong> Used for dynamic memory allocation during runtime.</p>
+<p>
+Good memory management prevents memory leaks and improves system performance.
+</p>
+</div>
+
+<div class="section">
+<h2>Virtual Memory</h2>
+<p>
+Virtual memory is a technique where the operating system uses disk space as extra memory
+when RAM is full. This allows the system to run large applications even if RAM is limited.
+</p>
+<p>
+The OS moves inactive pages from RAM to disk (swap space) and brings them back when needed.
+This process is called paging or swapping.
+</p>
+</div>
+
+<div class="section">
+<h2>User Mode vs Kernel Mode</h2>
+<p>
+Operating systems run in two modes for security and stability.
+User mode is used for normal applications, and kernel mode is used for OS core functions.
+</p>
+<ul>
+<li><strong>User Mode:</strong> Limited access to hardware and memory.</li>
+<li><strong>Kernel Mode:</strong> Full access to system hardware and memory.</li>
+</ul>
+<p>
+If a program crashes in user mode, the system survives.
+If kernel crashes, the whole system crashes (BSOD / Kernel Panic).
+</p>
+</div>
+
+<div class="section">
+<h2>File Permissions</h2>
+
+<p>
+File permissions control who can read, write, or execute a file.
+This is an important security feature in operating systems.
+</p>
+<ul>
+<li>Read (r) – View file</li>
+<li>Write (w) – Modify file</li>
+<li>Execute (x) – Run file</li>
+</ul>
+<p>
+Permissions are assigned to owner, group, and others.
+Proper permissions help protect sensitive files.
+</p>
+</div>
+
+<div class="section">
+<h2>CPU Scheduling</h2>
+<p>
+CPU scheduling is the method used by the operating system to decide
+which process gets CPU time.
+Since many processes compete for CPU, scheduling ensures fairness and efficiency.
+</p>
+<ul>
+<li>FCFS – First Come First Serve</li>
+<li>Round Robin – Time slice for each process</li>
+<li>Priority Scheduling</li>
+</ul>
+</div>
+
+<div class="section">
+<h2>Deadlock</h2>
+<p>
+Deadlock happens when two or more processes are waiting for each other
+to release resources, and none of them can continue.
+As a result, the system gets stuck.
+</p>
+<p>
+Deadlocks usually occur when processes hold resources and wait for other resources.
+Operating systems use prevention, avoidance, or detection methods to handle deadlocks.
+</p>
+</div>
+
+<div class="section">
+<h2>Event Viewer :</h2>
     <p>A built-in Windows tool used to view system logs.</p>
     <p>Helps troubleshoot errors, warnings, crashes, and security events.</p>
-    <img src="windows-event-viewer.png" alt="Windows Event Viewer Logs" class="diagram-img">
      alt="Windows Event Viewer Logs" 
      class="diagram-img">
 
@@ -184,16 +373,9 @@
       <li>Investigating failed logins</li>
       <li>Tracking software or driver failures</li>
     </ul>
-
-    <hr class="divider">
-
-    <h3 class="sub-topic">Registry :</h3>
+    <div class="section">
+    <h2 >Registry :</h2>
     <p>A central hierarchical database storing Windows configuration settings.</p>
-    <img src="windows-registry.png" alt="Windows Registry Editor" class="diagram-img">
-
- 
-     alt="Windows Registry Editor" 
-     class="diagram-img">
 
     <p>Contains settings for:</p>
     <ul>
@@ -211,14 +393,14 @@
     </ul>
 
   </div>
-
+<div class="section">
   <h2 class="os-title">Linux</h2>
   <div class="topic-block">
 
-    <h3 class="sub-topic">Logs :</h3>
+<div class="section">
+    <h2>Logs :</h2>
     <p>Plain text files that record system and application activity.</p>
     <p>Stored mainly in /var/log/</p>
-    <img src="linux-logs.png" class="diagram-img">
 
      alt="Linux Log Files in var log directory" 
      class="diagram-img">
@@ -310,65 +492,27 @@
       <td style="border:1px solid #1e293b; padding:10px;">CLI-focused</td>
     </tr>
   </table>
-
 </div>
-<hr class="divider">
-
 <div class="reference">
-  📎 Reference Document:<br>
-  <a href="Operating Systems.pdf" target="_blank">
-    Operating Systems.pdf
-  </a>
+📎 Reference Document:
+<a href="Operating Systems.pdf">Operating Systems.pdf</a>
 </div>
 <footer>
-  © 2026 HackProof Notes  
-  <br>
-  Created and maintained by
-  <span style="color:#22d3ee; font-weight:600;">
-    Liger44
-  </span>
-  <br>
-  Cyber Security Learner | Blue Team Enthusiast
-  <hr style="margin:25px auto; width:70%; border:1px solid #1e293b;">
-<p style="
-  font-size: 0.95rem;
-  color: #94a3b8;
-  margin-top: 10px;
-">
-  For any doubts, queries, or feedback, feel free to reach out via email:
-  <br>
-  <a href="mailto:ligerharry44@gmail.com"
-     style="color:#22c55e; font-weight:600; text-decoration:none;">
-     ligerharry44@gmail.com
-  </a>
-</p>
+© 2026 HackProof Notes  
 </footer>
-<script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-  import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+<script>
+const sidebar = document.getElementById("sidebar");
+const headings = document.querySelectorAll("h2");
 
-  const firebaseConfig = {
-    apiKey: "AIzaSyASUWJWXQXCYE9LpQJUKqz8z-371Y3yNUQ",
-    authDomain: "hackproof-7d14d.firebaseapp.com",
-    projectId: "hackproof-7d14d",
-    appId: "1:256480294548:web:66c82a236fc21f602f2681"
-  };
-
-  const app = initializeApp(firebaseConfig);
-  const auth = getAuth(app);
-
-  const content = document.getElementById("protected-content");
-
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      // ✅ Logged in → unlock content
-      content.style.display = "block";
-    } else {
-      // 🔒 Not logged in → redirect
-      window.location.href = "login.html";
-    }
-  });
+headings.forEach((h, i) => {
+  const id = "section-" + i;
+  h.id = id;
+  const link = document.createElement("a");
+  link.href = "#" + id;
+  link.textContent = h.textContent;
+  sidebar.appendChild(link);
+});
 </script>
+
 </body>
 </html>
-
