@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>HackProof Notes | Cyber Security 101</title>
+<title>HackProof Notes | Networking Fundamentals</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;600&display=swap" rel="stylesheet">
@@ -13,35 +13,27 @@
 body {
   margin: 0;
   font-family: 'JetBrains Mono', monospace;
-  background: linear-gradient(135deg, #f8fafc, #eef2f7);
+  background: #f4f7fb;
   color: #0f172a;
-}
-
-/* ===== PROGRESS BAR ===== */
-#progress-bar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 4px;
-  width: 0%;
-  background: #22c55e;
-  z-index: 9999;
+  line-height: 1.6;
 }
 
 /* ===== NAV ===== */
 nav {
-  display: flex;
-  justify-content: space-between;
   padding: 15px 30px;
-  background: rgba(255,255,255,0.8);
-  backdrop-filter: blur(10px);
+  background: white;
   border-bottom: 1px solid #e5e7eb;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
 }
 
 nav a {
-  color: #334155;
+  margin-right: 20px;
   text-decoration: none;
-  margin-right: 18px;
+  color: #334155;
+  font-weight: 500;
 }
 
 nav a:hover {
@@ -49,104 +41,110 @@ nav a:hover {
 }
 
 /* ===== SIDEBAR ===== */
+/* ===== SIDEBAR ===== */
 #sidebar {
   position: fixed;
   left: 0;
-  top: 80px;
-  width: 240px;
-  height: 80vh;
+  top: 70px;
+  width: 250px;
+  height: 85vh;
   overflow-y: auto;
-  padding: 10px 15px;
-
-  background: rgba(255,255,255,0.7);
-  backdrop-filter: blur(10px);
-  border-right: 1px solid #e5e7eb;
+  padding: 20px;
+  background: #0f172a;
+  border-right: 1px solid #1f2933;
 }
 
+/* Sidebar Links */
 #sidebar a {
   display: block;
-  color: #64748b;
+  margin: 8px 0;
+  padding: 10px 12px;
   text-decoration: none;
-  margin: 10px 0;
-  padding: 6px 8px;
-  border-radius: 6px;
+  color: #22c55e; /* GREEN TEXT */
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  background: rgba(34, 197, 94, 0.08);
 }
 
+/* Hover */
 #sidebar a:hover {
-  background: #f1f5f9;
-  color: #22c55e;
+  background: #22c55e;
+  color: white;
 }
 
+/* Active Section */
+#sidebar a.active {
+  background: #22c55e;
+  color: white;
+}
 /* ===== CONTAINER ===== */
 .container {
-  max-width: 900px;
-  margin-left: 260px;
-  padding: 40px 20px;
+  margin-left: 270px;
+  max-width: 950px;
+  padding: 40px;
 }
 
 /* ===== SECTION ===== */
-.section {
+section {
   margin-bottom: 60px;
   padding: 35px;
-  border-radius: 16px;
-
-  background: #ffffff;
+  background: white;
   border: 1px solid #e5e7eb;
-  box-shadow: 0 8px 25px rgba(0,0,0,0.05);
-
-  opacity: 0;
-  transform: translateY(40px);
-  transition: all 0.6s ease;
+  border-radius: 14px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.04);
 }
 
-.section.show {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* ===== HEADINGS ===== */
-h2 {
-  font-size: 1.8rem;
+/* ===== MAIN TITLE ===== */
+.main-title {
+  font-size: 2.2rem;
   font-weight: 700;
-  margin-bottom: 15px;
-  color: #0f172a;
-  border-left: 5px solid #22c55e;
+  padding: 15px 20px;
+  border-radius: 10px;
+  background: linear-gradient(90deg, #22c55e, #06b6d4);
+  color: white;
+  margin-bottom: 25px;
+}
+
+/* ===== TOPIC TITLE ===== */
+.topic-title {
+  font-size: 1.6rem;
+  margin-top: 40px;
+  border-left: 6px solid #22c55e;
   padding-left: 12px;
 }
 
-h2::after {
-  content: "";
-  display: block;
-  width: 60px;
-  height: 3px;
-  background: #22c55e;
-  margin-top: 8px;
-  border-radius: 5px;
-}
-
+/* ===== HEADINGS ===== */
 h3 {
-  font-size: 1.3rem;
-  font-weight: 600;
-  margin-top: 20px;
-  color: #1e293b;
+  font-size: 1.25rem;
+  margin-top: 25px;
 }
 
 h4 {
-  font-size: 1.1rem;
-  font-weight: 600;
-  color: #475569;
+  font-size: 1.05rem;
+  margin-top: 18px;
 }
 
 /* ===== TEXT ===== */
 p, li {
-  font-size: 0.95rem;
-  color: #334155;
+  color: #475569;
+}
+
+/* ===== IMAGES ===== */
+.diagram-img {
+  max-width: 650px;
+  width: 100%;
+  margin: 30px auto;
+  display: block;
+  border-radius: 12px;
+  box-shadow: 0 12px 25px rgba(0,0,0,0.08);
 }
 
 /* ===== TABLE ===== */
 table {
   width: 100%;
   border-collapse: collapse;
+  margin-top: 10px;
 }
 
 th, td {
@@ -158,87 +156,87 @@ th {
   background: #f1f5f9;
 }
 
-/* ===== IMAGES ===== */
-img {
-  display: block;
-  max-width: 600px;
-  width: 100%;
-  margin: 25px auto;
-  border-radius: 12px;
-  background: #f8fafc;
-  padding: 10px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-}
-
-/* ===== REFERENCE BOX ===== */
+/* ===== REFERENCE ===== */
 .reference {
-  margin-top: 50px;
+  margin-top: 40px;
   padding: 25px;
-
-  background: linear-gradient(135deg, #ecfdf5, #f0fdf4);
-  border: 1px solid #bbf7d0;
+  background: #ecfdf5;
   border-left: 6px solid #22c55e;
-
-  border-radius: 14px;
-}
-
-.reference h3 {
-  margin-bottom: 15px;
-  color: #166534;
+  border-radius: 12px;
 }
 
 .ref-item {
   display: flex;
   align-items: center;
-  gap: 15px;
-
-  padding: 15px;
-  border-radius: 10px;
-
+  gap: 10px;
   background: white;
-  border: 1px solid #e5e7eb;
-
-  transition: 0.3s;
-}
-
-.ref-item:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
-}
-
-.pdf-icon {
-  font-size: 2rem;
-}
-
-.ref-content p {
-  margin: 0;
-  font-weight: 600;
-  color: #0f172a;
+  padding: 12px;
+  border-radius: 8px;
 }
 
 .ref-content a {
   display: inline-block;
   margin-top: 5px;
-  padding: 6px 12px;
-
   background: #22c55e;
   color: white;
+  padding: 6px 12px;
   border-radius: 6px;
-
   text-decoration: none;
-  font-size: 0.85rem;
-}
-
-.ref-content a:hover {
-  background: #16a34a;
 }
 
 /* ===== FOOTER ===== */
 footer {
   text-align: center;
-  padding: 30px;
+  padding: 40px;
   border-top: 1px solid #e5e7eb;
-  color: #64748b;
+  background: white;
+  margin-top: 40px;
+}
+
+/* ===== DARK MODE ===== */
+.dark {
+  background: #0f172a;
+  color: #e2e8f0;
+}
+
+.dark nav,
+.dark #sidebar,
+.dark section,
+.dark footer {
+  background: #111827;
+  border-color: #1f2933;
+}
+
+.dark table th {
+  background: #1f2933;
+}
+
+/* ===== MOBILE ===== */
+@media (max-width: 900px) {
+  #sidebar {
+    position: relative;
+    width: 100%;
+    height: auto;
+    border-right: none;
+    border-bottom: 1px solid #e5e7eb;
+  }
+
+  .container {
+    margin-left: 0;
+    padding: 20px;
+  }
+
+  .main-title {
+    font-size: 1.6rem;
+  }
+
+  section {
+    padding: 20px;
+  }
+
+  table {
+    font-size: 0.85rem;
+  }
 }
 
 </style>
@@ -246,20 +244,29 @@ footer {
 
 <body>
 
-<div id="progress-bar"></div>
 <div id="sidebar"></div>
 
 <nav>
-  <div>
-    <a href="index.html">Notes</a>
-    <a href="roadmap.html">Roadmap</a>
-    <a href="practice-lab.html">Labs</a>
-  </div>
+  <a href="index.html">Notes</a>
+  <a href="roadmap.html">Roadmap</a>
+  <a href="practice-lab.html">Labs</a>
+
+  <button onclick="toggleDarkMode()" style="
+  padding:6px 12px;
+  border:none;
+  background:#22c55e;
+  color:white;
+  border-radius:6px;
+  cursor:pointer;">
+  Dark
+  </button>
 </nav>
+
 <div class="container">
-<!-- WHAT IS CYBERSECURITY -->
+<section>
+
 <div class="section">
-<h2>What Is Cybersecurity</h2>
+<h2 class="main-title">WHAT IS CYBERSECURITY</h2>
 <p>
 Cybersecurity is the practice of protecting systems,networks,and data from unauthorized access,attacks,ordamage.</p>
 <p>It’s essential because today’s world is digitally connected — from banking systems to defense infrastructure — and every connection is a potential target.</p>
@@ -267,10 +274,9 @@ Cybersecurity is the practice of protecting systems,networks,and data from unaut
 
 <!-- CIA TRIAD -->
 <div class="section">
-<h2>Core Pillars of Cybersecurity</h2>
-<img src="images/cia-triad.png" alt="CIA Triad Diagram">
+<h2 class="main-title">CIA TRIAD</h2>
 
-<h3>Confidentiality</h3>
+<h3 class="topic-title">Confidentiality</h3>
 <p>Ensures data is accessed only by authorized </p>
 <h4>Why Confidentiality is Important :</h4>
 <ul>
@@ -287,7 +293,7 @@ Cybersecurity is the practice of protecting systems,networks,and data from unaut
   <li>Biometrics (fingerprint, face ID)</li>
 </ul>
 
-<h3>Integrity</h3>
+<h3 class="topic-title">Integrity</h3>
 <p>Integrity ensures that data remains accurate, complete, and unchanged unless modified by an authorized person.</p>
 
 <h4>Why Integrity is Important :</h4>
@@ -310,7 +316,7 @@ Cybersecurity is the practice of protecting systems,networks,and data from unaut
   <li>Digital signatures</li>
 </ul>
 
-<h3>Availability</h3>
+<h3 class="topic-title">Availability</h3>
 <p>Ensures resources are accessible when needed.</p>
 
 <h4>Real-Life Examples :</h4>
@@ -330,7 +336,7 @@ Cybersecurity is the practice of protecting systems,networks,and data from unaut
 
 <!-- Differentiate between a Threat, Vulnerability, and Risk -->
 <div class="section">
-<h2> Differentiate between Threat,Vulnerability,and Risk</h2>
+<h2 class="main-title">DIFFERENTIATE THREAT VULNERABILITY AND RISK</h2>
 <table border="1" cellpadding="10" cellspacing="0">
   <thead>
     <tr>
@@ -361,7 +367,7 @@ Cybersecurity is the practice of protecting systems,networks,and data from unaut
 
 <!-- INFORMATION ASSURANCE -->
 <div class="section">
-<h2>Information Assurance (IA)</h2>
+<h2 class="main-title">INFORMATION ASSURANCE </h2>
 <p>Ensures information is trustworthy throughout its life cycle.</p>
 
 <ul>
@@ -382,10 +388,10 @@ Cybersecurity is the practice of protecting systems,networks,and data from unaut
 
 <!-- IAAA -->
 <div class="section">
-<h2>IAAA (Security Framework)</h2>
+<h2 class="main-title">IAAA</h2>
 <p>Identification, Authentication, Authorization, Accounting</p>
 
-<h3>Identification</h3>
+<h3 class="topic-title">Identification</h3>
 <p>Who are you? User claims identity. No verification yet.</p>
 <ul>
   <li>Username</li>
@@ -393,7 +399,7 @@ Cybersecurity is the practice of protecting systems,networks,and data from unaut
   <li>Employee ID</li>
 </ul>
 
-<h3>Authentication</h3>
+<h3 class="topic-title">Authentication</h3>
 <ul>
   <li>Password</li>
   <li>OTP</li>
@@ -401,7 +407,7 @@ Cybersecurity is the practice of protecting systems,networks,and data from unaut
   <li>Face ID</li>
 </ul>
 
-<h3>Authorization</h3>
+<h3 class="topic-title">Authorization</h3>
 <ul>
   <li>Student → View marks</li>
   <li>Teacher → Edit marks</li>
@@ -418,8 +424,7 @@ Cybersecurity is the practice of protecting systems,networks,and data from unaut
 
 <!-- ACCESS CONTROL -->
 <div class="section">
-<h2>Access Control</h2>
-<img src="images/access-control.png" alt="Access Control Diagram">
+<h2 class="main-title">ACCESS CONTROL</h2>
 
 <ul>
   <li>Mandatory Access Control (MAC)</li>
@@ -439,8 +444,7 @@ Cybersecurity is the practice of protecting systems,networks,and data from unaut
 
 <!-- RISK MANAGEMENT -->
 <div class="section">
-<h2>Risk Management</h2>
-<img src="images/risk-management.png" alt="Risk Management Cycle">
+<h2 class="main-title">RISK MANAGEMENT</h2>
 
 <p>Risk = Threat × Vulnerability × Impact</p>
 
@@ -456,8 +460,7 @@ Cybersecurity is the practice of protecting systems,networks,and data from unaut
 
 <!-- PRIVACY -->
 <div class="section">
-<h2>Privacy</h2>
-<img src="images/privacy.png" alt="Privacy Infographic">
+<h2 class="main-title">PRIVACY</h2>
 
 <h4>Personal Data Examples :</h4>
 <ul>
@@ -481,10 +484,9 @@ Cybersecurity is the practice of protecting systems,networks,and data from unaut
 
 <!-- COMMON CYBER THREATS -->
 <div class="section">
-<h2>Common Cyber Threats</h2>
-<img src="images/cyber-threats.png" alt="Cyber Threats Diagram">
+<h2 class="main-title">COMMON CYBER THREATS</h2>
 
-<h3>Malware</h3>
+<h3 class="topic-title">Malware</h3>
 <ul>
   <li>Virus</li>
   <li>Worm</li>
@@ -492,14 +494,14 @@ Cybersecurity is the practice of protecting systems,networks,and data from unaut
   <li>Ransomware</li>
 </ul>
 
-<h3>Phishing</h3>
+<h3 class="topic-title">Phishing</h3>
 <ul>
   <li>Email phishing</li>
   <li>SMS phishing (Smishing)</li>
   <li>Voice phishing (Vishing)</li>
 </ul>
 
-<h3>Hacking</h3>
+<h3 class="topic-title">Hacking</h3>
 <ul>
   <li>Weak passwords</li>
   <li>Software vulnerabilities</li>
@@ -507,14 +509,14 @@ Cybersecurity is the practice of protecting systems,networks,and data from unaut
   <li>Social engineering</li>
 </ul>
 
-<h3>DDoS Attacks</h3>
+<h3 class="topic-title">DDoS Attacks</h3>
 <ul>
   <li>Server overload</li>
   <li>Website downtime</li>
   <li>Revenue loss</li>
 </ul>
 
-<h3>Insider Threats</h3>
+<h3 class="topic-title">Insider Threats</h3>
 <ul>
   <li>Malicious employees</li>
   <li>Careless employees</li>
@@ -524,8 +526,7 @@ Cybersecurity is the practice of protecting systems,networks,and data from unaut
 
 <!-- MITM -->
 <div class="section">
-<h2>Man-in-the-Middle (MITM) Attack</h2>
-<img src="images/mitm-attack.png" alt="MITM Attack in Action">
+<h2 class="main-title">MAN IN THE MIDDLE ATTACK</h2>
 
 <h4>How MITM Attack Works :</h4>
 <ol>
@@ -564,7 +565,7 @@ Cybersecurity is the practice of protecting systems,networks,and data from unaut
 
 <!-- ZERO DAY -->
 <div class="section">
-<h2>Zero-Day Attack</h2>
+<h2 class="main-title">ZERO DAY</h2>
 <p>
 A Zero-Day attack exploits a software vulnerability that is unknown to the software developer and for which no patch or fix exists yet.
 </p>
@@ -598,8 +599,8 @@ A Zero-Day attack exploits a software vulnerability that is unknown to the softw
 </div>
 <!-- DOMAINS -->
 <div class="section">
-<h2>Cybersecurity Domains</h2>
-<h3>Network Security</h3>
+<h2 class="main-title">DOMAINS</h2>
+<h3 class="topic-title">Network Security</h3>
 <p>Network Security focuses on protecting computer networks and the data moving through them from unauthorized access, attacks, and misuse.
 </p>
 <ul>
@@ -608,7 +609,7 @@ A Zero-Day attack exploits a software vulnerability that is unknown to the softw
   <li>VPN</li>
   <li>Network monitoring</li>
 </ul>
-<h3>Application Security</h3>
+<h3 class="topic-title">Application Security</h3>
 <p>Application Security involves protecting software and applications from vulnerabilities and attacks throughout their lifecycle.
 </p>
 <ul>
@@ -616,14 +617,14 @@ A Zero-Day attack exploits a software vulnerability that is unknown to the softw
   <li>XSS</li>
   <li>Broken authentication</li>
 </ul>
-<h3>Information Security</h3>
+<h3 class="topic-title">Information Security</h3>
 <p>Information Security (InfoSec) focuses on protecting data and information from unauthorized access, modification, or destruction</p>
 <ul>
   <li>Encryption</li>
   <li>Access control</li>
   <li>Backup and recovery</li>
 </ul>
-<h3>Cloud Security</h3>
+<h3 class="topic-title">Cloud Security</h3>
 <p>Cloud Security refers to protecting data, applications, and services stored in cloud environments.
 </p>
 <ul>
@@ -632,7 +633,7 @@ A Zero-Day attack exploits a software vulnerability that is unknown to the softw
   <li>Secure configurations</li>
   <li>Continuous monitoring</li>
 </ul>
-<h3>Endpoint Security</h3>
+<h3 class="topic-title">Endpoint Security</h3>
 <p>Endpoint Security protects end-user devices that connect to a network.</p>
 <ul>
   <li>Antivirus</li>
@@ -659,65 +660,35 @@ A Zero-Day attack exploits a software vulnerability that is unknown to the softw
 <footer>
   © 2026 HackProof Notes  
   <br>
-   Created and maintained by
+  Created and maintained by
   <span style="color:#22d3ee; font-weight:600;">
     Liger44
   </span>
   <br>
-<p style="font-size:0.75rem; opacity:0.7;">
-  Built for ethical cyber security learning only.
-</p>
+  <p style="font-size:0.75rem; opacity:0.7;">
+    Built for ethical cyber security learning only.
+  </p>
   <br><br>
   Questions or feedback?
   <a href="mailto:ligerharry44@gmail.com">ligerharry44@gmail.com</a>
 </footer>
-</body>
-</html>
-<!-- JS -->
+
 <script>
-
-/* PROGRESS BAR */
-window.onscroll = function () {
-  let winScroll = document.documentElement.scrollTop;
-  let height =
-    document.documentElement.scrollHeight -
-    document.documentElement.clientHeight;
-
-  document.getElementById("progress-bar").style.width =
-    (winScroll / height) * 100 + "%";
-};
-
-/* SIDEBAR AUTO LINKS */
 const sidebar = document.getElementById("sidebar");
 const headings = document.querySelectorAll("h2");
 
 headings.forEach((h, i) => {
   const id = "section-" + i;
   h.id = id;
-
   const link = document.createElement("a");
   link.href = "#" + id;
   link.textContent = h.textContent;
-
   sidebar.appendChild(link);
 });
 
-/* SCROLL ANIMATION */
-const sections = document.querySelectorAll(".section");
-
-const observer = new IntersectionObserver(
-  (entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("show");
-      }
-    });
-  },
-  { threshold: 0.1 }
-);
-
-sections.forEach((sec) => observer.observe(sec));
-
+function toggleDarkMode() {
+  document.body.classList.toggle("dark");
+}
 </script>
 
 </body>
