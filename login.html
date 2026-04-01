@@ -4,156 +4,225 @@
   <meta charset="UTF-8">
   <title>Login | HackProof Notes</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- Font -->
+
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <!-- Favicon -->
-  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+
   <style>
-    body {
+    * {
       margin: 0;
+      padding: 0;
+      box-sizing: border-box;
       font-family: 'Inter', sans-serif;
-      background: radial-gradient(circle at top, #020617, #000);
-      color: #e5e7eb;
+    }
+
+    body {
+      height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
-      height: 100vh;
-    }
-    .login-container {
-      width: 100%;
-      max-width: 420px;
       background: #020617;
+      overflow: hidden;
+      color: #e5e7eb;
+    }
+
+    /* Animated background */
+    body::before {
+      content: "";
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, #22c55e33, transparent 70%);
+      top: -100px;
+      left: -100px;
+      animation: move1 10s infinite alternate;
+    }
+
+    body::after {
+      content: "";
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, #16a34a33, transparent 70%);
+      bottom: -100px;
+      right: -100px;
+      animation: move2 12s infinite alternate;
+    }
+
+    @keyframes move1 {
+      from { transform: translate(0,0); }
+      to { transform: translate(100px, 80px); }
+    }
+
+    @keyframes move2 {
+      from { transform: translate(0,0); }
+      to { transform: translate(-120px, -90px); }
+    }
+
+    .login-card {
+      position: relative;
+      width: 380px;
+      padding: 40px;
+      border-radius: 16px;
+      background: rgba(2, 6, 23, 0.85);
       border: 1px solid #1e293b;
-      border-radius: 14px;
-      padding: 36px;
-      box-shadow: 0 0 40px rgba(34,197,94,0.15);
+      backdrop-filter: blur(15px);
+      box-shadow: 0 0 40px rgba(0,0,0,0.6);
+      z-index: 1;
     }
-    .brand {
+
+    .logo {
       text-align: center;
-      margin-bottom: 28px;
+      margin-bottom: 25px;
     }
-    .brand img {
-      width: 40px;
+
+    .logo img {
+      width: 55px;
       margin-bottom: 10px;
     }
-    .brand h1 {
-      font-size: 1.4rem;
-      margin: 0;
+
+    .logo h1 {
       color: #22c55e;
+      font-size: 1.5rem;
     }
-    .brand p {
+
+    .logo p {
       font-size: 0.85rem;
       color: #94a3b8;
-      margin-top: 6px;
+      margin-top: 5px;
     }
-    form {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
+
+    .input-group {
+      margin-bottom: 16px;
     }
+
     label {
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       color: #94a3b8;
+      display: block;
+      margin-bottom: 6px;
     }
+
     input {
-      background: #020617;
-      border: 1px solid #1e293b;
-      border-radius: 8px;
+      width: 100%;
       padding: 12px;
+      border-radius: 8px;
+      border: 1px solid #1e293b;
+      background: #020617;
       color: #e5e7eb;
       font-size: 0.9rem;
     }
+
     input:focus {
       outline: none;
       border-color: #22c55e;
       box-shadow: 0 0 0 1px #22c55e;
     }
+
+    .forgot {
+      text-align: right;
+      font-size: 0.8rem;
+      margin-bottom: 15px;
+    }
+
+    .forgot a {
+      color: #22c55e;
+      text-decoration: none;
+    }
+
     .login-btn {
-      margin-top: 10px;
+      width: 100%;
       padding: 12px;
-      background: #22c55e;
+      background: linear-gradient(90deg, #22c55e, #16a34a);
       border: none;
       border-radius: 8px;
       color: #020617;
-      font-weight: 700;
-      font-size: 0.9rem;
+      font-weight: 600;
+      font-size: 0.95rem;
       cursor: pointer;
+      transition: 0.2s;
     }
+
     .login-btn:hover {
-      background: #16a34a;
+      transform: translateY(-1px);
+      box-shadow: 0 5px 15px rgba(34,197,94,0.3);
     }
-   .extra {
-    margin-top: 18px;
-    text-align: center;
-    font-size: 0.8rem;
+
+    .extra {
+      text-align: center;
+      margin-top: 18px;
+      font-size: 0.85rem;
     }
+
     .extra a {
-      color: #94a3b8;
+      color: #22c55e;
       text-decoration: none;
     }
-    .extra a:hover {
-      color: #22c55e;
-    }
+
     footer {
-      margin-top: 24px;
       text-align: center;
-      font-size: 0.75rem;
+      margin-top: 20px;
+      font-size: 0.7rem;
       color: #64748b;
     }
+
   </style>
 </head>
+
 <body>
-  <div class="login-container">
-    <div class="brand">
-      <img src="favicon.svg" alt="HackProof Logo">
+
+  <div class="login-card">
+    <div class="logo">
+      <img src="favicon.svg">
       <h1>HackProof Notes</h1>
-      <p>Secure login for cybersecurity learners</p>
+      <p>Cybersecurity Learning Platform</p>
     </div>
 
-    <form>
-      <div>
-        <label for="email">Email address</label>
-        <input type="email" id="email" placeholder=" "required>
+    <form onsubmit="loginUser(event)">
+      <div class="input-group">
+        <label>Email Address</label>
+        <input type="email" id="email" required>
       </div>
-      <div>
-        <label for="password">Password</label>
-        <input type="password" id="password" placeholder=" " required>
+
+      <div class="input-group">
+        <label>Password</label>
+       <input type="password" id="password" required>
       </div>
-     <button class="login-btn" onclick="loginUser()">Login</button>
+
+      <div class="forgot">
+        <a href="forgot-password.html">Forgot Password?</a>
+      </div>
+
+      <button type="submit" class="login-btn">Login</button>
     </form>
+
     <div class="extra">
-    <a href="register.html">Create account</a>
+      <a href="register.html">Create account</a>
     </div>
+
     <footer>
       Ethical cybersecurity learning only
     </footer>
   </div>
-<script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-  import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-  const firebaseConfig = {
-    apiKey: "AIzaSyASUWJWXQXCYE9LpQJUKqz8z-371Y3yNUQ",
-    authDomain: "hackproof-7d14d.firebaseapp.com",
-    projectId: "hackproof-7d14d",
-    storageBucket: "hackproof-7d14d.firebasestorage.app",
-    messagingSenderId: "256480294548",
-    appId: "1:256480294548:web:66c82a236fc21f602f2681"
-  };
-  const app = initializeApp(firebaseConfig);
-  const auth = getAuth(app);
-  // LOGIN FUNCTION
-  window.loginUser = function () {
-    const email = document.getElementById("email").value;
-    const password = document.getElementById("password").value;
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+<script src="firebase-config.js"></script>
+<script>
+function loginUser(event) {
+  event.preventDefault();
 
-    signInWithEmailAndPassword(auth, email, password)
-      .then(() => {
-        window.location.href = "index.html";
-      })
-      .catch((error) => {
-        alert(error.message);
-      });
-  };
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+
+  auth.signInWithEmailAndPassword(email, password)
+    .then(() => {
+      alert("Login successful!");
+      window.location.href = "index.html";
+    })
+    .catch((error) => {
+      alert(error.message);
+    });
+}
 </script>
 </body>
 </html>
