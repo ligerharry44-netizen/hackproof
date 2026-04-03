@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>HackProof | Cyber Dashboard</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;600&display=swap" rel="stylesheet">
+
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+
+<style>
+body {
+  margin: 0;
+  font-family: 'JetBrains Mono', monospace;
+  background: #f4f7fb;
+  color: #0f172a;
+}
+
+/* HEADER */
+.header {
+  text-align: center;
+  padding: 50px 20px;
+  background: linear-gradient(90deg, #22c55e, #3b82f6);
+  color: white;
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 2.2rem;
+}
+
+/* CONTAINER */
+.container {
+  max-width: 1100px;
+  margin: auto;
+  padding: 40px 20px;
+}
+
+/* GRID */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 25px;
+}
+
+/* CARD */
+.card {
+  background: white;
+  border-radius: 14px;
+  padding: 25px;
+  border: 1px solid #e5e7eb;
+  transition: 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+}
+
+/* TITLE */
+.title {
+  font-size: 1.3rem;
+  margin-bottom: 10px;
+  color: #22c55e;
+}
+
+/* BUTTON */
+button {
+  background: #22c55e;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+button:hover {
+  background: #16a34a;
+}
+
+/* MODAL */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+}
+
+.modal-content {
+  background: white;
+  margin: 10% auto;
+  padding: 25px;
+  width: 50%;
+  border-radius: 10px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+  <h1>Cyber Dashboard</h1>
+  <p>Daily Cybersecurity Learning</p>
+</div>
+
+<div class="container">
+  <div class="grid">
+
+    <!-- Vulnerability Card -->
+    <div class="card">
+      <div class="title">Vulnerability of the Day</div>
+      <h3 id="vulnName"></h3>
+      <p id="vulnRisk"></p>
+      <p id="vulnDesc"></p>
+      <button onclick="openModal()">Read More</button>
+    </div>
+
+    <!-- Tool of the Day -->
+    <div class="card">
+      <div class="title">Tool of the Day</div>
+      <h3 id="toolName">Coming Soon</h3>
+      <p id="toolUse"></p>
+    </div>
+
+  </div>
+</div>
+
+<!-- Modal -->
+<div id="infoModal" class="modal">
+  <div class="modal-content">
+    <h2 id="modalTitle"></h2>
+    <p id="modalDesc"></p>
+    <p id="modalPrev"></p>
+    <button onclick="closeModal()">Close</button>
+  </div>
+</div>
+
+<script>
+const firebaseConfig = {
+  apiKey: "AIzaSyCOEbqMZifKAVoKlZDHmcslXduBUxxb1xU",
+  authDomain: "hackproof-feb59.firebaseapp.com",
+  projectId: "hackproof-feb59",
+};
+
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+
+let currentVuln = null;
+
+async function loadDailyVulnerability() {
+    const snapshot = await db.collection("vulnerabilities").get();
+    const vulnerabilities = snapshot.docs.map(doc => doc.data());
+
+    const today = new Date();
+    const dayNumber = Math.floor(today.getTime() / (1000 * 60 * 60 * 24));
+    currentVuln = vulnerabilities[dayNumber % vulnerabilities.length];
+
+    document.getElementById("vulnName").innerText = currentVuln.name;
+    document.getElementById("vulnRisk").innerText = "Risk: " + currentVuln.risk;
+    document.getElementById("vulnDesc").innerText = currentVuln.description;
+}
+
+function openModal() {
+    document.getElementById("infoModal").style.display = "block";
+    document.getElementById("modalTitle").innerText = currentVuln.name;
+    document.getElementById("modalDesc").innerText = currentVuln.description;
+    document.getElementById("modalPrev").innerText = "Prevention: " + currentVuln.prevention;
+}
+
+function closeModal() {
+    document.getElementById("infoModal").style.display = "none";
+}
+
+loadDailyVulnerability();
+</script>
+
+</body>
+</html>
