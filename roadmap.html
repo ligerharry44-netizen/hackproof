@@ -1,198 +1,164 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>HackProof Notes | Cybersecurity Roadmap</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- Font -->
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;600&display=swap" rel="stylesheet">
-  <style>
-    body {
-      margin: 0;
-      font-family: 'JetBrains Mono', monospace;
-      background: #020617;
-      color: #e5e7eb;
-      line-height: 1.7;
-    }
-    /* HEADER */
-    header {
-      padding: 28px 24px;
-      text-align: center;
-      background: radial-gradient(circle at top, #020617, #000);
-      border-bottom: 1px solid #1e293b;
-    }
-    header h1 {
-      color: #22c55e;
-      font-size: 1.8rem;
-      text-shadow: 0 0 15px rgba(34,197,94,0.7);
-      margin-bottom: 15px;
-    }
-    header p {
-      max-width: 700px;
-      margin: auto;
-      color: #94a3b8;
-      font-size: 1rem;
-    }
-    /* NAVBAR */
-    nav {
-      display: flex;
-      justify-content: space-between;
-      padding: 12px 24px;
-      background: #020617;
-      border-bottom: 1px solid #1e293b;
-    }
-    nav a {
-      color: #22d3ee;
-      text-decoration: none;
-      margin-left: 18px;
-      font-size: 0.9rem;
-    }
-    nav a:hover {
-      text-decoration: underline;
-    }
-    /* ROADMAP */
-    .roadmap {
-      max-width: 1100px;
-      margin: 70px auto;
-      padding: 0 30px;
-    }
-    .roadmap h2 {
-      text-align: center;
-      color: #38bdf8;
-      margin-bottom: 45px;
-      font-size: 1.9rem;
-    }
-    .roadmap-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 28px;
-    }
-    .card {
-      background: linear-gradient(180deg, #020617, #000);
-      border: 1px solid #1e293b;
-      border-radius: 16px;
-      padding: 28px;
-      text-decoration: none;
-      color: #e5e7eb;
-      transition: transform 0.25s ease, box-shadow 0.25s ease;
-    }
-    .card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 0 30px rgba(56,189,248,0.18);
-    }
-    .step {
-      font-size: 0.8rem;
-      color: #94a3b8;
-      margin-bottom: 8px;
-    }
-    .title {
-      font-size: 1.25rem;
-      margin-bottom: 12px;
-      color: #38bdf8;
-    }
-    .desc {
-      font-size: 0.92rem;
-      color: #cbd5f5;
-    }
-    /* START HERE CARD */
-    .start {
-      border-color: #22c55e;
-      box-shadow: 0 0 35px rgba(34,197,94,0.25);
-    }
-    .start .title {
-      color: #05ce4f;
-    }
-    /* FOOTER */
-    footer {
-      text-align: center;
-      padding: 35px;
-      border-top: 1px solid #3a5b91;
-      color: #b9ceeb;
-      font-size: 0.85rem;
-    }
-  </style>
+<meta charset="UTF-8">
+<title>HackProof | Cybersecurity Roadmap</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+body {
+  margin: 0;
+  font-family: 'JetBrains Mono', monospace;
+  background: #f4f7fb;
+  color: #0f172a;
+}
+
+/* HEADER */
+.header {
+  text-align: center;
+  padding: 50px 20px;
+  background: linear-gradient(90deg, #22c55e, #3b82f6);
+  color: white;
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 2.2rem;
+}
+
+/* ROADMAP */
+.roadmap {
+  max-width: 1100px;
+  margin: auto;
+  padding: 40px 20px;
+}
+
+/* GRID */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+}
+
+/* CARD */
+.card {
+  background: white;
+  border-radius: 14px;
+  padding: 25px;
+  border: 1px solid #e5e7eb;
+  transition: 0.3s;
+  text-decoration: none;
+  color: #0f172a;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+}
+
+/* STEP NUMBER */
+.step {
+  font-size: 13px;
+  color: #64748b;
+  margin-bottom: 10px;
+}
+
+/* TITLE */
+.title {
+  font-size: 1.3rem;
+  margin-bottom: 10px;
+  color: #22c55e;
+}
+
+/* DESCRIPTION */
+.desc {
+  font-size: 0.9rem;
+  color: #475569;
+}
+
+/* FOOTER */
+footer {
+  text-align: center;
+  padding: 40px;
+  border-top: 1px solid #e5e7eb;
+  margin-top: 40px;
+}
+
+/* MOBILE */
+@media(max-width: 900px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
 </head>
+
 <body>
-<header>
+
+<div class="header">
   <h1>Cybersecurity Learning Roadmap</h1>
-</header>
-<nav>
-  <strong>🧠 HackProof Notes</strong>
-  <div>
-    <a href="index.html">Home</a>
-    <a href="cybersecurity-101.html">Cybersecurity 101</a>
-    <a href="networking.html">Networking</a>
-    <a href="operating-systems.html">Operating Systems</a>
-    <a href="WebFundamentals.html">Web Fundamentals</a>
-  </div>
-</nav>
-<section class="roadmap">
-  <h2>Beginner → Advanced Roadmap</h2>
-  <div class="roadmap-grid">
-    <a href="cybersecurity-101.html" class="card start">
-      <div class="step">STEP 1 · START HERE</div>
+  <p>Beginner → Advanced Learning Path</p>
+</div>
+
+<div class="roadmap">
+  <div class="grid">
+
+    <a href="cybersecurity-101.html" class="card">
+      <div class="step">STEP 1</div>
       <div class="title">Cybersecurity 101</div>
       <div class="desc">
-        Understand what cybersecurity is, why it exists,
-        core principles (CIA), attacks, threats, and domains.
+        Learn basics, CIA triad, threats, attacks, and security domains.
       </div>
     </a>
+
     <a href="networking.html" class="card">
       <div class="step">STEP 2</div>
-      <div class="title">Networking Fundamentals</div>
+      <div class="title">Networking</div>
       <div class="desc">
-        Learn how computers communicate, TCP/IP,
-        ports, protocols, DNS, and firewalls.
+        TCP/IP, DNS, ports, protocols, routing and firewalls.
       </div>
     </a>
+
     <a href="operating-systems.html" class="card">
       <div class="step">STEP 3</div>
       <div class="title">Operating Systems</div>
       <div class="desc">
-        Learn Linux and Windows basics,
-        users, permissions, processes, and file systems.
+        Linux, Windows, permissions, processes and file systems.
       </div>
     </a>
+
     <a href="WebFundamentals.html" class="card">
       <div class="step">STEP 4</div>
       <div class="title">Web Fundamentals</div>
       <div class="desc">
-        Understand how websites work,
-        HTTP, sessions, cookies, and web architecture.
+        HTTP, cookies, sessions and web architecture.
       </div>
     </a>
+
     <a href="blue-team.html" class="card">
       <div class="step">STEP 5</div>
-      <div class="title">Blue Team Fundamentals</div>
+      <div class="title">Blue Team</div>
       <div class="desc">
-        Defensive security: logs, monitoring,
-        SOC basics, incident response, and detection.
+        Logs, monitoring, SOC, incident response and detection.
       </div>
     </a>
+
     <a href="red-team.html" class="card">
       <div class="step">STEP 6</div>
-      <div class="title">Red Team Fundamentals</div>
+      <div class="title">Red Team</div>
       <div class="desc">
-        Offensive security: reconnaissance,
-        exploitation, web attacks, and ethical hacking.
+        Recon, exploitation, web attacks and ethical hacking.
       </div>
     </a>
+
   </div>
-</section>
+</div>
+
 <footer>
-  © 2026 HackProof Notes  
-  <br>
-   Created and maintained by
-  <span style="color:#22d3ee; font-weight:600;">
-    Liger44
-  </span>
-  <br>
-<p style="font-size:0.75rem; opacity:0.7;">
-  Built for ethical cyber security learning only.
-</p>
-  <br><br>
-  Questions or feedback?
-  <a href="mailto:ligerharry44@gmail.com">ligerharry44@gmail.com</a>
+  © 2026 HackProof Cybersecurity Roadmap
 </footer>
+
 </body>
 </html>
