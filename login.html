@@ -207,8 +207,9 @@
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
 <script src="firebase-config.js"></script>
+
 <script>
-function loginUser(event) {
+function loginUser(event){
   event.preventDefault();
 
   const email = document.getElementById("email").value;
@@ -216,8 +217,7 @@ function loginUser(event) {
 
   auth.signInWithEmailAndPassword(email, password)
     .then(() => {
-      alert("Login successful!");
-      window.location.href = "index.html";
+      window.location.href = "dashboard.html";
     })
     .catch((error) => {
       alert(error.message);
