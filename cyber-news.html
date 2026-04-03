@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>HackProof Cyber Intelligence</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+body {
+  margin: 0;
+  font-family: 'JetBrains Mono', monospace;
+  background: linear-gradient(135deg, #020617, #050816);
+  color: #e2e8f0;
+}
+
+/* HEADER */
+.header {
+  text-align: center;
+  padding: 40px 20px;
+  font-size: 28px;
+  font-weight: 600;
+  background: linear-gradient(90deg, #22c55e, #3b82f6, #a855f7);
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+/* CONTAINER */
+.container {
+  max-width: 1100px;
+  margin: auto;
+  padding: 20px;
+}
+
+/* STATS */
+.stats {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-bottom: 30px;
+}
+
+.stat-card {
+  flex: 1;
+  min-width: 150px;
+  padding: 20px;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid #0f172a;
+  text-align: center;
+}
+
+.stat-number {
+  font-size: 30px;
+  color: #22c55e;
+}
+
+/* SECTION TITLE */
+.section-title {
+  margin-top: 30px;
+  margin-bottom: 15px;
+  font-size: 20px;
+  border-left: 5px solid #22c55e;
+  padding-left: 10px;
+}
+
+/* SEARCH */
+.search-box {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 20px;
+  background: black;
+  border: 1px solid #22c55e;
+  color: white;
+  border-radius: 8px;
+}
+
+/* CARD */
+.card {
+  padding: 15px;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid #0f172a;
+  margin-bottom: 15px;
+  transition: 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  border-color: #22c55e;
+}
+
+.card a {
+  color: #22c55e;
+  text-decoration: none;
+}
+
+.date {
+  font-size: 12px;
+  color: #94a3b8;
+}
+
+/* CVE COLORS */
+.high { border-left: 5px solid red; }
+.medium { border-left: 5px solid orange; }
+.low { border-left: 5px solid yellow; }
+
+</style>
+</head>
+
+<body>
+
+<div class="header">
+HackProof Cyber Intelligence Portal
+</div>
+
+<div class="container">
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stat-card">
+    <div class="stat-number" id="attacks"></div>
+    Attacks Today
+  </div>
+  <div class="stat-card">
+    <div class="stat-number" id="breaches"></div>
+    Data Breaches
+  </div>
+  <div class="stat-card">
+    <div class="stat-number" id="malware"></div>
+    Malware Attacks
+  </div>
+</div>
+
+<!-- NEWS -->
+<div class="section-title">Cyber News Feed</div>
+<div id="news"></div>
+
+
+</div>
+
+<script>
+/* Random Stats */
+document.getElementById("attacks").innerText = Math.floor(Math.random()*5000+3000);
+document.getElementById("breaches").innerText = Math.floor(Math.random()*200+50);
+document.getElementById("malware").innerText = Math.floor(Math.random()*1000+500);
+
+/* Load News */
+let allNews = [];
+
+fetch("https://api.rss2json.com/v1/api.json?rss_url=https://thehackernews.com/feeds/posts/default")
+.then(res => res.json())
+.then(data => {
+  allNews = data.items;
+  displayNews(allNews);
+});
+
+function displayNews(newsItems){
+  const newsDiv = document.getElementById("news");
+  newsDiv.innerHTML = "";
+
+  newsItems.slice(0,10).forEach(item=>{
+    newsDiv.innerHTML += `
+      <div class="card">
+        <a href="${item.link}" target="_blank">${item.title}</a>
+        <div class="date">${item.pubDate}</div>
+      </div>
+    `;
+  });
+}
+
+/* Search */
+document.getElementById("search").addEventListener("keyup", function(){
+  const keyword = this.value.toLowerCase();
+  const filtered = allNews.filter(item =>
+    item.title.toLowerCase().includes(keyword)
+  );
+  displayNews(filtered);
+});
+
+/* CVE */
+fetch("https://cve.circl.lu/api/last")
+.then(res => res.json())
+.then(data => {
+  const cveDiv = document.getElementById("cve");
+
+  data.slice(0,10).forEach(cve=>{
+    let severity = "low";
+    if(cve.cvss > 7) severity = "high";
+    else if(cve.cvss > 4) severity = "medium";
+
+    cveDiv.innerHTML += `
+      <div class="card ${severity}">
+        <b>${cve.id}</b>
+        <p>${cve.summary}</p>
+      </div>
+    `;
+  });
+});
+</script>
+
+</body>
+</html>
