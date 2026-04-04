@@ -1,219 +1,534 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>HackProof CTF</title>
+<meta charset="UTF-8">
+<title>HackProof | Cyber Security Learning Platform</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/lucide@latest"></script>
+
 <style>
-body {
-  margin: 0;
-  font-family: Arial;
-  background: #f4f7fb;
+:root{
+  --bg:#020617;
+  --card:#0f172a;
+  --border:#1e293b;
+  --text:#e5e7eb;
+  --muted:#94a3b8;
+  --accent:#22c55e;
+  --blue:#38bdf8;
 }
 
-.header {
-  background: #0f172a;
-  color: white;
-  padding: 20px;
-  text-align: center;
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
 }
 
-.container {
-  max-width: 1100px;
-  margin: auto;
-  padding: 30px;
+body{
+  font-family:'Inter',sans-serif;
+  background: radial-gradient(circle at 10% 10%, #020617, #000);
+  color:var(--text);
 }
 
-.stats {
-  display: flex;
-  gap: 15px;
-  margin-bottom: 20px;
+/* NAVBAR */
+.navbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:16px 60px;
+  border-bottom:1px solid #1e293b;
+  background:rgba(2,6,23,0.7);
+  backdrop-filter: blur(10px);
+  position:sticky;
+  top:0;
+  z-index:1000;
 }
 
-.box {
-  flex: 1;
-  background: white;
-  padding: 20px;
-  border-left: 6px solid #22c55e;
-  border-radius: 8px;
+.logo{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  font-weight:700;
+  font-size:18px;
+  color:#22c55e;
 }
 
-table {
-  width: 100%;
-  border-collapse: collapse;
-  background: white;
+.logo span{
+  color:white;
 }
 
-th, td {
-  border: 1px solid #ddd;
-  padding: 10px;
+.nav-links a{
+  margin:0 15px;
+  text-decoration:none;
+  color:#94a3b8;
+  font-size:14px;
+  position:relative;
 }
 
-th {
-  background: #0f172a;
-  color: white;
+.nav-links a:hover{
+  color:white;
 }
 
-.start-btn {
-  background: #22c55e;
-  color: white;
-  padding: 5px 10px;
-  text-decoration: none;
-  border-radius: 5px;
+.nav-links a::after{
+  content:"";
+  position:absolute;
+  width:0%;
+  height:2px;
+  background:#22c55e;
+  left:0;
+  bottom:-5px;
+  transition:0.3s;
 }
 
-.progress {
-  height: 10px;
-  background: #ddd;
-  border-radius: 10px;
-  margin-top: 5px;
+.nav-links a:hover::after{
+  width:100%;
 }
 
-.progress-bar {
-  height: 10px;
-  background: #22c55e;
-  width: 0%;
-  border-radius: 10px;
+.login-btn{
+  padding:8px 16px;
+  background:#22c55e;
+  border:none;
+  border-radius:6px;
+  font-weight:600;
+  cursor:pointer;
 }
+
+.login-btn:hover{
+  background:#16a34a;
+}
+
+/* HERO */
+.hero{
+  max-width:1200px;
+  margin:auto;
+  padding:120px 20px;
+}
+
+.badge{
+  display:inline-block;
+  background:#0f172a;
+  border:1px solid var(--border);
+  padding:6px 12px;
+  border-radius:20px;
+  font-size:12px;
+  color:var(--muted);
+  margin-bottom:20px;
+}
+
+.hero h1{
+  font-size:52px;
+  font-weight:800;
+  line-height:1.2;
+}
+
+.hero span{
+  color:var(--accent);
+}
+
+.hero p{
+  color:var(--muted);
+  margin-top:20px;
+  font-size:18px;
+  max-width:600px;
+}
+
+.buttons{
+  margin-top:30px;
+}
+
+.btn{
+  padding:14px 26px;
+  border-radius:8px;
+  border:none;
+  cursor:pointer;
+  font-weight:600;
+  margin-right:10px;
+}
+
+.btn-primary{
+  background:linear-gradient(90deg,#22c55e,#16a34a);
+}
+
+.btn-secondary{
+  background:#0f172a;
+  border:1px solid var(--border);
+  color:var(--text);
+}
+
+/* FEATURES */
+.section{
+  max-width:1200px;
+  margin:auto;
+  padding:80px 20px;
+}
+
+.section-title{
+  text-align:center;
+  font-size:30px;
+  margin-bottom:50px;
+}
+
+.feature-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:25px;
+}
+
+.feature-card{
+  background:var(--card);
+  border:1px solid var(--border);
+  padding:35px;
+  border-radius:16px;
+  transition:0.3s;
+}
+
+.feature-card:hover{
+  transform:translateY(-8px);
+  border-color:var(--accent);
+}
+
+.feature-card i{
+  width:32px;
+  height:32px;
+  color:var(--accent);
+  margin-bottom:15px;
+}
+
+/* MODULES */
+.learning-section{
+  max-width:1100px;
+  margin:80px auto;
+  padding:40px;
+  background:rgba(15,23,42,0.4);
+  border:1px solid #1e293b;
+  border-radius:20px;
+}
+
+.modules-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:28px;
+  margin-top:35px;
+}
+
+.module-card{
+  background:#020617;
+  border:1px solid #1e293b;
+  padding:24px;
+  border-radius:14px;
+  transition:0.25s;
+  cursor:pointer;
+}
+
+.module-card:hover{
+  transform:translateY(-5px);
+  border-color:#38bdf8;
+  box-shadow:0 10px 25px rgba(0,0,0,0.4);
+}
+
+.module-title{
+  font-size:16px;
+  font-weight:600;
+  margin-bottom:6px;
+}
+
+.module-desc{
+  font-size:13px;
+  color:#94a3b8;
+}
+
+.module-tag{
+  display:inline-block;
+  margin-top:10px;
+  padding:4px 10px;
+  font-size:11px;
+  border-radius:20px;
+  background:#020617;
+  border:1px solid #1e293b;
+  color:#38bdf8;
+}
+/* CTA */
+.cta-banner{
+  text-align:center;
+  padding:100px 20px;
+}
+
+.cta-banner h2{
+  font-size:32px;
+  margin-bottom:10px;
+}
+
+.cta-banner p{
+  color:var(--muted);
+  margin-bottom:25px;
+}
+.logo{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  font-weight:700;
+  color:#22c55e;
+  font-size:18px;
+}
+
+.logo svg{
+  width:20px;
+  height:20px;
+}
+
+.learning-header{
+  text-align:center;
+  margin-bottom:20px;
+}
+
+.learning-header h2{
+  font-size:28px;
+  margin-bottom:8px;
+}
+
+.learning-header p{
+  color:#94a3b8;
+  font-size:14px;
+}
+/* FOOTER */
+.simple-footer{
+  background:#020617;
+  border-top:1px solid #1e293b;
+  margin-top:60px;
+}
+
+.footer-content{
+  max-width:1100px;
+  margin:auto;
+  padding:25px 20px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  flex-wrap:wrap;
+}
+
+.footer-left h3{
+  color:#22c55e;
+  margin:0;
+}
+
+.footer-left p{
+  color:#94a3b8;
+  font-size:13px;
+  margin-top:5px;
+}
+
+.footer-links a{
+  margin-left:20px;
+  color:#94a3b8;
+  text-decoration:none;
+  font-size:14px;
+}
+
+.footer-links a:hover{
+  color:#22c55e;
+}
+
+.footer-bottom{
+  text-align:center;
+  padding:12px;
+  border-top:1px solid #1e293b;
+  color:#94a3b8;
+  font-size:12px;
+}
+.ctf-section{
+    max-width:1100px;
+    margin:80px auto;
+    padding:20px;
+}
+
+.ctf-card{
+    background: linear-gradient(135deg,#020617,#020617,#0f172a);
+    border:1px solid #22c55e;
+    border-radius:20px;
+    padding:50px;
+    text-align:center;
+    box-shadow:0 0 30px rgba(34,197,94,0.25);
+}
+
+.ctf-card h2{
+    color:#22c55e;
+    font-size:34px;
+    margin-bottom:15px;
+}
+
+.ctf-card p{
+    color:#94a3b8;
+    margin-bottom:25px;
+}
+
+.ctf-btn{
+    display:inline-block;
+    padding:14px 28px;
+    background:#22c55e;
+    color:white;
+    text-decoration:none;
+    border-radius:8px;
+    font-weight:600;
+}
+
+.ctf-btn:hover{
+    background:#16a34a;
+}
+
 </style>
 </head>
 
 <body>
 
-<div class="header">
-<h1>HackProof CTF Platform</h1>
-</div>
-
-<div class="container">
-
-<div class="stats">
-  <div class="box">
-    <h3>Score</h3>
-    <p id="score">0</p>
+<!-- NAVBAR -->
+<div class="navbar">
+  <div class="logo">
+    <i data-lucide="shield"></i>
+    Hack<span>Proof</span>
   </div>
 
-  <div class="box">
-    <h3>Flags</h3>
-    <p id="flags">0</p>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="learn.html">Learn</a>
+    <a href="roadmap.html">Roadmap</a>
+    <a href="certificate.html">Certificates</a>
+    <a href="cyber-news.html">Cyber News</a>
   </div>
 
-  <div class="box">
-    <h3>Rank</h3>
-    <p id="rank">Beginner</p>
-  </div>
-
-  <div class="box">
-    <h3>Timer</h3>
-    <p id="timer">00:00:00</p>
+  <div class="nav-right">
+    <button class="login-btn" onclick="location.href='login.html'">Login</button>
   </div>
 </div>
 
-<div class="box">
-<h3>Progress</h3>
-<div class="progress">
-<div class="progress-bar" id="progressBar"></div>
-</div>
-</div>
+<!-- HERO -->
+<section class="hero">
+  <div class="badge">Cyber Security Learning Platform</div>
+  <h1>Master <span>Cyber Security</span><br>Through Notes, Labs & Certifications</h1>
+  <p>Structured learning platform designed for future cyber security professionals. Learn, practice and earn certificates.</p>
 
-<br>
+  <div class="buttons">
+    <button class="btn btn-primary" onclick="location.href='dashboard.html'">Go to Dashboard</button>
+    <button class="btn btn-secondary" onclick="location.href='cybersecurity-101.html'">Start Learning</button>
+  </div>
+</section>
 
-<table>
-<tr>
-<th>Challenge</th>
-<th>Topic</th>
-<th>Difficulty</th>
-<th>Start</th>
-</tr>
+<section class="learning-section">
 
-<tr>
-<td>Challenge 1</td>
-<td>Source Code</td>
-<td>Easy</td>
-<td><a class="start-btn" href="challenge1.html">Start</a></td>
-</tr>
+  <div class="learning-header">
+    <h2>Cybersecurity Learning Path</h2>
+    <p>These are the topics that we are going to cover live during the training program.</p>
+  </div>
 
-<tr>
-<td>Challenge 2</td>
-<td>Robots</td>
-<td>Easy</td>
-<td><a class="start-btn" href="challenge2.html">Start</a></td>
-</tr>
+  <div class="modules-grid">
 
-<tr>
-<td>Challenge 3</td>
-<td>Cryptography</td>
-<td>Medium</td>
-<td><a class="start-btn" href="challenge3.html">Start</a></td>
-</tr>
+    <div class="module-card" onclick="openPage('cybersecurity-101.html')">
+      <div class="module-title">Cyber Security Fundamentals</div>
+      <div class="module-desc">CIA triad, threats, risk, security principles.</div>
+      <div class="module-tag">Beginner</div>
+    </div>
 
-<tr>
-<td>Challenge 4</td>
-<td>Cookies</td>
-<td>Medium</td>
-<td><a class="start-btn" href="challenge4.html">Start</a></td>
-</tr>
+    <div class="module-card" onclick="openPage('networking.html')">
+      <div class="module-title">Networking</div>
+      <div class="module-desc">OSI model, TCP/IP, routing, firewall.</div>
+      <div class="module-tag">Beginner</div>
+    </div>
 
-<tr>
-<td>Challenge 5</td>
-<td>Files</td>
-<td>Medium</td>
-<td><a class="start-btn" href="challenge5.html">Start</a></td>
-</tr>
+    <div class="module-card" onclick="openPage('operating-systems.html')">
+      <div class="module-title">Operating Systems</div>
+      <div class="module-desc">Windows logs, Linux logs, permissions.</div>
+      <div class="module-tag">Intermediate</div>
+    </div>
 
-<tr>
-<td>Challenge 6</td>
-<td>URL / IDOR</td>
-<td>Hard</td>
-<td><a class="start-btn" href="challenge6.html">Start</a></td>
-</tr>
+    <div class="module-card" onclick="openPage('WebFundamentals.html')">
+      <div class="module-title">Web Security</div>
+      <div class="module-desc">DNS, HTTP, cookies, web attacks.</div>
+      <div class="module-tag">Intermediate</div>
+    </div>
 
-<tr>
-<td>Challenge 7</td>
-<td>Login Bypass</td>
-<td>Hard</td>
-<td><a class="start-btn" href="challenge7.html">Start</a></td>
-</tr>
+    <div class="module-card">
+      <div class="module-title">Blue Team</div>
+      <div class="module-desc">SOC, SIEM, Incident Response.</div>
+      <div class="module-tag">Coming Soon</div>
+    </div>
 
-</table>
-
-</div>
+    <div class="module-card">
+      <div class="module-title">Red Team</div>
+      <div class="module-desc">Penetration Testing & Exploitation.</div>
+      <div class="module-tag">Coming Soon</div>
+    </div>
+  </div>
+</section>
+<section class="ctf-section">
+    <div class="ctf-card">
+        <h2>⚡ HackProof CTF Arena</h2>
+        <p>
+            Enter the Capture The Flag challenges and test your real cybersecurity skills.
+            Find hidden flags, exploit vulnerabilities, and climb the leaderboard.
+        </p>
+        <a href="ctf/index.html" class="ctf-btn">Enter CTF Arena</a>
+    </div>
+</section>
+<footer class="simple-footer">
+  <div class="footer-content">
+    <div class="footer-left">
+      <h3>HackProof</h3>
+      <p>Cybersecurity Learning & CTF Platform</p>
+    </div>
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="learn.html">Learn</a>
+      <a href="roadmap.html">Roadmap</a>
+      <a href="ctf/index.html">CTF</a>
+      <a href="certificate.html">Certificates</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    © 2026 HackProof Cybersecurity Platform
+  </div>
+</footer>
 
 <script>
-/* Score + Flags */
-let score = localStorage.getItem("score") || 0;
-let flags = localStorage.getItem("flags") || 0;
-
-document.getElementById("score").innerText = score;
-document.getElementById("flags").innerText = flags;
-
-/* Rank */
-if(score > 150) document.getElementById("rank").innerText = "Pro";
-else if(score > 80) document.getElementById("rank").innerText = "Intermediate";
-
-/* Progress */
-let progress = (flags / 21) * 100;
-document.getElementById("progressBar").style.width = progress + "%";
-
-/* Timer Auto Start */
-let seconds = localStorage.getItem("ctfTime") || 0;
-seconds = parseInt(seconds);
-
-function updateTimer(){
-    seconds++;
-    let hrs = Math.floor(seconds / 3600);
-    let mins = Math.floor((seconds % 3600) / 60);
-    let secs = seconds % 60;
-
-    document.getElementById("timer").innerText =
-        String(hrs).padStart(2,'0') + ":" +
-        String(mins).padStart(2,'0') + ":" +
-        String(secs).padStart(2,'0');
-
-    localStorage.setItem("ctfTime", seconds);
+function openPage(page){
+  window.location.href = page;
 }
-
-setInterval(updateTimer, 1000);
+lucide.createIcons();
 </script>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
+const firebaseConfig = {
+  apiKey: "AIzaSyCOEbqMZifKAVoKlZDHmcslXduBUxxb1xU",
+  authDomain: "hackproof-feb59.firebaseapp.com",
+  projectId: "hackproof-feb59",
+  storageBucket: "hackproof-feb59.firebasestorage.app",
+  messagingSenderId: "309682905913",
+  appId: "1:309682905913:web:7e32f772ed2e82672b3ee8",
+  measurementId: "G-PKSRE0Z6CC"
+};
+
+firebase.initializeApp(firebaseConfig);
+
+const auth = firebase.auth();
+const db = firebase.firestore();
+
+
+onAuthStateChanged(auth, (user) => {
+  if(user){
+    console.log("User logged in:", user.uid);
+    
+    // Change login button to Dashboard or Logout
+    document.querySelector(".login-btn").innerText = "Dashboard";
+    document.querySelector(".login-btn").onclick = () => {
+      window.location.href = "dashboard.html";
+    };
+
+  } else {
+    console.log("No user logged in");
+  }
+});
+</script>
 </body>
 </html>
