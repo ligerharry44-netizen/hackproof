@@ -1,190 +1,221 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Register | HackProof Notes</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<title>Create Account | HackProof</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-  <!-- Favicon -->
-  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Inter',sans-serif;
+}
 
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Inter', sans-serif;
-      background: radial-gradient(circle at top, #020617, #000);
-      color: #e5e7eb;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-    }
+body{
+  height:100vh;
+  display:flex;
+  background:#020617;
+  color:#e5e7eb;
+  overflow:hidden;
+}
 
-    .register-container {
-      width: 100%;
-      max-width: 420px;
-      background: #020617;
-      border: 1px solid #1e293b;
-      border-radius: 14px;
-      padding: 36px;
-      box-shadow: 0 0 40px rgba(34,197,94,0.15);
-    }
+/* Animated Background */
+body::before{
+  content:"";
+  position:absolute;
+  width:100%;
+  height:100%;
+  background:radial-gradient(circle at 20% 20%, rgba(34,197,94,0.15), transparent 40%),
+             radial-gradient(circle at 80% 70%, rgba(56,189,248,0.15), transparent 40%);
+  z-index:-1;
+}
 
-    .brand {
-      text-align: center;
-      margin-bottom: 28px;
-    }
+/* LEFT SIDE */
+.left{
+  width:50%;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  padding:80px;
+}
 
-    .brand img {
-      width: 40px;
-      margin-bottom: 10px;
-    }
+.left h1{
+  font-size:52px;
+  color:#22c55e;
+  text-shadow:0 0 15px rgba(34,197,94,0.5);
+}
 
-    .brand h1 {
-      font-size: 1.4rem;
-      margin: 0;
-      color: #22c55e;
-    }
+.left p{
+  margin-top:15px;
+  color:#94a3b8;
+  max-width:420px;
+}
 
-    .brand p {
-      font-size: 0.85rem;
-      color: #94a3b8;
-      margin-top: 6px;
-    }
+.features{
+  margin-top:30px;
+}
 
-    form {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
+.features div{
+  margin-bottom:10px;
+  color:#94a3b8;
+}
 
-    label {
-      font-size: 0.85rem;
-      color: #94a3b8;
-    }
+/* RIGHT SIDE */
+.right{
+  width:50%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
 
-    input {
-      background: #020617;
-      border: 1px solid #1e293b;
-      border-radius: 8px;
-      padding: 12px;
-      color: #e5e7eb;
-      font-size: 0.9rem;
-    }
+.register-card{
+  width:400px;
+  padding:40px;
+  border-radius:16px;
+  background:rgba(15,23,42,0.6);
+  backdrop-filter: blur(15px);
+  border:1px solid #1e293b;
+  box-shadow:0 0 60px rgba(0,0,0,0.7);
+  animation: float 4s ease-in-out infinite;
+}
 
-    input:focus {
-      outline: none;
-      border-color: #22c55e;
-      box-shadow: 0 0 0 1px #22c55e;
-    }
+@keyframes float{
+  0%{ transform: translateY(0px);}
+  50%{ transform: translateY(-8px);}
+  100%{ transform: translateY(0px);}
+}
 
-    .register-btn {
-      margin-top: 10px;
-      padding: 12px;
-      background: #22c55e;
-      border: none;
-      border-radius: 8px;
-      color: #020617;
-      font-weight: 700;
-      font-size: 0.9rem;
-      cursor: pointer;
-    }
+.register-card h2{
+  text-align:center;
+  color:#22c55e;
+  margin-bottom:20px;
+}
 
-    .register-btn:hover {
-      background: #16a34a;
-    }
+input{
+  width:100%;
+  padding:12px;
+  margin-bottom:15px;
+  border-radius:8px;
+  border:1px solid #1e293b;
+  background:#020617;
+  color:#e5e7eb;
+  transition:0.3s;
+}
 
-    .extra {
-      margin-top: 18px;
-      text-align: center;
-      font-size: 0.8rem;
-    }
+input:focus{
+  outline:none;
+  border-color:#22c55e;
+  box-shadow:0 0 10px rgba(34,197,94,0.4);
+}
 
-    .extra a {
-      color: #94a3b8;
-      text-decoration: none;
-    }
+button{
+  width:100%;
+  padding:12px;
+  background:linear-gradient(90deg,#22c55e,#16a34a);
+  border:none;
+  border-radius:8px;
+  color:#020617;
+  font-weight:600;
+  cursor:pointer;
+  transition:0.3s;
+}
 
-    .extra a:hover {
-      color: #22c55e;
-    }
+button:hover{
+  box-shadow:0 0 20px rgba(34,197,94,0.6);
+}
 
-    footer {
-      margin-top: 24px;
-      text-align: center;
-      font-size: 0.75rem;
-      color: #64748b;
-    }
-  </style>
+.extra{
+  text-align:center;
+  margin-top:15px;
+  font-size:14px;
+}
+
+.extra a{
+  color:#22c55e;
+  text-decoration:none;
+}
+</style>
 </head>
 
 <body>
 
-  <div class="register-container">
-    <div class="brand">
-      <img src="favicon.svg" alt="HackProof Logo">
-      <h1>Create Account</h1>
-      <p>Join HackProof Notes securely</p>
-    </div>
+<!-- LEFT SIDE -->
+<div class="left">
+  <h1>Join HackProof</h1>
+  <p>Start your cybersecurity journey with labs, CTF challenges, learning paths and certifications.</p>
 
-    <form onsubmit="event.preventDefault(); registerUser();">
-      <div>
-        <label for="email">Email address</label>
-        <input type="email" id="email" placeholder="  " required>
-      </div>
+  <div class="features">
+    <div>✔ Cybersecurity Roadmaps</div>
+    <div>✔ Hands-on Labs</div>
+    <div>✔ Capture The Flag</div>
+    <div>✔ Certificates</div>
+  </div>
+</div>
 
-      <div>
-        <label for="password">Password</label>
-        <input type="password" id="password" placeholder="  " required>
-      </div>
+<!-- RIGHT SIDE REGISTER -->
+<div class="right">
+  <div class="register-card">
+    <h2>Create Account</h2>
 
-      <button class="register-btn" type="submit">Create Account</button>
+    <form id="registerForm">
+      <input type="text" id="username" placeholder="Username" required>
+      <input type="email" id="email" placeholder="Email" required>
+      <input type="password" id="password" placeholder="Password" required>
+      <button type="submit">Create Account</button>
     </form>
 
     <div class="extra">
-      Already have an account?
-      <a href="login.html">Login</a>
+      Already have account? <a href="login.html">Login</a>
     </div>
-
-    <footer>
-      Ethical cybersecurity learning only
-    </footer>
   </div>
+</div>
 
-  <!-- Firebase Signup Logic -->
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-    import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+<script src="firebase-config.js"></script>
 
-    const firebaseConfig = {
-      apiKey: "AIzaSyASUWJWXQXCYE9LpQJUKqz8z-371Y3yNUQ",
-      authDomain: "hackproof-7d14d.firebaseapp.com",
-      projectId: "hackproof-7d14d",
-      storageBucket: "hackproof-7d14d.firebasestorage.app",
-      messagingSenderId: "256480294548",
-      appId: "1:256480294548:web:66c82a236fc21f602f2681"
-    };
+<script>
+document.getElementById("registerForm").addEventListener("submit", function(e){
+  e.preventDefault();
 
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
+  const username = document.getElementById("username").value;
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
 
-    window.registerUser = function () {
-      const email = document.getElementById("email").value;
-      const password = document.getElementById("password").value;
+  auth.createUserWithEmailAndPassword(email, password)
+    .then((userCredential) => {
 
-      createUserWithEmailAndPassword(auth, email, password)
-        .then(() => {
-          alert("Account created successfully. Please login.");
-          window.location.href = "login.html";
-        })
-        .catch((error) => {
-          alert(error.message);
-        });
-    };
-  </script>
+      const user = userCredential.user;
+
+      return db.collection("users").doc(user.uid).set({
+        username: username,
+        email: email,
+        coursesCompleted: 0,
+        certificates: 0,
+        labsCompleted: 0,
+        progress:{
+          cybersecurity:0,
+          networking:0,
+          os:0
+        }
+      });
+
+    })
+    .then(()=>{
+      alert("Account created successfully");
+      window.location.href = "login.html";
+    })
+    .catch((error)=>{
+      alert(error.message);
+    });
+});
+</script>
 
 </body>
 </html>
