@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Challenge 1 - Source Code</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Arial;
+    background: linear-gradient(120deg, #020617, #0f172a);
+    color: white;
+}
+
+/* Header */
+.header {
+    background: #020617;
+    padding: 25px;
+    text-align: center;
+    border-bottom: 2px solid #38bdf8;
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 32px;
+    color: #38bdf8;
+}
+
+/* Container */
+.container {
+    padding: 40px;
+}
+
+/* Challenge Boxes */
+.box {
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 25px;
+}
+
+/* Difficulty Colors */
+.easy {
+    background: #064e3b;
+    border-left: 6px solid #10b981;
+}
+
+.medium {
+    background: #78350f;
+    border-left: 6px solid #f59e0b;
+}
+
+.hard {
+    background: #7f1d1d;
+    border-left: 6px solid #ef4444;
+}
+
+/* Locked */
+.locked {
+    opacity: 0.4;
+    pointer-events: none;
+}
+
+/* Input */
+input {
+    padding: 10px;
+    margin-top: 10px;
+    width: 250px;
+    background: #020617;
+    border: 1px solid #1e293b;
+    color: white;
+}
+
+/* Button */
+button {
+    padding: 10px 15px;
+    background: #38bdf8;
+    border: none;
+    color: black;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+button:hover {
+    background: #0ea5e9;
+}
+
+/* Result text */
+.result {
+    margin-top: 10px;
+    font-weight: bold;
+}
+<style>
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Arial;
+    background: linear-gradient(120deg, #020617, #0f172a);
+    color: white;
+}
+
+/* Header */
+.header {
+    background: #020617;
+    padding: 25px;
+    text-align: center;
+    border-bottom: 3px solid #38bdf8;
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 32px;
+}
+
+/* Container */
+.container {
+    padding: 40px;
+}
+
+/* Description */
+.description {
+    background: #020617;
+    border: 1px solid #1e293b;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+}
+
+/* Boxes */
+.box {
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 25px;
+}
+
+.easy {
+    background: #064e3b;
+    border-left: 6px solid #10b981;
+}
+
+.medium {
+    background: #78350f;
+    border-left: 6px solid #f59e0b;
+}
+
+.hard {
+    background: #7f1d1d;
+    border-left: 6px solid #ef4444;
+}
+
+.locked {
+    opacity: 0.4;
+    pointer-events: none;
+}
+
+/* Inputs */
+input {
+    padding: 10px;
+    margin-top: 10px;
+    width: 250px;
+    background: #020617;
+    border: 1px solid #1e293b;
+    color: white;
+}
+
+button {
+    padding: 10px 15px;
+    background: #38bdf8;
+    border: none;
+    color: black;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.result {
+    margin-top: 10px;
+    font-weight: bold;
+}
+</style>
+</style>
+
+</head>
+<body>
+
+<div class="header">
+    <h1>Challenge 1 – Source Code</h1>
+</div>
+
+<div class="container">
+<div class="description">
+<h2>Challenge Description</h2>
+<p>
+Developers sometimes leave sensitive information inside HTML comments,
+JavaScript files, or encoded data in the source code.
+Inspect the page source and scripts carefully to find hidden flags.
+</p>
+
+<ul>
+<li>Easy: Find flag in HTML source.</li>
+<li>Medium: Inspect JavaScript source.</li>
+<li>Hard: Decode encoded data.</li>
+</ul>
+</div>
+
+<!-- EASY -->
+<div class="box easy">
+    <h2>Easy</h2>
+    <p>The flag is hidden in the page source.</p>
+
+    <input id="flagEasy" placeholder="Enter flag">
+    <button onclick="checkEasy()">Submit</button>
+
+    <div class="result" id="resultEasy"></div>
+</div>
+
+<!-- MEDIUM -->
+<div class="box medium locked" id="mediumSection">
+    <h2>Medium</h2>
+    <p>The flag is hidden in the source, not in HTML comments.</p>
+
+    <input id="flagMedium" placeholder="Enter flag">
+    <button onclick="checkMedium()">Submit</button>
+
+    <div class="result" id="resultMedium"></div>
+</div>
+
+<!-- HARD -->
+<div class="box hard locked" id="hardSection">
+    <h2>Hard</h2>
+    <p>The flag is encoded in the source code.</p>
+
+    <input id="flagHard" placeholder="Enter flag">
+    <button onclick="checkHard()">Submit</button>
+
+    <div class="result" id="resultHard"></div>
+</div>
+
+</div>
+
+<script>
+let sourceProgress = localStorage.getItem("sourceProgress") || 1;
+
+if(sourceProgress >= 2){
+    document.getElementById("mediumSection").classList.remove("locked");
+}
+if(sourceProgress >= 3){
+    document.getElementById("hardSection").classList.remove("locked");
+}
+
+/* EASY */
+function checkEasy(){
+    let flag = document.getElementById("flagEasy").value.trim();
+
+    if(flag === "HP{easy_source}"){
+        document.getElementById("resultEasy").innerText = "Correct! Medium Unlocked";
+        localStorage.setItem("sourceProgress", 2);
+
+        let score = localStorage.getItem("score") || 0;
+        score = parseInt(score) + 10;
+        localStorage.setItem("score", score);
+
+        document.getElementById("mediumSection").classList.remove("locked");
+    } else {
+        document.getElementById("resultEasy").innerText = "Wrong Flag";
+    }
+}
+
+/* MEDIUM */
+var part1 = "HP{medium";
+var part2 = "_source}";
+var mediumFlag = part1 + part2;
+
+function checkMedium(){
+    let flag = document.getElementById("flagMedium").value.trim();
+
+    if(flag === mediumFlag){
+        document.getElementById("resultMedium").innerText = "Correct! Hard Unlocked";
+        localStorage.setItem("sourceProgress", 3);
+
+        let score = localStorage.getItem("score") || 0;
+        score = parseInt(score) + 20;
+        localStorage.setItem("score", score);
+
+        document.getElementById("hardSection").classList.remove("locked");
+    } else {
+        document.getElementById("resultMedium").innerText = "Wrong Flag";
+    }
+}
+
+/* HARD */
+let encoded = "SFB7aGFyZF9zb3VyY2V9";
+
+function checkHard(){
+    let flag = document.getElementById("flagHard").value.trim();
+
+    if(flag === "HP{hard_source}"){
+        document.getElementById("resultHard").innerText = "Challenge Completed!";
+        localStorage.setItem("progress", 2);
+
+        let score = localStorage.getItem("score") || 0;
+        score = parseInt(score) + 30;
+        localStorage.setItem("score", score);
+    } else {
+        document.getElementById("resultHard").innerText = "Wrong Flag";
+    }
+}
+</script>
+
+<!-- EASY FLAG -->
+<!-- HP{easy_source} -->
+
+</body>
+</html>

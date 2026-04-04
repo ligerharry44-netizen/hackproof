@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Challenge 6 - URL Parameters</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Arial;
+    background: linear-gradient(120deg, #020617, #0f172a);
+    color: white;
+}
+
+.header {
+    background: #020617;
+    padding: 25px;
+    text-align: center;
+    border-bottom: 2px solid #22c55e;
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 32px;
+    color: #22c55e;
+}
+
+.container {
+    padding: 40px;
+}
+
+.description {
+    background: #020617;
+    border: 1px solid #1e293b;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+}
+
+.box {
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 25px;
+}
+
+.easy {
+    background: #064e3b;
+    border-left: 6px solid #10b981;
+}
+
+.medium {
+    background: #78350f;
+    border-left: 6px solid #f59e0b;
+}
+
+.hard {
+    background: #7f1d1d;
+    border-left: 6px solid #ef4444;
+}
+
+.locked {
+    opacity: 0.4;
+    pointer-events: none;
+}
+
+input {
+    padding: 10px;
+    margin-top: 10px;
+    width: 250px;
+    background: #020617;
+    border: 1px solid #1e293b;
+    color: white;
+}
+
+button {
+    padding: 10px 15px;
+    background: #22c55e;
+    border: none;
+    color: black;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.result {
+    margin-top: 10px;
+    font-weight: bold;
+}
+</style>
+
+</head>
+<body>
+
+<div class="header">
+    <h1>Challenge 6 – URL Parameters / IDOR</h1>
+</div>
+
+<div class="container">
+
+<div class="description">
+<h2>Challenge Description</h2>
+<p>
+This website uses URL parameters to load user data and pages.
+Sometimes developers do not properly validate user input or check authorization.
+Try manipulating URL parameters to access hidden pages, admin functionality, or other user accounts.
+</p>
+
+<h3>Objectives</h3>
+<ul>
+<li><b>Easy:</b> Modify the id parameter to find hidden data.</li>
+<li><b>Medium:</b> Discover hidden URL parameters.</li>
+<li><b>Hard:</b> Access another user's profile (IDOR vulnerability).</li>
+</ul>
+</div>
+
+<!-- EASY -->
+<div class="box easy">
+    <h2>Easy</h2>
+    <p>The website loads pages using a URL parameter called <b>id</b>. Try changing the id value.</p>
+
+    <input id="flagEasy" placeholder="Enter flag">
+    <button onclick="checkEasy()">Submit</button>
+
+    <div class="result" id="resultEasy"></div>
+</div>
+
+<!-- MEDIUM -->
+<div class="box medium locked" id="mediumSection">
+    <h2>Medium</h2>
+    <p>The website might be using hidden URL parameters to control access. Try adding new parameters.</p>
+
+    <input id="flagMedium" placeholder="Enter flag">
+    <button onclick="checkMedium()">Submit</button>
+
+    <div class="result" id="resultMedium"></div>
+</div>
+
+<!-- HARD -->
+<div class="box hard locked" id="hardSection">
+    <h2>Hard</h2>
+    <p>You can view profiles using a URL parameter. Try accessing another user's profile.</p>
+
+    <input id="flagHard" placeholder="Enter flag">
+    <button onclick="checkHard()">Submit</button>
+
+    <div class="result" id="resultHard"></div>
+</div>
+
+</div>
+
+<script>
+/* URL Parameters */
+const params = new URLSearchParams(window.location.search);
+const id = params.get("id");
+const admin = params.get("admin");
+const user = params.get("user");
+
+/* EASY FLAG */
+if(id === "999"){
+    document.body.innerHTML += "<p style='color:lightgreen;'>Flag: HP{url_easy}</p>";
+}
+
+/* MEDIUM FLAG */
+if(admin === "true"){
+    document.body.innerHTML += "<p style='color:orange;'>Flag: HP{hidden_parameter}</p>";
+}
+
+/* HARD FLAG */
+if(user === "admin"){
+    document.body.innerHTML += "<p style='color:red;'>Flag: HP{idor_access}</p>";
+}
+
+/* Progress Unlock */
+let urlProgress = localStorage.getItem("urlProgress") || 1;
+
+if(urlProgress >= 2){
+    document.getElementById("mediumSection").classList.remove("locked");
+}
+if(urlProgress >= 3){
+    document.getElementById("hardSection").classList.remove("locked");
+}
+
+/* Flag Submission */
+function checkEasy(){
+    let flag = document.getElementById("flagEasy").value.trim();
+    if(flag === "HP{url_easy}"){
+        document.getElementById("resultEasy").innerText = "Correct!";
+        localStorage.setItem("urlProgress", 2);
+        document.getElementById("mediumSection").classList.remove("locked");
+    }
+}
+
+function checkMedium(){
+    let flag = document.getElementById("flagMedium").value.trim();
+    if(flag === "HP{hidden_parameter}"){
+        document.getElementById("resultMedium").innerText = "Correct!";
+        localStorage.setItem("urlProgress", 3);
+        document.getElementById("hardSection").classList.remove("locked");
+    }
+}
+
+function checkHard(){
+    let flag = document.getElementById("flagHard").value.trim();
+    if(flag === "HP{idor_access}"){
+        document.getElementById("resultHard").innerText = "Challenge Completed!";
+    }
+}
+</script>
+
+</body>
+</html>

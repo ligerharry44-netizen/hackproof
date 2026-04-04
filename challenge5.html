@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Challenge 5 - Files</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial;
+    background: linear-gradient(120deg, #020617, #0f172a);
+    color: white;
+}
+
+.header {
+    background: #020617;
+    padding: 25px;
+    text-align: center;
+    border-bottom: 2px solid #38bdf8;
+}
+
+.container {
+    padding: 40px;
+}
+
+.box {
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 25px;
+}
+
+.easy { background: #064e3b; }
+.medium { background: #78350f; }
+.hard { background: #7f1d1d; }
+
+.locked {
+    opacity: 0.4;
+    pointer-events: none;
+}
+
+input {
+    padding: 10px;
+    margin-top: 10px;
+}
+
+button {
+    padding: 10px;
+    background: #38bdf8;
+    border: none;
+}
+<style>
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Arial;
+    background: linear-gradient(120deg, #020617, #0f172a);
+    color: white;
+}
+
+/* Header */
+.header {
+    background: #020617;
+    padding: 25px;
+    text-align: center;
+    border-bottom: 3px solid #38bdf8;
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 32px;
+}
+
+/* Container */
+.container {
+    padding: 40px;
+}
+
+/* Description */
+.description {
+    background: #020617;
+    border: 1px solid #1e293b;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+}
+
+/* Boxes */
+.box {
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 25px;
+}
+
+.easy {
+    background: #064e3b;
+    border-left: 6px solid #10b981;
+}
+
+.medium {
+    background: #78350f;
+    border-left: 6px solid #f59e0b;
+}
+
+.hard {
+    background: #7f1d1d;
+    border-left: 6px solid #ef4444;
+}
+
+.locked {
+    opacity: 0.4;
+    pointer-events: none;
+}
+
+/* Inputs */
+input {
+    padding: 10px;
+    margin-top: 10px;
+    width: 250px;
+    background: #020617;
+    border: 1px solid #1e293b;
+    color: white;
+}
+
+button {
+    padding: 10px 15px;
+    background: #38bdf8;
+    border: none;
+    color: black;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.result {
+    margin-top: 10px;
+    font-weight: bold;
+}
+</style>
+</style>
+</head>
+
+<body>
+
+<div class="header">
+<h1>Challenge 5 – Files</h1>
+</div>
+
+<div class="container">
+<h2>Challenge Description</h2>
+<p>
+Developers sometimes leave backup files, hidden directories, or configuration files on the server.
+Attackers often search for these files to find sensitive information such as passwords or flags.
+Try to discover hidden files and retrieve the flags.
+</p>
+
+<h3>Objectives</h3>
+<ul>
+<li><b>Easy:</b> Find a backup file on the server.</li>
+<li><b>Medium:</b> Discover a hidden directory.</li>
+<li><b>Hard:</b> Locate an exposed configuration file.</li>
+</ul>
+<div class="box easy">
+<h2>Easy</h2>
+<p>Developers sometimes leave backup files.</p>
+<input id="flagEasy">
+<button onclick="checkEasy()">Submit</button>
+<p id="resultEasy"></p>
+</div>
+
+<div class="box medium locked" id="mediumSection">
+<h2>Medium</h2>
+<p>Hidden directories might contain files.</p>
+<input id="flagMedium">
+<button onclick="checkMedium()">Submit</button>
+<p id="resultMedium"></p>
+</div>
+
+<div class="box hard locked" id="hardSection">
+<h2>Hard</h2>
+<p>Configuration files may expose secrets.</p>
+<input id="flagHard">
+<button onclick="checkHard()">Submit</button>
+<p id="resultHard"></p>
+</div>
+
+</div>
+
+<script>
+let fileProgress = localStorage.getItem("fileProgress") || 1;
+
+if(fileProgress >= 2){
+    document.getElementById("mediumSection").classList.remove("locked");
+}
+if(fileProgress >= 3){
+    document.getElementById("hardSection").classList.remove("locked");
+}
+
+function checkEasy(){
+    let flag = document.getElementById("flagEasy").value.trim();
+    if(flag === "HP{backup_file}"){
+        document.getElementById("resultEasy").innerText = "Correct!";
+        localStorage.setItem("fileProgress", 2);
+        document.getElementById("mediumSection").classList.remove("locked");
+    }
+}
+
+function checkMedium(){
+    let flag = document.getElementById("flagMedium").value.trim();
+    if(flag === "HP{hidden_directory}"){
+        document.getElementById("resultMedium").innerText = "Correct!";
+        localStorage.setItem("fileProgress", 3);
+        document.getElementById("hardSection").classList.remove("locked");
+    }
+}
+
+function checkHard(){
+    let flag = document.getElementById("flagHard").value.trim();
+    if(flag === "HP{config_exposed}"){
+        document.getElementById("resultHard").innerText = "Challenge Completed!";
+    }
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Challenge 4 - Cookies</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Arial;
+    background: linear-gradient(120deg, #020617, #0f172a);
+    color: white;
+}
+
+.header {
+    background: #020617;
+    padding: 25px;
+    text-align: center;
+    border-bottom: 2px solid #f59e0b;
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 32px;
+    color: #f59e0b;
+}
+
+.container {
+    padding: 40px;
+}
+
+.box {
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 25px;
+}
+
+.easy {
+    background: #064e3b;
+    border-left: 6px solid #10b981;
+}
+
+.medium {
+    background: #78350f;
+    border-left: 6px solid #f59e0b;
+}
+
+.hard {
+    background: #7f1d1d;
+    border-left: 6px solid #ef4444;
+}
+
+.locked {
+    opacity: 0.4;
+    pointer-events: none;
+}
+
+input {
+    padding: 10px;
+    margin-top: 10px;
+    width: 250px;
+    background: #020617;
+    border: 1px solid #1e293b;
+    color: white;
+}
+
+button {
+    padding: 10px 15px;
+    background: #f59e0b;
+    border: none;
+    color: black;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.result {
+    margin-top: 10px;
+    font-weight: bold;
+}
+<style>
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Arial;
+    background: linear-gradient(120deg, #020617, #0f172a);
+    color: white;
+}
+
+/* Header */
+.header {
+    background: #020617;
+    padding: 25px;
+    text-align: center;
+    border-bottom: 3px solid #38bdf8;
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 32px;
+}
+
+/* Container */
+.container {
+    padding: 40px;
+}
+
+/* Description */
+.description {
+    background: #020617;
+    border: 1px solid #1e293b;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+}
+
+/* Boxes */
+.box {
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 25px;
+}
+
+.easy {
+    background: #064e3b;
+    border-left: 6px solid #10b981;
+}
+
+.medium {
+    background: #78350f;
+    border-left: 6px solid #f59e0b;
+}
+
+.hard {
+    background: #7f1d1d;
+    border-left: 6px solid #ef4444;
+}
+
+.locked {
+    opacity: 0.4;
+    pointer-events: none;
+}
+
+/* Inputs */
+input {
+    padding: 10px;
+    margin-top: 10px;
+    width: 250px;
+    background: #020617;
+    border: 1px solid #1e293b;
+    color: white;
+}
+
+button {
+    padding: 10px 15px;
+    background: #38bdf8;
+    border: none;
+    color: black;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.result {
+    margin-top: 10px;
+    font-weight: bold;
+}
+</style>
+</style>
+
+</head>
+<body>
+
+<div class="header">
+    <h1>Challenge 4 – Cookies</h1>
+</div>
+
+<div class="container">
+<h2>Challenge Description</h2>
+<p>
+Web applications store user data and permissions inside browser cookies.
+If cookies are not properly protected, attackers may read or modify them to gain unauthorized access.
+Inspect and manipulate cookies to find hidden flags.
+</p>
+
+<h3>Objectives</h3>
+<ul>
+<li><b>Easy:</b> Inspect cookies to find the flag.</li>
+<li><b>Medium:</b> Decode an encoded cookie value.</li>
+<li><b>Hard:</b> Modify the cookie role to gain admin access.</li>
+</ul>
+<!-- EASY -->
+<div class="box easy">
+    <h2>Easy</h2>
+    <p>The flag is stored in cookies.</p>
+
+    <input id="flagEasy" placeholder="Enter flag">
+    <button onclick="checkEasy()">Submit</button>
+
+    <div class="result" id="resultEasy"></div>
+</div>
+
+<!-- MEDIUM -->
+<div class="box medium locked" id="mediumSection">
+    <h2>Medium</h2>
+    <p>The cookie value is encoded.</p>
+
+    <input id="flagMedium" placeholder="Enter flag">
+    <button onclick="checkMedium()">Submit</button>
+
+    <div class="result" id="resultMedium"></div>
+</div>
+
+<!-- HARD -->
+<div class="box hard locked" id="hardSection">
+    <h2>Hard</h2>
+    <p>Change your cookie role to admin.</p>
+
+    <input id="flagHard" placeholder="Enter flag">
+    <button onclick="checkHard()">Submit</button>
+
+    <div class="result" id="resultHard"></div>
+</div>
+
+</div>
+
+<script>
+/* Set Cookies */
+document.cookie = "flag=HP{cookie_easy}";
+document.cookie = "encoded=SFB7Y29va2llX21lZGl1bX0="; // Base64 HP{cookie_medium}
+document.cookie = "role=user";
+
+let cookieProgress = localStorage.getItem("cookieProgress") || 1;
+
+if(cookieProgress >= 2){
+    document.getElementById("mediumSection").classList.remove("locked");
+}
+if(cookieProgress >= 3){
+    document.getElementById("hardSection").classList.remove("locked");
+}
+
+/* EASY */
+function checkEasy(){
+    let flag = document.getElementById("flagEasy").value.trim();
+
+    if(flag === "HP{cookie_easy}"){
+        document.getElementById("resultEasy").innerText = "Correct! Medium Unlocked";
+        localStorage.setItem("cookieProgress", 2);
+        document.getElementById("mediumSection").classList.remove("locked");
+
+        let score = localStorage.getItem("score") || 0;
+        score = parseInt(score) + 10;
+        localStorage.setItem("score", score);
+    } else {
+        document.getElementById("resultEasy").innerText = "Wrong Flag";
+    }
+}
+
+/* MEDIUM */
+function checkMedium(){
+    let flag = document.getElementById("flagMedium").value.trim();
+
+    if(flag === "HP{cookie_medium}"){
+        document.getElementById("resultMedium").innerText = "Correct! Hard Unlocked";
+        localStorage.setItem("cookieProgress", 3);
+        document.getElementById("hardSection").classList.remove("locked");
+
+        let score = localStorage.getItem("score") || 0;
+        score = parseInt(score) + 20;
+        localStorage.setItem("score", score);
+    } else {
+        document.getElementById("resultMedium").innerText = "Wrong Flag";
+    }
+}
+
+/* HARD */
+function checkHard(){
+    let role = document.cookie;
+
+    if(role.includes("role=admin")){
+        document.getElementById("resultHard").innerText = "Correct! Flag = HP{cookie_admin}";
+        
+        let score = localStorage.getItem("score") || 0;
+        score = parseInt(score) + 30;
+        localStorage.setItem("score", score);
+
+        localStorage.setItem("progress", 5);
+    } else {
+        document.getElementById("resultHard").innerText = "You are not admin yet.";
+    }
+}
+</script>
+
+</body>
+</html>
