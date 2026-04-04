@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Settings</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#020617;
+  --card:#0f172a;
+  --border:#1e293b;
+  --text:#e5e7eb;
+  --muted:#94a3b8;
+  --green:#22c55e;
+  --blue:#38bdf8;
+  --purple:#a855f7;
+  --red:#ef4444;
+}
+
+body{
+  margin:0;
+  font-family:Inter;
+  background: radial-gradient(circle at top, #020617, #000);
+  color:var(--text);
+}
+
+/* Top Nav */
+.topnav{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:15px 40px;
+  border-bottom:1px solid var(--border);
+  background:rgba(2,6,23,0.7);
+  backdrop-filter:blur(10px);
+}
+
+.logo{
+  color:var(--green);
+  font-weight:700;
+  font-size:18px;
+}
+
+.nav-links a{
+  margin:0 15px;
+  text-decoration:none;
+  color:var(--muted);
+}
+
+.container{
+  max-width:900px;
+  margin:auto;
+  padding:40px 20px;
+}
+
+/* Settings Cards */
+.settings-card{
+  background:rgba(15,23,42,0.6);
+  backdrop-filter:blur(12px);
+  padding:25px;
+  border-radius:16px;
+  border:1px solid var(--border);
+  margin-bottom:25px;
+  transition:0.3s;
+}
+
+.settings-card:hover{
+  transform:translateY(-4px);
+}
+
+/* Different colors for sections */
+.profile{ border-left:4px solid var(--green); }
+.account{ border-left:4px solid var(--blue); }
+.appearance{ border-left:4px solid var(--purple); }
+.notifications{ border-left:4px solid var(--green); }
+.learning{ border-left:4px solid var(--blue); }
+.danger{ border-left:4px solid var(--red); }
+
+/* Inputs */
+input, select{
+  width:100%;
+  padding:12px;
+  margin:10px 0;
+  border-radius:8px;
+  border:1px solid var(--border);
+  background:#020617;
+  color:white;
+}
+
+/* Buttons */
+button{
+  padding:10px 20px;
+  border:none;
+  border-radius:8px;
+  cursor:pointer;
+  margin-top:10px;
+}
+
+.save-btn{ background:var(--green); }
+.blue-btn{ background:var(--blue); }
+.purple-btn{ background:var(--purple); }
+.red-btn{ background:var(--red); }
+
+/* Toggle Switch */
+.switch{
+  position:relative;
+  display:inline-block;
+  width:50px;
+  height:24px;
+}
+
+.switch input{ display:none; }
+
+.slider{
+  position:absolute;
+  cursor:pointer;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+  background:#1e293b;
+  border-radius:24px;
+}
+
+.slider:before{
+  position:absolute;
+  content:"";
+  height:18px;
+  width:18px;
+  left:3px;
+  bottom:3px;
+  background:white;
+  border-radius:50%;
+  transition:.3s;
+}
+
+input:checked + .slider{
+  background:var(--green);
+}
+
+input:checked + .slider:before{
+  transform:translateX(26px);
+}
+</style>
+</head>
+
+<body>
+
+<div class="topnav">
+  <div class="logo">HackProof</div>
+  <div class="nav-links">
+    <a href="dashboard.html">Dashboard</a>
+    <a href="leaderboard.html">Leaderboard</a>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- Profile -->
+  <div class="settings-card">
+    <h3>Profile Settings</h3>
+    <input type="text" id="usernameInput" placeholder="Username">
+    <input type="text" id="bioInput" placeholder="Bio">
+    <input type="text" id="githubInput" placeholder="GitHub Link">
+    <button onclick="updateProfile()">Save Profile</button>
+  </div>
+
+  <!-- Account -->
+  <div class="settings-card">
+    <h3>Account Security</h3>
+    <input type="email" id="emailInput" placeholder="New Email">
+    <input type="password" id="passwordInput" placeholder="New Password">
+    <button onclick="updateAccount()">Update Account</button>
+  </div>
+
+  <!-- Appearance -->
+  <div class="settings-card">
+    <h3>Appearance</h3>
+    <button class="toggle" onclick="toggleTheme()">Toggle Dark / Light</button>
+  </div>
+
+  <!-- Notifications -->
+  <div class="settings-card">
+    <h3>Notifications</h3>
+    <label><input type="checkbox" id="emailNotif"> Email Notifications</label><br>
+    <label><input type="checkbox" id="courseNotif"> Course Updates</label><br>
+    <label><input type="checkbox" id="ctfNotif"> CTF Challenges</label><br>
+    <button onclick="saveNotifications()">Save Notifications</button>
+  </div>
+
+  <!-- Learning Preferences -->
+  <div class="settings-card">
+    <h3>Learning Preferences</h3>
+    <select id="learningPath">
+      <option>Red Team</option>
+      <option>Blue Team</option>
+      <option>Web Security</option>
+      <option>Networking</option>
+    </select>
+
+    <input type="number" id="dailyGoal" placeholder="Daily Learning Goal (minutes)">
+    <button onclick="saveLearning()">Save Preferences</button>
+  </div>
+
+  <!-- Danger Zone -->
+  <div class="settings-card danger">
+    <h3>Danger Zone</h3>
+    <button onclick="deleteAccount()">Delete Account</button>
+  </div>
+
+</div>
+
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+<script src="firebase-config.js"></script>
+
+<script>
+auth.onAuthStateChanged(async (user)=>{
+  if(!user){
+    window.location.href="login.html";
+  }else{
+    const doc = await db.collection("users").doc(user.uid).get();
+    const data = doc.data();
+
+    document.getElementById("usernameInput").value = data.username || "";
+    document.getElementById("bioInput").value = data.bio || "";
+    document.getElementById("githubInput").value = data.github || "";
+  }
+});
+
+function updateProfile(){
+  const user = auth.currentUser;
+  db.collection("users").doc(user.uid).update({
+    username: usernameInput.value,
+    bio: bioInput.value,
+    github: githubInput.value
+  });
+  alert("Profile Updated");
+}
+
+function updateAccount(){
+  const user = auth.currentUser;
+
+  if(emailInput.value){
+    user.updateEmail(emailInput.value);
+  }
+
+  if(passwordInput.value){
+    user.updatePassword(passwordInput.value);
+  }
+
+  alert("Account Updated");
+}
+
+function saveNotifications(){
+  const user = auth.currentUser;
+
+  db.collection("users").doc(user.uid).update({
+    notifications:{
+      email: emailNotif.checked,
+      course: courseNotif.checked,
+      ctf: ctfNotif.checked
+    }
+  });
+
+  alert("Notifications Saved");
+}
+
+function saveLearning(){
+  const user = auth.currentUser;
+
+  db.collection("users").doc(user.uid).update({
+    learningPath: learningPath.value,
+    dailyGoal: dailyGoal.value
+  });
+
+  alert("Learning Preferences Saved");
+}
+
+function toggleTheme(){
+  document.body.classList.toggle("light");
+}
+
+function deleteAccount(){
+  const user = auth.currentUser;
+  user.delete().then(()=>{
+    alert("Account Deleted");
+    window.location.href="index.html";
+  });
+}
+</script>
+
+</body>
+</html>
