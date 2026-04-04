@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>HackProof CTF</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial;
+  background: #f4f7fb;
+}
+
+.header {
+  background: #0f172a;
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+.container {
+  max-width: 1100px;
+  margin: auto;
+  padding: 30px;
+}
+
+.stats {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.box {
+  flex: 1;
+  background: white;
+  padding: 20px;
+  border-left: 6px solid #22c55e;
+  border-radius: 8px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 10px;
+}
+
+th {
+  background: #0f172a;
+  color: white;
+}
+
+.start-btn {
+  background: #22c55e;
+  color: white;
+  padding: 5px 10px;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+.progress {
+  height: 10px;
+  background: #ddd;
+  border-radius: 10px;
+  margin-top: 5px;
+}
+
+.progress-bar {
+  height: 10px;
+  background: #22c55e;
+  width: 0%;
+  border-radius: 10px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+<h1>HackProof CTF Platform</h1>
+</div>
+
+<div class="container">
+
+<div class="stats">
+  <div class="box">
+    <h3>Score</h3>
+    <p id="score">0</p>
+  </div>
+
+  <div class="box">
+    <h3>Flags</h3>
+    <p id="flags">0</p>
+  </div>
+
+  <div class="box">
+    <h3>Rank</h3>
+    <p id="rank">Beginner</p>
+  </div>
+
+  <div class="box">
+    <h3>Timer</h3>
+    <p id="timer">00:00:00</p>
+  </div>
+</div>
+
+<div class="box">
+<h3>Progress</h3>
+<div class="progress">
+<div class="progress-bar" id="progressBar"></div>
+</div>
+</div>
+
+<br>
+
+<table>
+<tr>
+<th>Challenge</th>
+<th>Topic</th>
+<th>Difficulty</th>
+<th>Start</th>
+</tr>
+
+<tr>
+<td>Challenge 1</td>
+<td>Source Code</td>
+<td>Easy</td>
+<td><a class="start-btn" href="challenge1.html">Start</a></td>
+</tr>
+
+<tr>
+<td>Challenge 2</td>
+<td>Robots</td>
+<td>Easy</td>
+<td><a class="start-btn" href="challenge2.html">Start</a></td>
+</tr>
+
+<tr>
+<td>Challenge 3</td>
+<td>Cryptography</td>
+<td>Medium</td>
+<td><a class="start-btn" href="challenge3.html">Start</a></td>
+</tr>
+
+<tr>
+<td>Challenge 4</td>
+<td>Cookies</td>
+<td>Medium</td>
+<td><a class="start-btn" href="challenge4.html">Start</a></td>
+</tr>
+
+<tr>
+<td>Challenge 5</td>
+<td>Files</td>
+<td>Medium</td>
+<td><a class="start-btn" href="challenge5.html">Start</a></td>
+</tr>
+
+<tr>
+<td>Challenge 6</td>
+<td>URL / IDOR</td>
+<td>Hard</td>
+<td><a class="start-btn" href="challenge6.html">Start</a></td>
+</tr>
+
+<tr>
+<td>Challenge 7</td>
+<td>Login Bypass</td>
+<td>Hard</td>
+<td><a class="start-btn" href="challenge7.html">Start</a></td>
+</tr>
+
+</table>
+
+</div>
+
+<script>
+/* Score + Flags */
+let score = localStorage.getItem("score") || 0;
+let flags = localStorage.getItem("flags") || 0;
+
+document.getElementById("score").innerText = score;
+document.getElementById("flags").innerText = flags;
+
+/* Rank */
+if(score > 150) document.getElementById("rank").innerText = "Pro";
+else if(score > 80) document.getElementById("rank").innerText = "Intermediate";
+
+/* Progress */
+let progress = (flags / 21) * 100;
+document.getElementById("progressBar").style.width = progress + "%";
+
+/* Timer Auto Start */
+let seconds = localStorage.getItem("ctfTime") || 0;
+seconds = parseInt(seconds);
+
+function updateTimer(){
+    seconds++;
+    let hrs = Math.floor(seconds / 3600);
+    let mins = Math.floor((seconds % 3600) / 60);
+    let secs = seconds % 60;
+
+    document.getElementById("timer").innerText =
+        String(hrs).padStart(2,'0') + ":" +
+        String(mins).padStart(2,'0') + ":" +
+        String(secs).padStart(2,'0');
+
+    localStorage.setItem("ctfTime", seconds);
+}
+
+setInterval(updateTimer, 1000);
+</script>
+
+</body>
+</html>
