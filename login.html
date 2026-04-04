@@ -1,228 +1,185 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Login | HackProof Notes</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<title>Login | HackProof</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Inter', sans-serif;
-    }
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Inter',sans-serif;
+}
 
-    body {
-      height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: #020617;
-      overflow: hidden;
-      color: #e5e7eb;
-    }
+body{
+  height:100vh;
+  display:flex;
+  background:#020617;
+  color:#e5e7eb;
+}
 
-    /* Animated background */
-    body::before {
-      content: "";
-      position: absolute;
-      width: 600px;
-      height: 600px;
-      background: radial-gradient(circle, #22c55e33, transparent 70%);
-      top: -100px;
-      left: -100px;
-      animation: move1 10s infinite alternate;
-    }
+/* LEFT SIDE */
+.left{
+  width:50%;
+  background:linear-gradient(120deg,#020617,#020617,#000);
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  padding:80px;
+}
 
-    body::after {
-      content: "";
-      position: absolute;
-      width: 600px;
-      height: 600px;
-      background: radial-gradient(circle, #16a34a33, transparent 70%);
-      bottom: -100px;
-      right: -100px;
-      animation: move2 12s infinite alternate;
-    }
+.left h1{
+  font-size:48px;
+  color:#22c55e;
+}
 
-    @keyframes move1 {
-      from { transform: translate(0,0); }
-      to { transform: translate(100px, 80px); }
-    }
+.left p{
+  margin-top:15px;
+  color:#94a3b8;
+  max-width:420px;
+}
 
-    @keyframes move2 {
-      from { transform: translate(0,0); }
-      to { transform: translate(-120px, -90px); }
-    }
+.features{
+  margin-top:30px;
+}
 
-    .login-card {
-      position: relative;
-      width: 380px;
-      padding: 40px;
-      border-radius: 16px;
-      background: rgba(2, 6, 23, 0.85);
-      border: 1px solid #1e293b;
-      backdrop-filter: blur(15px);
-      box-shadow: 0 0 40px rgba(0,0,0,0.6);
-      z-index: 1;
-    }
+.features div{
+  margin-bottom:10px;
+  color:#94a3b8;
+}
 
-    .logo {
-      text-align: center;
-      margin-bottom: 25px;
-    }
+/* RIGHT SIDE */
+.right{
+  width:50%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
 
-    .logo img {
-      width: 55px;
-      margin-bottom: 10px;
-    }
+.login-card{
+  width:380px;
+  padding:40px;
+  border-radius:16px;
+  background:rgba(15,23,42,0.6);
+  backdrop-filter: blur(10px);
+  border:1px solid #1e293b;
+  box-shadow:0 0 40px rgba(0,0,0,0.6);
+}
 
-    .logo h1 {
-      color: #22c55e;
-      font-size: 1.5rem;
-    }
+.login-card h2{
+  text-align:center;
+  color:#22c55e;
+  margin-bottom:20px;
+}
 
-    .logo p {
-      font-size: 0.85rem;
-      color: #94a3b8;
-      margin-top: 5px;
-    }
+input{
+  width:100%;
+  padding:12px;
+  margin-bottom:15px;
+  border-radius:8px;
+  border:1px solid #1e293b;
+  background:#020617;
+  color:#e5e7eb;
+}
 
-    .input-group {
-      margin-bottom: 16px;
-    }
+input:focus{
+  outline:none;
+  border-color:#22c55e;
+}
 
-    label {
-      font-size: 0.8rem;
-      color: #94a3b8;
-      display: block;
-      margin-bottom: 6px;
-    }
+button{
+  width:100%;
+  padding:12px;
+  background:linear-gradient(90deg,#22c55e,#16a34a);
+  border:none;
+  border-radius:8px;
+  color:#020617;
+  font-weight:600;
+  cursor:pointer;
+  transition:0.3s;
+}
 
-    input {
-      width: 100%;
-      padding: 12px;
-      border-radius: 8px;
-      border: 1px solid #1e293b;
-      background: #020617;
-      color: #e5e7eb;
-      font-size: 0.9rem;
-    }
+button:hover{
+  box-shadow:0 0 15px rgba(34,197,94,0.6);
+}
 
-    input:focus {
-      outline: none;
-      border-color: #22c55e;
-      box-shadow: 0 0 0 1px #22c55e;
-    }
+.extra{
+  text-align:center;
+  margin-top:15px;
+  font-size:14px;
+}
 
-    .forgot {
-      text-align: right;
-      font-size: 0.8rem;
-      margin-bottom: 15px;
-    }
-
-    .forgot a {
-      color: #22c55e;
-      text-decoration: none;
-    }
-
-    .login-btn {
-      width: 100%;
-      padding: 12px;
-      background: linear-gradient(90deg, #22c55e, #16a34a);
-      border: none;
-      border-radius: 8px;
-      color: #020617;
-      font-weight: 600;
-      font-size: 0.95rem;
-      cursor: pointer;
-      transition: 0.2s;
-    }
-
-    .login-btn:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 5px 15px rgba(34,197,94,0.3);
-    }
-
-    .extra {
-      text-align: center;
-      margin-top: 18px;
-      font-size: 0.85rem;
-    }
-
-    .extra a {
-      color: #22c55e;
-      text-decoration: none;
-    }
-
-    footer {
-      text-align: center;
-      margin-top: 20px;
-      font-size: 0.7rem;
-      color: #64748b;
-    }
-
-  </style>
+.extra a{
+  color:#22c55e;
+  text-decoration:none;
+}
+</style>
 </head>
 
 <body>
 
+<!-- LEFT SIDE -->
+<div class="left">
+  <h1>HackProof</h1>
+  <p>Cybersecurity learning platform with labs, CTF challenges and certifications.</p>
+
+  <div class="features">
+    <div>✔ Hands-on Labs</div>
+    <div>✔ Capture The Flag</div>
+    <div>✔ Learning Roadmaps</div>
+    <div>✔ Certificates</div>
+  </div>
+</div>
+
+<!-- RIGHT SIDE LOGIN -->
+<div class="right">
   <div class="login-card">
-    <div class="logo">
-      <img src="favicon.svg">
-      <h1>HackProof Notes</h1>
-      <p>Cybersecurity Learning Platform</p>
-    </div>
+    <h2>Login</h2>
 
-    <form onsubmit="loginUser(event)">
-      <div class="input-group">
-        <label>Email Address</label>
-        <input type="email" id="email" required>
-      </div>
-
-      <div class="input-group">
-        <label>Password</label>
-       <input type="password" id="password" required>
-      </div>
-
-      <div class="forgot">
-        <a href="forgot-password.html">Forgot Password?</a>
-      </div>
-
-      <button type="submit" class="login-btn">Login</button>
+    <form id="loginForm">
+      <input type="email" id="email" placeholder="Email" required>
+      <input type="password" id="password" placeholder="Password" required>
+      <button type="submit">Login</button>
     </form>
 
     <div class="extra">
-      <a href="register.html">Create account</a>
+      Don't have an account? <a href="register.html">Create Account</a>
     </div>
-
-    <footer>
-      Ethical cybersecurity learning only
-    </footer>
   </div>
+</div>
+
+<!-- Firebase -->
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
 <script src="firebase-config.js"></script>
 
 <script>
-function loginUser(event){
-  event.preventDefault();
+document.getElementById("loginForm").addEventListener("submit", function(e){
+  e.preventDefault();
 
   const email = document.getElementById("email").value;
   const password = document.getElementById("password").value;
 
   auth.signInWithEmailAndPassword(email, password)
-    .then(() => {
+    .then(()=>{
       window.location.href = "dashboard.html";
     })
-    .catch((error) => {
+    .catch((error)=>{
       alert(error.message);
     });
-}
+});
+
+auth.onAuthStateChanged(user=>{
+  if(user){
+    window.location.href = "dashboard.html";
+  }
+});
 </script>
+
 </body>
 </html>
