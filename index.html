@@ -194,7 +194,37 @@ body{
   color:var(--accent);
   margin-bottom:15px;
 }
+/* Mobile only */
+@media (max-width:768px){
 
+  .navbar{
+    flex-direction:column;
+    align-items:flex-start;
+  }
+
+  .nav-links{
+    display:block;
+    width:100%;
+  }
+
+  .cards{
+    grid-template-columns:1fr;
+  }
+
+  .progress-diagram{
+    flex-direction:column;
+    align-items:center;
+  }
+
+  .container{
+    padding:20px;
+  }
+
+  table{
+    display:block;
+    overflow-x:auto;
+  }
+}
 /* MODULES */
 .learning-section{
   max-width:1100px;
@@ -494,8 +524,8 @@ body{
     <a href="cyber-news.html">Cyber News</a>
   </div>
 
-  <div class="nav-right" id="navUser">>
-    <button class="login-btn" onclick="location.href='login.html'">Login</button>
+  <div class="nav-right" id="navUser">
+    <button class="login-btn" onclick="location.href='login.html'">Login </button>
   </div>
 </div>
 
@@ -522,7 +552,7 @@ body{
     </div>
 
     <div class="slide">
-        <img src="https://images.unsplash.com/photo-1518770660439-4636190af475">
+        <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f">
         <div class="overlay"></div>
         <div class="slide-content">
             <h1>Earn Certificates</h1>
@@ -530,7 +560,6 @@ body{
             <button onclick="location.href='certificate.html'" class="hero-btn">View Certificates</button>
         </div>
     </div>
-
     <div class="nav prev">&#10094;</div>
     <div class="nav next">&#10095;</div>
 
