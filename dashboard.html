@@ -109,14 +109,102 @@ body{
   border-radius:20px;
   margin:5px;
 }
+/* Mobile only */
+@media (max-width:768px){
+
+  .navbar{
+    flex-direction:column;
+    align-items:flex-start;
+  }
+
+  .nav-links{
+    display:block;
+    width:100%;
+  }
+
+  .cards{
+    grid-template-columns:1fr;
+  }
+
+  .progress-diagram{
+    flex-direction:column;
+    align-items:center;
+  }
+
+  .container{
+    padding:20px;
+  }
+
+  table{
+    display:block;
+    overflow-x:auto;
+  }
+}
+/* BUTTON */
+.btn{
+  margin-top:30px;
+  padding:12px 20px;
+  background:#22c55e;
+  border:none;
+  border-radius:8px;
+  cursor:pointer;
+  font-weight:600;
+}
+.main-footer{
+  width:100%;
+  background:#020617;
+  border-top:1px solid #1e293b;
+  margin-top:60px;
+}
+
+.footer-container{
+  max-width:1100px;
+  margin:auto;
+  padding:25px 20px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  flex-wrap:wrap;
+}
+
+.footer-left h2{
+  color:#22c55e;
+  margin:0;
+}
+
+.footer-left p{
+  color:#94a3b8;
+  font-size:13px;
+  margin-top:5px;
+}
+
+.footer-links a{
+  margin-left:20px;
+  color:#94a3b8;
+  text-decoration:none;
+  font-size:14px;
+}
+
+.footer-links a:hover{
+  color:#22c55e;
+}
+
+.footer-bottom{
+  text-align:center;
+  padding:12px;
+  border-top:1px solid #1e293b;
+  color:#94a3b8;
+  font-size:12px;
+}
+.btn-center{
+  display:flex;
+  justify-content:center;
+  margin-top:30px;
+}
 </style>
 </head>
-
 <body>
-
 <div class="dashboard">
-
-
 <div class="topnav">
   <div class="logo">HackProof</div>
 
@@ -126,11 +214,8 @@ body{
     <a href="settings.html">Settings</a>
     <a href="#" onclick="logout()">Logout</a>
   </div>
-
   <div class="user-box">👤 <b id="username">User</b></div>
 </div>
-
-
 <div class="container">
 
   <!-- Stats -->
@@ -177,8 +262,33 @@ body{
   <!-- Badges -->
   <div class="badges" id="badges"></div>
 
+<div class="btn-center">
+  <button class="btn" onclick="location.href='index.html'">
+    Continue Learning
+  </button>
+</div>
+
 </div>
 </div>
+
+<footer class="main-footer">
+  <div class="footer-container">
+    <div class="footer-left">
+      <h2>HackProof</h2>
+      <p>Cybersecurity Learning & CTF Platform</p>
+    </div>
+
+    <div class="footer-links">
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="terms.html">Terms</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    © 2026 HackProof Cybersecurity Platform
+  </div>
+</footer>
 <!-- Firebase -->
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
