@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Linux Commands Cheat Sheet - HackProof</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background-color: #0f172a;
+    color: #e2e8f0;
+    margin: 0;
+}
+
+/* ===== TOP NAVBAR ===== */
+.topnav {
+  position: sticky;
+  top: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #020617;
+  padding: 14px 30px;
+  border-bottom: 1px solid #1e293b;
+  z-index: 1000;
+}
+
+.logo {
+  font-size: 20px;
+  font-weight: bold;
+  color: #22c55e;
+}
+
+.nav-links a {
+  margin: 0 15px;
+  text-decoration: none;
+  color: #38bdf8;
+  font-weight: 500;
+}
+
+.nav-links a:hover {
+  color: #22c55e;
+}
+
+.dark-btn {
+  padding: 6px 12px;
+  border: none;
+  background: #22c55e;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+/* ===== FOOTER ===== */
+.simple-footer {
+  background: #020617;
+  color: #e2e8f0;
+  padding: 30px;
+  border-top: 1px solid #1e293b;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.footer-links a {
+  display: block;
+  color: #38bdf8;
+  text-decoration: none;
+  margin: 5px 0;
+}
+
+.footer-links a:hover {
+  color: #22c55e;
+}
+
+.footer-bottom {
+  text-align: center;
+  margin-top: 20px;
+  border-top: 1px solid #1e293b;
+  padding-top: 10px;
+  font-size: 14px;
+}
+/* SECTIONS */
+.section {
+    padding: 30px;
+}
+
+h2 {
+    color: #38bdf8;
+    border-bottom: 1px solid #1e293b;
+    padding-bottom: 10px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+table, th, td {
+    border: 1px solid #1e293b;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+}
+
+th {
+    background-color: #020617;
+}
+
+tr:hover {
+    background-color: #020617;
+}
+/* ===== HERO HEADER ===== */
+.hero {
+  height: 220px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background: linear-gradient(90deg, #020617, #0f172a);
+  border-bottom: 1px solid #1e293b;
+}
+
+.hero h1 {
+  font-size: 42px;
+  color: #22c55e;
+  background: rgba(34, 197, 94, 0.1);
+  padding: 15px 30px;
+  border-radius: 10px;
+  border: 1px solid #22c55e;
+  box-shadow: 0 0 15px rgba(34, 197, 94, 0.3);
+}
+</style>
+</head>
+
+<body>
+
+<!-- TOP NAVBAR -->
+<div class="topnav">
+  <div class="logo">HackProof</div>
+
+  <div class="nav-links">
+    <a href="index.html">Notes</a>
+    <a href="roadmap.html">Roadmap</a>
+    <a href="practice-lab.html">Labs</a>
+    <a href="ctf.html">CTF</a>
+  </div>
+
+  <button onclick="toggleDarkMode()" class="dark-btn">Dark</button>
+</div>
+<!-- HEADER -->
+<div class="hero">
+  <h1>Linux Commands Cheat Sheet</h1>
+</div>
+
+<!-- BASIC -->
+<div class="section">
+<h2>Basic Commands</h2>
+<table>
+<tr><th>Command</th><th>Description</th></tr>
+<tr><td>pwd</td><td>Show current directory</td></tr>
+<tr><td>ls</td><td>List files</td></tr>
+<tr><td>cd</td><td>Change directory</td></tr>
+<tr><td>mkdir</td><td>Create folder</td></tr>
+<tr><td>rm</td><td>Delete file</td></tr>
+<tr><td>cp</td><td>Copy file</td></tr>
+<tr><td>mv</td><td>Move or rename file</td></tr>
+<tr><td>touch</td><td>Create empty file</td></tr>
+</table>
+</div>
+
+<!-- FILE VIEW -->
+<div class="section">
+<h2>File Viewing Commands</h2>
+<table>
+<tr><th>Command</th><th>Description</th></tr>
+<tr><td>cat</td><td>View file content</td></tr>
+<tr><td>less</td><td>View file page by page</td></tr>
+<tr><td>more</td><td>View file page by page</td></tr>
+<tr><td>head</td><td>First lines of file</td></tr>
+<tr><td>tail</td><td>Last lines of file</td></tr>
+</table>
+</div>
+
+<!-- PERMISSIONS -->
+<div class="section">
+<h2>Permissions Commands</h2>
+<table>
+<tr><th>Command</th><th>Description</th></tr>
+<tr><td>chmod</td><td>Change file permissions</td></tr>
+<tr><td>chown</td><td>Change file owner</td></tr>
+<tr><td>chgrp</td><td>Change group</td></tr>
+</table>
+</div>
+
+<!-- NETWORK -->
+<div class="section">
+<h2>Networking Commands</h2>
+<table>
+<tr><th>Command</th><th>Description</th></tr>
+<tr><td>ip a</td><td>Show IP address</td></tr>
+<tr><td>ping</td><td>Check connectivity</td></tr>
+<tr><td>netstat</td><td>Network connections</td></tr>
+<tr><td>ss</td><td>Socket statistics</td></tr>
+<tr><td>traceroute</td><td>Trace network route</td></tr>
+<tr><td>nslookup</td><td>DNS lookup</td></tr>
+</table>
+</div>
+
+<!-- PROCESS -->
+<div class="section">
+<h2>Process Commands</h2>
+<table>
+<tr><th>Command</th><th>Description</th></tr>
+<tr><td>ps</td><td>Show processes</td></tr>
+<tr><td>top</td><td>Live processes</td></tr>
+<tr><td>htop</td><td>Advanced process viewer</td></tr>
+<tr><td>kill</td><td>Kill process</td></tr>
+<tr><td>killall</td><td>Kill by name</td></tr>
+</table>
+</div>
+
+<!-- CYBERSECURITY -->
+<div class="section">
+<h2>Cybersecurity Important Commands</h2>
+<table>
+<tr><th>Command</th><th>Description</th></tr>
+<tr><td>nmap</td><td>Network scanning</td></tr>
+<tr><td>whois</td><td>Domain information</td></tr>
+<tr><td>curl</td><td>Request website</td></tr>
+<tr><td>wget</td><td>Download files</td></tr>
+<tr><td>ssh</td><td>Remote login</td></tr>
+<tr><td>netcat</td><td>Network tool</td></tr>
+<tr><td>tcpdump</td><td>Packet capture</td></tr>
+</table>
+</div>
+
+<footer class="simple-footer">
+  <div class="footer-content">
+    <div class="footer-left">
+      <h3>HackProof</h3>
+      <p>Cybersecurity Learning & CTF Platform</p>
+    </div>
+
+    <div class="footer-links">
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="terms.html">Terms</a>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    © 2026 HackProof Cybersecurity Platform
+  </div>
+</footer>
+<script>
+function toggleDarkMode() {
+  document.body.classList.toggle("dark");
+}
+</script>
+</body>
+</html>
