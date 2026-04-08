@@ -101,6 +101,52 @@ button:hover {
   width: 50%;
   border-radius: 10px;
 }
+.main-footer{
+  width:100%;
+  background:#020617;
+  border-top:1px solid #1e293b;
+  margin-top:60px;
+}
+
+.footer-container{
+  max-width:1100px;
+  margin:auto;
+  padding:25px 20px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  flex-wrap:wrap;
+}
+
+.footer-left h2{
+  color:#22c55e;
+  margin:0;
+}
+
+.footer-left p{
+  color:#94a3b8;
+  font-size:13px;
+  margin-top:5px;
+}
+
+.footer-links a{
+  margin-left:20px;
+  color:#94a3b8;
+  text-decoration:none;
+  font-size:14px;
+}
+
+.footer-links a:hover{
+  color:#22c55e;
+}
+
+.footer-bottom{
+  text-align:center;
+  padding:12px;
+  border-top:1px solid #1e293b;
+  color:#94a3b8;
+  font-size:12px;
+}
 </style>
 </head>
 
@@ -115,22 +161,23 @@ button:hover {
   <div class="grid">
 
     <!-- Vulnerability Card -->
-    <div class="card">
-      <div class="title">Vulnerability of the Day</div>
-      <h3 id="vulnName"></h3>
-      <p id="vulnRisk"></p>
-      <p id="vulnDesc"></p>
-      <button onclick="openModal()">Read More</button>
-    </div>
+ <div class="card">
+    <div class="title">VULNERABILITY OF THE DAY</div>
+    <h3 id="vulnName"></h3>
+    <p id="vulnRisk"></p>
+    <p id="vulnDesc"></p>
+    <button id="vulnLinkBtn">Read More</button>
+</div>
 
     <!-- Tool of the Day -->
-    <div class="card">
-      <div class="title">Tool of the Day</div>
-      <h3 id="toolName">Coming Soon</h3>
-      <p id="toolUse"></p>
-    </div>
-
-  </div>
+  <div class="card">
+     <div class="title">TOOLS OF THE DAY</div>
+     <h3 id="toolName">Loading...</h3>
+     <p id="toolType"></p>
+     <p id="toolUse"></p>
+     <a id="toolLink" target="_blank">
+     <button onclick="openModal('tool')">Read More</button>
+  </a>
 </div>
 
 <!-- Modal -->
@@ -142,7 +189,6 @@ button:hover {
     <button onclick="closeModal()">Close</button>
   </div>
 </div>
-
 <script>
 const firebaseConfig = {
   apiKey: "AIzaSyCOEbqMZifKAVoKlZDHmcslXduBUxxb1xU",
@@ -154,7 +200,9 @@ firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 
 let currentVuln = null;
+let currentTool = null;
 
+/* Vulnerability of the Day */
 async function loadDailyVulnerability() {
     const snapshot = await db.collection("vulnerabilities").get();
     const vulnerabilities = snapshot.docs.map(doc => doc.data());
@@ -166,20 +214,49 @@ async function loadDailyVulnerability() {
     document.getElementById("vulnName").innerText = currentVuln.name;
     document.getElementById("vulnRisk").innerText = "Risk: " + currentVuln.risk;
     document.getElementById("vulnDesc").innerText = currentVuln.description;
+
+    // Redirect button
+    document.getElementById("vulnLinkBtn").onclick = function() {
+        window.open(currentVuln.link, "_blank");
+    };
+}
+/* Tool of the Day */
+async function loadToolOfDay() {
+    const snapshot = await db.collection("tools").get();
+    const tools = snapshot.docs.map(doc => doc.data());
+
+    const today = new Date();
+    const dayNumber = Math.floor(today.getTime() / (1000 * 60 * 60 * 24));
+    currentTool = tools[dayNumber % tools.length];
+
+    document.getElementById("toolName").innerText = currentTool.name;
+    document.getElementById("toolType").innerText = "Type: " + currentTool.type;
+    document.getElementById("toolUse").innerText = currentTool.use;
+    document.getElementById("toolLink").href = currentTool.link;
 }
 
+/* Modal */
 function openModal() {
     document.getElementById("infoModal").style.display = "block";
-    document.getElementById("modalTitle").innerText = currentVuln.name;
-    document.getElementById("modalDesc").innerText = currentVuln.description;
-    document.getElementById("modalPrev").innerText = "Prevention: " + currentVuln.prevention;
+
+    if (currentVuln) {
+        document.getElementById("modalTitle").innerText = currentVuln.name;
+        document.getElementById("modalDesc").innerText = currentVuln.description;
+        document.getElementById("modalPrev").innerText = "Prevention: " + currentVuln.prevention;
+    } else if (currentTool) {
+        document.getElementById("modalTitle").innerText = currentTool.name;
+        document.getElementById("modalDesc").innerText = currentTool.description;
+        document.getElementById("modalPrev").innerText = "Use: " + currentTool.use;
+    }
 }
 
 function closeModal() {
     document.getElementById("infoModal").style.display = "none";
 }
 
+/* Load Data */
 loadDailyVulnerability();
+loadToolOfDay();
 </script>
 
 </body>
