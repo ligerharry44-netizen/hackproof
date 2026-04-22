@@ -240,36 +240,179 @@ body{
   color:var(--accent);
   margin-bottom:15px;
 }
-/* Mobile only */
-@media (max-width:768px){
+/* ═══════════════════════════════════════
+   MOBILE RESPONSIVE — complete overhaul
+═══════════════════════════════════════ */
 
-  .navbar{
-    flex-direction:column;
-    align-items:flex-start;
-  }
+/* ── HAMBURGER BUTTON (hidden on desktop) ── */
+#menuToggle {
+  display: none;
+  background: none;
+  border: 1px solid #1e293b;
+  border-radius: 8px;
+  padding: 7px 10px;
+  cursor: pointer;
+  color: #e5e7eb;
+  font-size: 20px;
+  line-height: 1;
+  transition: border-color 0.2s;
+  flex-shrink: 0;
+}
+#menuToggle:hover { border-color: #22c55e; color: #22c55e; }
 
-  .nav-links{
-    display:block;
-    width:100%;
-  }
+/* ─────────────────────────────────────
+   TABLET  ≤ 1024px
+───────────────────────────────────── */
+@media (max-width:1024px) {
+  .navbar { padding: 14px 24px; }
+  .nav-links a { margin: 0 10px; font-size: 13px; }
+  .learning-section { padding: 28px; margin: 40px auto; }
+  .features-section { padding: 0 16px; }
+}
 
-  .cards{
-    grid-template-columns:1fr;
-  }
+/* ─────────────────────────────────────
+   MOBILE  ≤ 768px
+───────────────────────────────────── */
+@media (max-width:768px) {
 
-  .progress-diagram{
-    flex-direction:column;
-    align-items:center;
+  /* NAVBAR */
+  .navbar {
+    padding: 14px 18px;
+    flex-wrap: wrap;
+    gap: 0;
+    position: relative;
   }
+  #menuToggle { display: flex; align-items: center; }
 
-  .container{
-    padding:20px;
+  .nav-links {
+    display: none;
+    width: 100%;
+    flex-direction: column;
+    padding: 12px 0 6px;
+    border-top: 1px solid #1e293b;
+    margin-top: 10px;
+    gap: 2px;
   }
+  .nav-links.open { display: flex; }
+  .nav-links a {
+    display: block;
+    margin: 0;
+    padding: 10px 6px;
+    font-size: 15px;
+    border-bottom: 1px solid rgba(30,41,59,0.5);
+  }
+  .nav-links a:last-child { border-bottom: none; }
 
-  table{
-    display:block;
-    overflow-x:auto;
+  #navUser {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 8px;
   }
+  .login-btn { width: 100%; text-align: center; padding: 10px; }
+  .user-nav {
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 8px;
+    width: 100%;
+  }
+  .user-nav button { flex: 1; min-width: 100px; padding: 9px 10px; }
+
+  /* TICKER */
+  .ticker-label { display: none; }
+  .ticker-track  { padding-left: 12px; }
+  .ticker-item   { font-size: 12px; }
+
+  /* HERO SLIDER */
+  .hero-slider { height: 70vw; min-height: 280px; max-height: 480px; }
+  .slide-content { left: 50%; transform: translate(-50%, -50%); text-align: center; width: 90%; max-width: 100%; padding: 0 10px; }
+  .slide-content h1 { font-size: 26px; margin-bottom: 10px; }
+  .slide-content p  { font-size: 14px; margin-bottom: 14px; }
+  .hero-btn { padding: 10px 20px; font-size: 14px; }
+  .nav { font-size: 26px; padding: 8px; }
+  .slide-dots { bottom: 14px; }
+
+  /* LEARNING SECTION */
+  .learning-section {
+    margin: 24px 12px;
+    padding: 20px 16px;
+    border-radius: 14px;
+  }
+  .learning-header h2 { font-size: 22px; padding: 6px 14px; }
+  .learning-header p  { font-size: 13px; }
+
+  /* MODULE SEARCH */
+  .module-search-wrap { padding: 0 4px; }
+  .module-search      { font-size: 13px; padding: 10px 14px 10px 38px; }
+  .search-icon        { font-size: 14px; left: 12px; }
+
+  /* MODULE GRID */
+  .modules-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-top: 20px;
+  }
+  .module-card { padding: 16px 14px; border-radius: 12px; }
+  .module-icon { font-size: 22px; margin-bottom: 8px; }
+  .module-title { font-size: 14px; }
+  .module-desc  { font-size: 12px; }
+
+  /* FEATURES SECTION */
+  .features-section { margin: 0 12px 48px; padding: 0; }
+  .features-title   { font-size: 22px; }
+  .features-sub     { font-size: 13px; margin-bottom: 28px; }
+  .features-grid    { grid-template-columns: 1fr 1fr; gap: 14px; }
+  .feature-item     { padding: 20px 14px; border-radius: 12px; }
+  .feature-icon     { font-size: 26px; margin-bottom: 10px; }
+  .feature-item h4  { font-size: 14px; }
+  .feature-item p   { font-size: 12px; }
+
+  /* STATS */
+  .stats-section    { padding: 28px 12px; }
+  .stats-container  { grid-template-columns: 1fr 1fr; gap: 12px; max-width: 100%; }
+  .stat-box         { padding: 14px 10px; border-radius: 10px; }
+  .stat-box h2      { font-size: 22px; }
+  .stat-box p       { font-size: 12px; }
+  .stat-icon        { font-size: 18px; }
+
+  /* SECTION PADDING */
+  .section { padding: 40px 16px; }
+
+  /* FOOTER */
+  .footer-content {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 20px 16px;
+  }
+  .footer-links { display: flex; flex-wrap: wrap; gap: 8px; margin-left: 0; }
+  .footer-links a { margin-left: 0; }
+
+  /* TABLE */
+  table { display: block; overflow-x: auto; }
+
+  /* BACK TO TOP */
+  #backToTop { bottom: 92px; right: 16px; width: 38px; height: 38px; font-size: 16px; }
+
+  /* CHATBOT */
+  #chatFab   { bottom: 16px; right: 16px; width: 54px; height: 54px; font-size: 22px; }
+  #chatPanel { width: calc(100vw - 20px); right: 10px; bottom: 82px; height: 72vh; border-radius: 14px; }
+  #chatChips { gap: 5px; padding: 8px 10px 4px; }
+  .chip      { font-size: 10px; padding: 4px 9px; }
+}
+
+/* ─────────────────────────────────────
+   SMALL MOBILE  ≤ 420px
+───────────────────────────────────── */
+@media (max-width:420px) {
+  .slide-content h1    { font-size: 20px; }
+  .modules-grid        { grid-template-columns: 1fr; }
+  .features-grid       { grid-template-columns: 1fr; }
+  .stats-container     { grid-template-columns: 1fr 1fr; }
+  .module-card         { padding: 14px 12px; }
+  .learning-section    { margin: 16px 8px; padding: 16px 12px; }
+  .navbar              { padding: 12px 14px; }
+  #chatPanel           { width: calc(100vw - 12px); right: 6px; }
 }
 /* MODULES */
 .learning-section{
@@ -488,67 +631,41 @@ body{
 .next{ right:20px; }
 /* STATS SECTION */
 .stats-section{
-  padding:70px 20px;
+  padding:40px 15px; /* reduced from 70px */
   border-top:1px solid #1e293b;
   border-bottom:1px solid #1e293b;
-  background:linear-gradient(180deg,#020617,#020617,#000);
 }
 
 .stats-container{
-  max-width:1000px;
+  max-width:800px; /* smaller width */
   margin:auto;
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-  gap:30px;
+  grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+  gap:15px; /* less spacing */
   text-align:center;
 }
 
 .stat-box{
   background:#020617;
   border:1px solid #1e293b;
-  padding:30px;
-  border-radius:14px;
-  transition:0.3s;
-}
-
-.stat-box:hover{
-  transform:translateY(-5px);
-  border-color:#22c55e;
-  box-shadow:0 0 20px rgba(34,197,94,0.3);
+  padding:18px; /* reduced from 30px */
+  border-radius:10px; /* slightly smaller */
+  transition:0.2s;
 }
 
 .stat-box h2{
-  font-size:38px;
+  font-size:24px; /* smaller number */
   color:#22c55e;
 }
 
 .stat-box p{
+  font-size:12px; /* smaller text */
   color:#94a3b8;
-  margin-top:8px;
+  margin-top:5px;
 }
-.user-nav{
-  display:flex;
-  align-items:center;
-  gap:10px;
-}
-
-.user-nav span{
-  color:#22c55e;
-  font-weight:600;
-}
-
-.user-nav button{
-  padding:6px 12px;
-  border:none;
-  background:#0f172a;
-  color:white;
-  border-radius:6px;
+.stat-box{
+  background:transparent;
   border:1px solid #1e293b;
-  cursor:pointer;
-}
-
-.user-nav button:hover{
-  border-color:#22c55e;
 }
 /* Difficulty Tags */
 .tag-beginner{
@@ -603,7 +720,564 @@ body{
 
 .progress-fill{
   height:100%;
-  background:#22c55e;
+  background: linear-gradient(90deg, #16a34a, #22c55e);
+  border-radius:10px;
+  position:relative;
+  transition: width 1.2s cubic-bezier(.4,0,.2,1);
+}
+
+/* ── ANNOUNCEMENT TICKER ── */
+.ticker-wrap {
+  background: linear-gradient(90deg, #0a1628, #0f172a, #0a1628);
+  border-bottom: 1px solid #1e293b;
+  padding: 9px 0;
+  overflow: hidden;
+  position: relative;
+  z-index: 999;
+}
+.ticker-wrap::before, .ticker-wrap::after {
+  content: '';
+  position: absolute;
+  top: 0; bottom: 0; width: 80px;
+  z-index: 2;
+}
+.ticker-wrap::before { left: 0; background: linear-gradient(90deg, #0a1628, transparent); }
+.ticker-wrap::after  { right: 0; background: linear-gradient(-90deg, #0a1628, transparent); }
+.ticker-label {
+  display: inline-block;
+  background: #22c55e;
+  color: #000;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 10px;
+  border-radius: 4px;
+  letter-spacing: 1px;
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 3;
+}
+.ticker-track {
+  display: flex;
+  gap: 0;
+  animation: tickerScroll 28s linear infinite;
+  white-space: nowrap;
+  padding-left: 120px;
+}
+.ticker-track:hover { animation-play-state: paused; }
+.ticker-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-right: 48px;
+  font-size: 13px;
+  color: #94a3b8;
+}
+.ticker-item .dot { color: #22c55e; }
+@keyframes tickerScroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ── HERO SLIDE TRANSITION ── */
+.slide {
+  opacity: 0;
+  transition: opacity 0.8s ease;
+}
+.slide.active {
+  opacity: 1;
+}
+.slide-dots {
+  position: absolute;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+  z-index: 10;
+}
+.slide-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.35);
+  cursor: pointer;
+  transition: background 0.3s, transform 0.3s;
+}
+.slide-dot.active {
+  background: #22c55e;
+  transform: scale(1.3);
+  box-shadow: 0 0 8px rgba(34,197,94,0.7);
+}
+
+/* ── MODULE SEARCH ── */
+.module-search-wrap {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 28px;
+}
+.module-search {
+  width: 100%;
+  max-width: 460px;
+  padding: 11px 18px 11px 42px;
+  background: rgba(15,23,42,0.8);
+  border: 1px solid #1e293b;
+  border-radius: 10px;
+  color: #e5e7eb;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  font-family: inherit;
+  position: relative;
+}
+.module-search:focus {
+  border-color: rgba(34,197,94,0.5);
+  box-shadow: 0 0 0 3px rgba(34,197,94,0.08);
+}
+.module-search::placeholder { color: #475569; }
+.search-wrap-inner {
+  position: relative;
+  width: 100%;
+  max-width: 460px;
+}
+.search-icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #475569;
+  font-size: 16px;
+  pointer-events: none;
+}
+
+/* ── FEATURES SECTION ── */
+.features-section {
+  max-width: 1100px;
+  margin: 0 auto 80px;
+  padding: 0 20px;
+}
+.features-title {
+  text-align: center;
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+.features-sub {
+  text-align: center;
+  color: #64748b;
+  font-size: 15px;
+  margin-bottom: 44px;
+}
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 22px;
+}
+.feature-item {
+  background: #0f172a;
+  border: 1px solid #1e293b;
+  border-radius: 14px;
+  padding: 28px 22px;
+  transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
+  position: relative;
+  overflow: hidden;
+}
+.feature-item::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--c, #22c55e), transparent);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.feature-item:hover {
+  transform: translateY(-5px);
+  border-color: var(--c, #22c55e);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+}
+.feature-item:hover::before { opacity: 1; }
+.feature-icon {
+  font-size: 32px;
+  margin-bottom: 14px;
+  display: block;
+}
+.feature-item h4 {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: #e5e7eb;
+}
+.feature-item p {
+  font-size: 13px;
+  color: #64748b;
+  line-height: 1.6;
+}
+
+/* ── MODULE CARD IMPROVEMENTS ── */
+.module-card {
+  position: relative;
+  overflow: hidden;
+}
+.module-card::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #38bdf8, transparent);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.module-card:hover::after { opacity: 1; }
+.module-icon {
+  font-size: 26px;
+  margin-bottom: 10px;
+  display: block;
+}
+.module-card.locked-card {
+  opacity: 0.6;
+  cursor: default;
+}
+.module-card.locked-card:hover {
+  transform: none;
+  border-color: #1e293b;
+  box-shadow: none;
+}
+.lock-icon {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  color: #475569;
+  font-size: 16px;
+}
+
+/* ── STAT BOX IMPROVEMENTS ── */
+.stat-box {
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.stat-box:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(34,197,94,0.12);
+  border-color: rgba(34,197,94,0.3);
+}
+.stat-icon {
+  font-size: 22px;
+  margin-bottom: 6px;
+  display: block;
+}
+
+/* ── SCROLL REVEAL ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── BACK TO TOP ── */
+#backToTop {
+  position: fixed;
+  bottom: 102px;
+  right: 28px;
+  width: 42px;
+  height: 42px;
+  background: #0f172a;
+  border: 1px solid #1e293b;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  cursor: pointer;
+  z-index: 9997;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.3s, transform 0.3s, background 0.2s;
+  color: #64748b;
+}
+#backToTop.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+#backToTop:hover {
+  background: #1e293b;
+  color: #22c55e;
+  border-color: rgba(34,197,94,0.4);
+}
+
+/* ── FOOTER IMPROVEMENT ── */
+.footer-social {
+  display: flex;
+  gap: 12px;
+  margin-top: 10px;
+}
+.footer-social a {
+  width: 32px; height: 32px;
+  background: #0f172a;
+  border: 1px solid #1e293b;
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  color: #64748b;
+  text-decoration: none;
+  font-size: 15px;
+  transition: border-color 0.2s, color 0.2s;
+}
+.footer-social a:hover { border-color: #22c55e; color: #22c55e; }
+
+/* ── USER NAV ── */
+.user-nav {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  color: #94a3b8;
+}
+.user-nav button {
+  padding: 7px 14px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: inherit;
+}
+.user-nav button:first-of-type {
+  background: #22c55e;
+  color: #000;
+}
+.user-nav button:first-of-type:hover { background: #16a34a; }
+.user-nav button:last-of-type {
+  background: transparent;
+  border: 1px solid #1e293b;
+  color: #94a3b8;
+}
+.user-nav button:last-of-type:hover { border-color: #ef4444; color: #ef4444; }
+/* ===== CHATBOT ===== */
+#chatFab {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  width: 62px;
+  height: 62px;
+  background: linear-gradient(135deg, #22c55e, #16a34a);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  cursor: pointer;
+  box-shadow: 0 6px 28px rgba(34,197,94,0.5);
+  z-index: 9999;
+  animation: fabPulse 2.5s ease-in-out infinite;
+  transition: transform 0.2s;
+  user-select: none;
+}
+#chatFab:hover { transform: scale(1.08); }
+@keyframes fabPulse {
+  0%,100% { box-shadow: 0 6px 28px rgba(34,197,94,0.5), 0 0 0 0 rgba(34,197,94,0.4); }
+  50%      { box-shadow: 0 6px 28px rgba(34,197,94,0.5), 0 0 0 12px rgba(34,197,94,0); }
+}
+
+#chatPanel {
+  position: fixed;
+  bottom: 104px;
+  right: 28px;
+  width: 390px;
+  height: 540px;
+  background: #07111f;
+  border: 1px solid #1e3a5f;
+  border-radius: 18px;
+  display: flex;
+  flex-direction: column;
+  z-index: 9998;
+  box-shadow: 0 24px 70px rgba(0,0,0,0.75), 0 0 0 1px rgba(34,197,94,0.1);
+  overflow: hidden;
+  transform: translateY(16px) scale(0.96);
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 0.25s cubic-bezier(.4,0,.2,1), opacity 0.25s;
+}
+#chatPanel.open {
+  transform: translateY(0) scale(1);
+  opacity: 1;
+  pointer-events: all;
+}
+
+#chatTop {
+  padding: 14px 18px;
+  background: #0f1f3d;
+  border-bottom: 1px solid #1e3a5f;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.chat-avatar {
+  width: 34px; height: 34px;
+  background: rgba(34,197,94,0.15);
+  border: 1px solid rgba(34,197,94,0.4);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px;
+  box-shadow: 0 0 10px rgba(34,197,94,0.2);
+}
+.chat-head-info { flex: 1; }
+.chat-head-name { font-size: 14px; font-weight: 700; color: #22c55e; }
+.chat-head-status { font-size: 11px; color: #64748b; }
+.chat-head-status::before { content: '● '; color: #22c55e; font-size: 8px; }
+#chatCloseBtn {
+  background: none; border: none; color: #64748b;
+  font-size: 18px; cursor: pointer; padding: 4px 8px;
+  border-radius: 6px; line-height: 1; transition: color 0.2s, background 0.2s;
+}
+#chatCloseBtn:hover { color: #e2e8f0; background: rgba(255,255,255,0.07); }
+
+/* CHIPS */
+#chatChips {
+  display: flex;
+  gap: 7px;
+  flex-wrap: wrap;
+  padding: 10px 14px 4px;
+  border-bottom: 1px solid #1e3a5f;
+}
+.chip {
+  padding: 5px 12px;
+  background: rgba(34,197,94,0.08);
+  border: 1px solid rgba(34,197,94,0.25);
+  border-radius: 20px;
+  font-size: 11px;
+  color: #22c55e;
+  cursor: pointer;
+  transition: background 0.2s;
+  white-space: nowrap;
+}
+.chip:hover { background: rgba(34,197,94,0.18); }
+
+#chatMessages {
+  flex: 1;
+  padding: 14px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  scrollbar-width: thin;
+  scrollbar-color: #1e3a5f transparent;
+}
+#chatMessages::-webkit-scrollbar { width: 4px; }
+#chatMessages::-webkit-scrollbar-thumb { background: #1e3a5f; border-radius: 4px; }
+
+.msg {
+  max-width: 82%;
+  padding: 10px 14px;
+  border-radius: 12px;
+  font-size: 13.5px;
+  line-height: 1.55;
+  animation: msgPop 0.2s ease;
+}
+@keyframes msgPop { from { opacity:0; transform:translateY(5px); } to { opacity:1; transform:translateY(0); } }
+
+.msg.user {
+  align-self: flex-end;
+  background: rgba(34,197,94,0.18);
+  border: 1px solid rgba(34,197,94,0.3);
+  color: #e2e8f0;
+  border-radius: 12px 4px 12px 12px;
+}
+.msg.bot {
+  align-self: flex-start;
+  background: #0f1f3d;
+  border: 1px solid #1e3a5f;
+  color: #e2e8f0;
+  border-radius: 4px 12px 12px 12px;
+}
+.msg.bot code {
+  background: #020617;
+  border: 1px solid #1e3a5f;
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-family: monospace;
+  font-size: 12px;
+  color: #22c55e;
+}
+.msg.bot pre {
+  background: #020617;
+  border: 1px solid #1e3a5f;
+  padding: 10px;
+  border-radius: 8px;
+  overflow-x: auto;
+  margin-top: 8px;
+  font-size: 12px;
+  color: #22c55e;
+  font-family: monospace;
+}
+.msg.bot strong { color: #38bdf8; }
+
+/* TYPING DOTS */
+#typingIndicator {
+  display: none;
+  align-self: flex-start;
+  background: #0f1f3d;
+  border: 1px solid #1e3a5f;
+  border-radius: 4px 12px 12px 12px;
+  padding: 12px 16px;
+  gap: 5px;
+  align-items: center;
+}
+#typingIndicator.show { display: flex; }
+.dot {
+  width: 6px; height: 6px;
+  background: #22c55e;
+  border-radius: 50%;
+  animation: dotBounce 1.2s ease-in-out infinite;
+}
+.dot:nth-child(2) { animation-delay: 0.2s; }
+.dot:nth-child(3) { animation-delay: 0.4s; }
+@keyframes dotBounce {
+  0%,80%,100% { transform: scale(0.6); opacity: 0.4; }
+  40%          { transform: scale(1);   opacity: 1; }
+}
+
+#chatInputArea {
+  display: flex;
+  gap: 8px;
+  padding: 12px 14px;
+  border-top: 1px solid #1e3a5f;
+  background: #0f1f3d;
+}
+#userInput {
+  flex: 1;
+  padding: 10px 13px;
+  background: #020617;
+  border: 1px solid #1e3a5f;
+  border-radius: 8px;
+  color: #e2e8f0;
+  font-size: 13px;
+  outline: none;
+  transition: border-color 0.2s;
+  font-family: inherit;
+}
+#userInput:focus { border-color: rgba(34,197,94,0.5); }
+#userInput::placeholder { color: #475569; }
+#chatInputArea button {
+  background: #22c55e;
+  border: none;
+  padding: 10px 14px;
+  border-radius: 8px;
+  color: #000;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+  font-weight: 700;
+  min-width: 42px;
+}
+#chatInputArea button:hover { background: #16a34a; transform: scale(1.05); }
+
+@media (max-width: 480px) {
+  #chatPanel { width: calc(100vw - 20px); right: 10px; bottom: 90px; height: 70vh; }
 }
 </style>
 </head>
@@ -617,7 +1291,9 @@ body{
     Hack<span>Proof</span>
   </div>
 
-  <div class="nav-links">
+  <button id="menuToggle" onclick="toggleMenu()" aria-label="Toggle menu">☰</button>
+
+  <div class="nav-links" id="navLinks">
     <a href="index.html">Home</a>
     <a href="learn.html">Learn</a>
     <a href="roadmap.html">Roadmap</a>
@@ -628,6 +1304,23 @@ body{
 
   <div class="nav-right" id="navUser">
     <button class="login-btn" onclick="location.href='login.html'">Login </button>
+  </div>
+</div>
+
+<!-- ANNOUNCEMENT TICKER -->
+<div class="ticker-wrap">
+  <span class="ticker-label">🔴 LIVE</span>
+  <div class="ticker-track" id="tickerTrack">
+    <span class="ticker-item"><span class="dot">⚡</span> New CTF challenge released — SQL Injection Lab II</span>
+    <span class="ticker-item"><span class="dot">🏆</span> Leaderboard updated — check your rank!</span>
+    <span class="ticker-item"><span class="dot">🛡️</span> Web Security module now available</span>
+    <span class="ticker-item"><span class="dot">📢</span> Blue Team module coming soon — stay tuned</span>
+    <span class="ticker-item"><span class="dot">🎓</span> Certificates now available for completed modules</span>
+    <span class="ticker-item"><span class="dot">⚡</span> New CTF challenge released — SQL Injection Lab II</span>
+    <span class="ticker-item"><span class="dot">🏆</span> Leaderboard updated — check your rank!</span>
+    <span class="ticker-item"><span class="dot">🛡️</span> Web Security module now available</span>
+    <span class="ticker-item"><span class="dot">📢</span> Blue Team module coming soon — stay tuned</span>
+    <span class="ticker-item"><span class="dot">🎓</span> Certificates now available for completed modules</span>
   </div>
 </div>
 
@@ -648,7 +1341,7 @@ body{
         <div class="slide-content">
             <h1>Practice With CTF Challenges</h1>
             <p>Real world labs and hacking challenges</p>
-            <button onclick="location.href='main.html'" class="hero-btn">Enter CTF</button>
+            <button onclick="location.href='CTF/main.html'" class="hero-btn">Enter CTF</button>
         </div>
     </div>
 
@@ -663,7 +1356,7 @@ body{
     </div>
     <div class="nav prev">&#10094;</div>
     <div class="nav next">&#10095;</div>
-
+    <div class="slide-dots" id="slideDots"></div>
 </section>
 <section class="learning-section">
 
@@ -672,9 +1365,17 @@ body{
     <p>These are the topics that we are going to cover live during the training program.</p>
   </div>
 
-  <div class="modules-grid">
+  <div class="module-search-wrap">
+    <div class="search-wrap-inner">
+      <span class="search-icon">🔍</span>
+      <input class="module-search" id="moduleSearch" type="text" placeholder="Search modules... (e.g. XSS, Linux, Networking)" oninput="filterModules()" />
+    </div>
+  </div>
+
+  <div class="modules-grid" id="modulesGrid">
 <!-- Cybersecurity 101 -->
-<div class="module-card" onclick="openPage('cybersecurity-101.html')">
+<div class="module-card reveal" onclick="openPage('cybersecurity-101.html')">
+  <span class="module-icon">🛡️</span>
   <div class="module-title">Cybersecurity 101</div>
   <div class="module-desc">Security basics, CIA triad, threats, risk.</div>
   <div class="tag-beginner">Beginner</div>
@@ -684,7 +1385,8 @@ body{
 </div>
 
 <!-- Networking -->
-<div class="module-card" onclick="openPage('networking.html')">
+<div class="module-card reveal" onclick="openPage('networking.html')">
+  <span class="module-icon">🌐</span>
   <div class="module-title">Networking</div>
   <div class="module-desc">OSI model, TCP/IP, DNS, HTTP, Firewalls.</div>
   <div class="tag-beginner">Beginner</div>
@@ -694,7 +1396,8 @@ body{
 </div>
 
 <!-- Operating Systems -->
-<div class="module-card" onclick="openPage('operating-systems.html')">
+<div class="module-card reveal" onclick="openPage('operating-systems.html')">
+  <span class="module-icon">💻</span>
   <div class="module-title">Operating Systems</div>
   <div class="module-desc">Windows, Linux, logs, permissions.</div>
   <div class="tag-intermediate">Intermediate</div>
@@ -704,7 +1407,8 @@ body{
 </div>
 
 <!-- Linux -->
-<div class="module-card" onclick="openPage('linux-cheatsheet.html')">
+<div class="module-card reveal" onclick="openPage('linux-cheatsheet.html')">
+  <span class="module-icon">🐧</span>
   <div class="module-title">Linux</div>
   <div class="module-desc">Linux commands, file system, networking tools.</div>
   <div class="tag-intermediate">Intermediate</div>
@@ -714,7 +1418,8 @@ body{
 </div>
 
 <!-- Web Security -->
-<div class="module-card" onclick="openPage('WebFundamentals.html')">
+<div class="module-card reveal" onclick="openPage('WebFundamentals.html')">
+  <span class="module-icon">🔒</span>
   <div class="module-title">Web Security</div>
   <div class="module-desc">HTTP, cookies, XSS, SQL Injection.</div>
   <div class="tag-intermediate">Intermediate</div>
@@ -724,69 +1429,116 @@ body{
 </div>
 
 <!-- Blue Team -->
-<div class="module-card">
-  <i data-lucide="lock"></i>
+<div class="module-card locked-card reveal">
+  <span class="lock-icon">🔒</span>
+  <span class="module-icon">🔵</span>
   <div class="module-title">Blue Team</div>
   <div class="module-desc">SOC, SIEM, Incident Response.</div>
   <div class="tag-coming">Coming Soon</div>
 </div>
 
 <!-- Red Team -->
-<div class="module-card">
-  <i data-lucide="lock"></i>
+<div class="module-card locked-card reveal">
+  <span class="lock-icon">🔒</span>
+  <span class="module-icon">🔴</span>
   <div class="module-title">Red Team</div>
   <div class="module-desc">Pentesting, exploitation, attacks.</div>
   <div class="tag-coming">Coming Soon</div>
 </div>
 
 <!-- Cloud Security -->
-<div class="module-card">
-  <i data-lucide="lock"></i>
+<div class="module-card locked-card reveal">
+  <span class="lock-icon">🔒</span>
+  <span class="module-icon">☁️</span>
   <div class="module-title">Cloud Security</div>
   <div class="module-desc">AWS, Azure, IAM, Cloud attacks.</div>
   <div class="tag-coming">Coming Soon</div>
 </div>
 
 <!-- Malware Analysis -->
-<div class="module-card">
-  <i data-lucide="lock"></i>
+<div class="module-card locked-card reveal">
+  <span class="lock-icon">🔒</span>
+  <span class="module-icon">🦠</span>
   <div class="module-title">Malware Analysis</div>
   <div class="module-desc">Static & Dynamic malware analysis.</div>
   <div class="tag-coming">Coming Soon</div>
 </div>
 </section>
 
+<!-- WHY HACKPROOF FEATURES -->
+<section class="features-section reveal">
+  <h2 class="features-title">Why <span style="color:#22c55e">HackProof?</span></h2>
+  <p class="features-sub">Everything you need to go from zero to ethical hacker</p>
+  <div class="features-grid">
+    <div class="feature-item" style="--c:#22c55e">
+      <span class="feature-icon">🎯</span>
+      <h4>Hands-On Labs</h4>
+      <p>Practice in real browser-based labs — no setup required. Break things safely.</p>
+    </div>
+    <div class="feature-item" style="--c:#38bdf8">
+      <span class="feature-icon">🏆</span>
+      <h4>CTF Challenges</h4>
+      <p>Solve real Capture The Flag challenges across web, binary, crypto and forensics.</p>
+    </div>
+    <div class="feature-item" style="--c:#a855f7">
+      <span class="feature-icon">📈</span>
+      <h4>Track Progress</h4>
+      <p>Earn XP, level up, and see exactly where you stand on the global leaderboard.</p>
+    </div>
+    <div class="feature-item" style="--c:#f97316">
+      <span class="feature-icon">🎓</span>
+      <h4>Earn Certificates</h4>
+      <p>Complete modules and receive verifiable certificates to showcase your skills.</p>
+    </div>
+    <div class="feature-item" style="--c:#ef4444">
+      <span class="feature-icon">🤖</span>
+      <h4>AI Learning Assistant</h4>
+      <p>Get instant help with our built-in HackProof AI — hints, explanations, and guidance.</p>
+    </div>
+    <div class="feature-item" style="--c:#22c55e">
+      <span class="feature-icon">🗺️</span>
+      <h4>Structured Roadmap</h4>
+      <p>Follow a clear, curated path from beginner fundamentals to advanced exploitation.</p>
+    </div>
+  </div>
+</section>
+
 <section class="stats-section">
   <div class="stats-container">
-    
-    <div class="stat-box">
+    <div class="stat-box reveal">
+      <span class="stat-icon">👨‍💻</span>
       <h2 class="counter" data-target="50">0</h2>
       <p>Students</p>
     </div>
-
-    <div class="stat-box">
+    <div class="stat-box reveal">
+      <span class="stat-icon">🧪</span>
       <h2 class="counter" data-target="10">0</h2>
       <p>Labs</p>
     </div>
-
-    <div class="stat-box">
+    <div class="stat-box reveal">
+      <span class="stat-icon">🚩</span>
       <h2 class="counter" data-target="10">0</h2>
       <p>CTF Challenges</p>
     </div>
-
-    <div class="stat-box">
+    <div class="stat-box reveal">
+      <span class="stat-icon">🎓</span>
       <h2 class="counter" data-target="5">0</h2>
       <p>Certificates</p>
     </div>
-
   </div>
 </section>
 
 <footer class="simple-footer">
   <div class="footer-content">
     <div class="footer-left">
-      <h3>HackProof</h3>
+      <h3>🛡️ HackProof</h3>
       <p>Cybersecurity Learning & CTF Platform</p>
+      <div class="footer-social">
+        <a href="#" title="GitHub">🐙</a>
+        <a href="#" title="Twitter/X">🐦</a>
+        <a href="#" title="Discord">💬</a>
+        <a href="#" title="YouTube">▶️</a>
+      </div>
     </div>
     <div class="footer-links">
       <a href="about.html">About</a>
@@ -796,15 +1548,31 @@ body{
     </div>
   </div>
   <div class="footer-bottom">
-    © 2026 HackProof Cybersecurity Platform
+    © 2026 HackProof Cybersecurity Platform 
   </div>
 </footer>
 
+<!-- BACK TO TOP -->
+<div id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">↑</div>
+
 <script>
-function openPage(page){
-  window.location.href = page;
-}
+function openPage(page){ window.location.href = page; }
 lucide.createIcons();
+
+// ── HAMBURGER MENU ──
+function toggleMenu() {
+  const links = document.getElementById('navLinks');
+  const btn   = document.getElementById('menuToggle');
+  const open  = links.classList.toggle('open');
+  btn.textContent = open ? '✕' : '☰';
+}
+// Close menu when a link is tapped
+document.getElementById('navLinks').querySelectorAll('a').forEach(a => {
+  a.addEventListener('click', () => {
+    document.getElementById('navLinks').classList.remove('open');
+    document.getElementById('menuToggle').textContent = '☰';
+  });
+});
 </script>
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
@@ -841,53 +1609,88 @@ onAuthStateChanged(auth, (user) => {
   }
 });
 </script>
-<script>
-let slides = document.querySelectorAll(".slide");
-let index = 0;
 
-function showSlide(i){
-  slides.forEach(slide => slide.classList.remove("active"));
-  slides[i].classList.add("active");
-}
 
-document.querySelector(".next").onclick = () => {
-  index = (index + 1) % slides.length;
-  showSlide(index);
-}
-
-document.querySelector(".prev").onclick = () => {
-  index = (index - 1 + slides.length) % slides.length;
-  showSlide(index);
-}
-
-setInterval(()=>{
-  index = (index + 1) % slides.length;
-  showSlide(index);
-},5000);
-</script>
 
 <script>
-const counters = document.querySelectorAll('.counter');
-
-counters.forEach(counter => {
-  counter.innerText = '0';
-
-  const updateCounter = () => {
-    const target = +counter.getAttribute('data-target');
-    const c = +counter.innerText;
-
-    const increment = target / 100;
-
-    if(c < target){
-      counter.innerText = `${Math.ceil(c + increment)}`;
-      setTimeout(updateCounter, 20);
-    } else {
-      counter.innerText = target + "+";
+// ── COUNTER (trigger on scroll) ──
+function runCounters() {
+  document.querySelectorAll('.counter:not(.counted)').forEach(counter => {
+    const rect = counter.getBoundingClientRect();
+    if (rect.top < window.innerHeight - 60) {
+      counter.classList.add('counted');
+      const target = +counter.getAttribute('data-target');
+      let c = 0;
+      const step = Math.max(1, Math.ceil(target / 80));
+      const t = setInterval(() => {
+        c = Math.min(c + step, target);
+        counter.innerText = c < target ? c : target + '+';
+        if (c >= target) clearInterval(t);
+      }, 20);
     }
-  };
+  });
+}
 
-  updateCounter();
+// ── SCROLL REVEAL ──
+function revealOnScroll() {
+  document.querySelectorAll('.reveal:not(.visible)').forEach((el, i) => {
+    const rect = el.getBoundingClientRect();
+    if (rect.top < window.innerHeight - 40) {
+      setTimeout(() => el.classList.add('visible'), i * 60);
+    }
+  });
+}
+
+// ── BACK TO TOP ──
+const btt = document.getElementById('backToTop');
+window.addEventListener('scroll', () => {
+  btt.classList.toggle('show', window.scrollY > 400);
+  revealOnScroll();
+  runCounters();
 });
+revealOnScroll();
+runCounters();
+
+// ── SLIDE DOTS ──
+const slides = document.querySelectorAll('.slide');
+const dotsWrap = document.getElementById('slideDots');
+let slideIndex = 0;
+
+slides.forEach((_, i) => {
+  const dot = document.createElement('div');
+  dot.className = 'slide-dot' + (i === 0 ? ' active' : '');
+  dot.onclick = () => { slideIndex = i; showSlide(i); };
+  dotsWrap.appendChild(dot);
+});
+
+function showSlide(i) {
+  slides.forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.slide-dot').forEach(d => d.classList.remove('active'));
+  slides[i].classList.add('active');
+  dotsWrap.querySelectorAll('.slide-dot')[i]?.classList.add('active');
+}
+
+document.querySelector('.next').onclick = () => {
+  slideIndex = (slideIndex + 1) % slides.length;
+  showSlide(slideIndex);
+};
+document.querySelector('.prev').onclick = () => {
+  slideIndex = (slideIndex - 1 + slides.length) % slides.length;
+  showSlide(slideIndex);
+};
+setInterval(() => {
+  slideIndex = (slideIndex + 1) % slides.length;
+  showSlide(slideIndex);
+}, 5000);
+
+// ── MODULE SEARCH ──
+function filterModules() {
+  const q = document.getElementById('moduleSearch').value.toLowerCase();
+  document.querySelectorAll('#modulesGrid .module-card').forEach(card => {
+    const text = card.innerText.toLowerCase();
+    card.style.display = text.includes(q) ? '' : 'none';
+  });
+}
 </script>
 <script type="module">
 import { auth } from "./firebase-config.js";
@@ -925,7 +1728,173 @@ function logout(){
   auth.signOut();
   window.location.reload();
 }
+</script>
+<!-- ===== CHATBOT FAB ===== -->
+<div id="chatFab" title="Ask HackProof AI">🤖</div>
 
+<!-- ===== CHAT PANEL ===== -->
+<div id="chatPanel">
+
+  <!-- Header -->
+  <div id="chatTop">
+    <div class="chat-avatar">🤖</div>
+    <div class="chat-head-info">
+      <div class="chat-head-name">HackProof AI</div>
+      <div class="chat-head-status">Online — Ask me anything</div>
+    </div>
+    <button id="chatCloseBtn" title="Close">✕</button>
+  </div>
+
+  <!-- Quick suggestion chips -->
+  <div id="chatChips">
+    <span class="chip" onclick="chipAsk('What is XSS?')">What is XSS?</span>
+    <span class="chip" onclick="chipAsk('Explain SQL Injection')">SQL Injection</span>
+    <span class="chip" onclick="chipAsk('How does nmap work?')">nmap basics</span>
+    <span class="chip" onclick="chipAsk('CTF beginner tips')">CTF tips</span>
+    <span class="chip" onclick="chipAsk('What is a buffer overflow?')">Buffer overflow</span>
+  </div>
+
+  <!-- Messages -->
+  <div id="chatMessages"></div>
+
+  <!-- Typing indicator -->
+  <div id="typingIndicator">
+    <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+  </div>
+
+  <!-- Input -->
+  <div id="chatInputArea">
+    <input id="userInput" placeholder="Ask about CTF, hacking, tools..." onkeydown="if(event.key==='Enter') sendMessage()" />
+    <button onclick="sendMessage()">➤</button>
+  </div>
+
+</div>
+<!-- ===== HACKPROOF AI CHATBOT (Claude-powered) ===== -->
+<script>
+const chatFab      = document.getElementById("chatFab");
+const chatPanel    = document.getElementById("chatPanel");
+const chatMessages = document.getElementById("chatMessages");
+const typingEl     = document.getElementById("typingIndicator");
+const inputEl      = document.getElementById("userInput");
+
+let history  = [];
+let greeted  = false;
+
+/* Toggle open/close */
+chatFab.onclick = () => toggleChat();
+document.getElementById("chatCloseBtn").onclick = () => toggleChat(false);
+
+function toggleChat(forceOpen) {
+  const open = forceOpen !== undefined ? forceOpen : !chatPanel.classList.contains("open");
+  chatPanel.classList.toggle("open", open);
+  if (open && !greeted) {
+    greeted = true;
+    const name = document.getElementById("navUser")?.querySelector("span")?.innerText?.replace("👤 ","") || "Hacker";
+    addMsg("bot", `Hey ${name}! 👋 I'm <strong>HackProof AI</strong> — your cybersecurity learning assistant.<br>Ask me anything: CTF hints, tool explanations, hacking concepts, career paths, and more.`);
+  }
+  if (open) setTimeout(() => inputEl.focus(), 200);
+}
+
+/* Quick chip click */
+function chipAsk(text) {
+  inputEl.value = text;
+  sendMessage();
+}
+
+/* Render simple markdown-like formatting */
+function formatReply(text) {
+  return text
+    .replace(/```([\s\S]*?)```/g, '<pre><code>$1</code></pre>')
+    .replace(/`([^`]+)`/g, '<code>$1</code>')
+    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+    .replace(/\*(.+?)\*/g, '<em>$1</em>')
+    .replace(/\n/g, '<br>');
+}
+
+/* Add message bubble */
+function addMsg(role, html) {
+  const div = document.createElement("div");
+  div.className = "msg " + role;
+  div.innerHTML = html;
+  chatMessages.appendChild(div);
+  chatMessages.scrollTop = chatMessages.scrollHeight;
+}
+
+/* Page context for smarter answers */
+function getPageContext() {
+  const url = window.location.href.toLowerCase();
+  if (url.includes("sql"))      return "The user is on the SQL Injection module.";
+  if (url.includes("xss"))      return "The user is on the XSS module.";
+  if (url.includes("password")) return "The user is on the Password Cracking module.";
+  if (url.includes("linux"))    return "The user is on the Linux module.";
+  if (url.includes("network"))  return "The user is on the Networking module.";
+  return "The user is on the HackProof homepage browsing the learning modules.";
+}
+
+/* Send message */
+async function sendMessage() {
+  const msg = inputEl.value.trim();
+  if (!msg) return;
+  inputEl.value = "";
+
+  addMsg("user", msg);
+  history.push({ role: "user", content: msg });
+
+  typingEl.classList.add("show");
+  chatMessages.scrollTop = chatMessages.scrollHeight;
+
+  try {
+    const res = await fetch("https://api.anthropic.com/v1/messages", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        model: "claude-sonnet-4-20250514",
+        max_tokens: 1000,
+        system: `You are HackProof AI, an expert cybersecurity learning assistant embedded in the HackProof platform.
+
+${getPageContext()}
+
+Your role:
+- Explain cybersecurity concepts clearly (XSS, SQLi, buffer overflow, etc.)
+- Give CTF hints — guide step by step, don't just give full answers
+- Explain tools: nmap, Burp Suite, Metasploit, Wireshark, hashcat, etc.
+- Help with Linux commands, networking, web security
+- Suggest learning paths and career advice
+- Use code blocks for commands and payloads
+- Be concise, practical, hacker-friendly, and encouraging
+- Never assist with illegal or unethical real-world attacks`,
+        messages: history
+      })
+    });
+
+    typingEl.classList.remove("show");
+
+    const data = await res.json();
+
+    if (data.error) {
+      addMsg("bot", `⚠️ <strong>API Error:</strong> ${data.error.message}<br><small>Make sure your Anthropic API key is configured.</small>`);
+      history.pop();
+      return;
+    }
+
+    const reply = data.content.filter(b => b.type === "text").map(b => b.text).join("\n");
+    history.push({ role: "assistant", content: reply });
+    addMsg("bot", formatReply(reply));
+
+  } catch (err) {
+    typingEl.classList.remove("show");
+    // Smart offline fallback based on context
+    const q = msg.toLowerCase();
+    let fallback = "🔌 Can't reach the AI right now. Try: check your API key in the code, or search the topic on HackTricks.";
+    if (q.includes("xss"))      fallback = "💡 XSS tip: Try <code>&lt;script&gt;alert(1)&lt;/script&gt;</code> in input fields. Look for reflected vs stored XSS.";
+    if (q.includes("sql"))      fallback = "💡 SQLi tip: Start with <code>' OR '1'='1</code> for login bypass. Use sqlmap for automation.";
+    if (q.includes("nmap"))     fallback = "💡 nmap basics: <code>nmap -sV -sC target</code> for service/version scan. <code>-p-</code> scans all ports.";
+    if (q.includes("password")) fallback = "💡 Use <code>hashcat -m 0 hash.txt rockyou.txt</code> for MD5 cracking. Identify hash type with hash-identifier.";
+    if (q.includes("ctf"))      fallback = "💡 CTF tip: Start with recon. Read the challenge carefully. Check source code, cookies, headers.";
+    addMsg("bot", fallback);
+    console.error("Chatbot error:", err);
+  }
+}
 </script>
 </body>
 </html>
